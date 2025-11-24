@@ -156,6 +156,71 @@
             padding-right: 0;
         }
 
+        /* Signature Pad Styles */
+        .signature-pad-container {
+            margin-top: 15px;
+        }
+
+        .signature-pad-wrapper {
+            position: relative;
+            border: 2px solid #333;
+            border-radius: 8px;
+            background-color: #fff;
+            overflow: hidden;
+        }
+
+        .signature-pad {
+            width: 100%;
+            height: 150px;
+            cursor: crosshair;
+            touch-action: none;
+        }
+
+        .signature-pad-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ccc;
+            font-size: 1rem;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .signature-pad-wrapper.has-signature .signature-pad-label {
+            opacity: 0;
+        }
+
+        .signature-actions {
+            margin-top: 8px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-clear-signature {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-clear-signature:hover {
+            background-color: #c82333;
+        }
+
+        .signature-line {
+            position: absolute;
+            bottom: 30px;
+            left: 20px;
+            right: 20px;
+            border-bottom: 1px dashed #ccc;
+            pointer-events: none;
+        }
+
         .btn-submit {
             background-color: var(--primary-color);
             color: white;
@@ -482,8 +547,21 @@
 
                 <div class="row align-items-end">
                     <div class="col-md-7">
-                        <label class="form-label">חתימה (שם מלא):</label>
-                        <input type="text" class="form-control signature-input fs-5" placeholder="הקלד שם לחתימה" required>
+                        <label class="form-label">חתימה:</label>
+                        <div class="signature-pad-container">
+                            <div class="signature-pad-wrapper" id="signaturePadWrapper">
+                                <canvas id="signaturePad" class="signature-pad"></canvas>
+                                <span class="signature-pad-label">חתום כאן</span>
+                                <div class="signature-line"></div>
+                            </div>
+                            <div class="signature-actions">
+                                <button type="button" class="btn-clear-signature" onclick="clearSignature()">
+                                    <i class="fas fa-eraser"></i> נקה חתימה
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Hidden input to store signature data -->
+                        <input type="hidden" id="signatureData" name="signatureData">
                     </div>
                     <div class="col-md-5 text-start">
                         תאריך: <span id="currentDate" class="fw-bold text-decoration-underline"></span>
@@ -644,11 +722,210 @@
     // --- Submit ---
     function submitForm(e) {
         e.preventDefault();
+        
+        // Validate signature is provided
+        if (isSignatureEmpty()) {
+            alert('נא לחתום על הטופס לפני השליחה');
+            return;
+        }
+        
+        // Save the signature data before submitting
+        saveSignature();
+        
         alert('הטופס נשלח בהצלחה למערכת!');
     }
 
+    // --- Signature Pad Logic ---
+    let signaturePad;
+    let isDrawing = false;
+    let lastX = 0;
+    let lastY = 0;
+
+    function initSignaturePad() {
+        const canvas = document.getElementById('signaturePad');
+        const wrapper = document.getElementById('signaturePadWrapper');
+        
+        if (!canvas) return;
+        
+        signaturePad = canvas.getContext('2d');
+        
+        // Set canvas size to match container
+        resizeCanvas();
+        
+        // Set drawing styles
+        signaturePad.strokeStyle = '#000';
+        signaturePad.lineWidth = 2;
+        signaturePad.lineCap = 'round';
+        signaturePad.lineJoin = 'round';
+        
+        // Mouse events
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+        
+        // Touch events
+        canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
+        canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+        canvas.addEventListener('touchend', stopDrawing);
+        
+        // Handle window resize
+        window.addEventListener('resize', resizeCanvas);
+    }
+    
+    function resizeCanvas() {
+        const canvas = document.getElementById('signaturePad');
+        const wrapper = document.getElementById('signaturePadWrapper');
+        
+        if (!canvas || !wrapper) return;
+        
+        const hadSignature = wrapper.classList.contains('has-signature');
+        
+        // Only save signature data if there's actually a signature
+        let dataUrl = null;
+        if (hadSignature) {
+            dataUrl = canvas.toDataURL();
+        }
+        
+        // Resize canvas
+        const rect = wrapper.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = 150;
+        
+        // Restore drawing styles after resize (canvas reset clears styles)
+        signaturePad.strokeStyle = '#000';
+        signaturePad.lineWidth = 2;
+        signaturePad.lineCap = 'round';
+        signaturePad.lineJoin = 'round';
+        
+        // Restore signature if there was one
+        if (hadSignature && dataUrl) {
+            const img = new Image();
+            img.onload = function() {
+                signaturePad.drawImage(img, 0, 0);
+            };
+            img.src = dataUrl;
+        }
+    }
+    
+    function getPointerPos(e) {
+        const canvas = document.getElementById('signaturePad');
+        const rect = canvas.getBoundingClientRect();
+        
+        return {
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top
+        };
+    }
+    
+    function startDrawing(e) {
+        isDrawing = true;
+        const pos = getPointerPos(e);
+        lastX = pos.x;
+        lastY = pos.y;
+        
+        // Mark that we have a signature
+        document.getElementById('signaturePadWrapper').classList.add('has-signature');
+    }
+    
+    function draw(e) {
+        if (!isDrawing) return;
+        
+        const pos = getPointerPos(e);
+        
+        signaturePad.beginPath();
+        signaturePad.moveTo(lastX, lastY);
+        signaturePad.lineTo(pos.x, pos.y);
+        signaturePad.stroke();
+        
+        lastX = pos.x;
+        lastY = pos.y;
+    }
+    
+    function stopDrawing() {
+        if (isDrawing) {
+            isDrawing = false;
+            // Save signature data when user stops drawing
+            saveSignature();
+        }
+    }
+    
+    function getTouchPos(e) {
+        const canvas = document.getElementById('signaturePad');
+        const rect = canvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        
+        return {
+            x: touch.clientX - rect.left,
+            y: touch.clientY - rect.top
+        };
+    }
+    
+    function handleTouchStart(e) {
+        e.preventDefault();
+        isDrawing = true;
+        const pos = getTouchPos(e);
+        lastX = pos.x;
+        lastY = pos.y;
+        
+        // Mark that we have a signature
+        document.getElementById('signaturePadWrapper').classList.add('has-signature');
+    }
+    
+    function handleTouchMove(e) {
+        if (!isDrawing) return;
+        e.preventDefault();
+        
+        const pos = getTouchPos(e);
+        
+        signaturePad.beginPath();
+        signaturePad.moveTo(lastX, lastY);
+        signaturePad.lineTo(pos.x, pos.y);
+        signaturePad.stroke();
+        
+        lastX = pos.x;
+        lastY = pos.y;
+    }
+    
+    function clearSignature() {
+        const canvas = document.getElementById('signaturePad');
+        const wrapper = document.getElementById('signaturePadWrapper');
+        
+        if (!canvas || !signaturePad) return;
+        
+        signaturePad.clearRect(0, 0, canvas.width, canvas.height);
+        wrapper.classList.remove('has-signature');
+        document.getElementById('signatureData').value = '';
+    }
+    
+    function saveSignature() {
+        const canvas = document.getElementById('signaturePad');
+        if (!canvas) return;
+        
+        // Get signature as PNG data URL
+        const signatureDataUrl = canvas.toDataURL('image/png');
+        document.getElementById('signatureData').value = signatureDataUrl;
+    }
+    
+    function isSignatureEmpty() {
+        const wrapper = document.getElementById('signaturePadWrapper');
+        return !wrapper || !wrapper.classList.contains('has-signature');
+    }
+    
+    /**
+     * Public API function to retrieve the signature as a base64 PNG image.
+     * Can be used by external scripts or form handlers to get the signature data.
+     * @returns {string} Base64 encoded PNG data URL of the signature
+     */
+    function getSignatureAsImage() {
+        return document.getElementById('signatureData').value;
+    }
+
     // Initialize
-    window.addEventListener('DOMContentLoaded', initTable);
+    window.addEventListener('DOMContentLoaded', () => {
+        initTable();
+        initSignaturePad();
+    });
 
 </script>
 
