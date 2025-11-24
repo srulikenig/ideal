@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>טופס הזמנה – תפריט חתונה דיגיטלי</title>
+    <style>
+        :root {
+            --primary-color: #d4af37; /* זהב */
+            --primary-dark: #b59020;
+            --secondary-color: #333;
+            --light-bg: #f9f9f9;
+            --border-color: #ddd;
+            --success-color: #28a745;
+            --warning-color: #ff9800;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1, h2, h3 { text-align: center; color: var(--secondary-color); }
+        h1 { margin-bottom: 30px; border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; }
+        h3 { 
+            color: var(--primary-color); 
+            margin-top: 25px; 
+            border-bottom: 1px solid #eee; 
+            padding-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Counter Badge Style */
+        .counter-badge {
+            font-size: 0.8em;
+            background: #eee;
+            padding: 2px 8px;
+            border-radius: 10px;
+            color: #555;
+        }
+        .counter-badge.limit-reached { background: var(--success-color); color: white; }
+        .counter-badge.over-limit { background: var(--warning-color); color: white; }
+
+        /* Progress Bar */
+        .progress-container { margin-bottom: 30px; counter-reset: step; }
+        .progressbar {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+        .progressbar li {
+            float: right;
+            width: 16.66%;
+            position: relative;
+            text-align: center;
+            font-size: 12px;
+            color: #777;
+            z-index: 1;
+            cursor: pointer; /* Clickable */
+            transition: color 0.3s;
+        }
+        .progressbar li:hover { color: var(--primary-dark); }
+        .progressbar li:before {
+            content: counter(step);
+            counter-increment: step;
+            width: 30px;
+            height: 30px;
+            line-height: 26px; /* Adjust for border */
+            border: 2px solid #ddd;
+            display: block;
+            text-align: center;
+            margin: 0 auto 10px auto;
+            border-radius: 50%;
+            background-color: white;
+            transition: all 0.3s;
+        }
+        .progressbar li:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: #ddd;
+            top: 15px;
+            right: -50%;
+            z-index: -1;
+        }
+        .progressbar li:first-child:after { content: none; }
+        .progressbar li.active { color: var(--primary-color); font-weight: bold; }
+        .progressbar li.active:before { border-color: var(--primary-color); background: var(--primary-color); color: white; }
+        .progressbar li.completed:before { background: var(--secondary-color); border-color: var(--secondary-color); color: white; content: "✓"; }
+
+        /* Form Steps */
+        .form-step { display: none; animation: fadeIn 0.4s; }
+        .form-step.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Inputs */
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: 600; }
+        small { color: #666; display: block; margin-bottom: 5px; }
+        input[type="text"], input[type="email"], input[type="number"], input[type="date"], input[type="time"], textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        
+        /* Checkboxes & Radio */
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 10px;
+        }
+        .checkbox-item {
+            background: var(--light-bg);
+            padding: 10px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            transition: background 0.2s;
+        }
+        .checkbox-item:hover { background: #eee; }
+        .checkbox-item input { margin-left: 10px; width: auto; height: 16px; width: 16px; }
+        .checkbox-item label { margin: 0; font-weight: normal; width: 100%; cursor: pointer; }
+        
+        .upgrade-item { border: 1px dashed var(--primary-color); background: #fffcf0; }
+        
+        /* Bar Table */
+        .bar-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; }
+        .bar-table th, .bar-table td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        .bar-table th { background-color: #f2f2f2; }
+        .bar-table td:first-child { text-align: right; font-weight: bold; }
+
+        /* Price Summary Table */
+        .summary-table { width: 100%; margin-top: 20px; border-collapse: collapse; }
+        .summary-table td { padding: 8px; border-bottom: 1px solid #eee; }
+        .summary-table .price-row { font-weight: bold; color: var(--secondary-color); }
+        .summary-table .total-row { font-size: 1.2em; border-top: 2px solid var(--primary-color); color: var(--primary-color); }
+        .summary-table .deposit-row { background: #f0f0f0; font-weight: bold; }
+
+        /* Buttons */
+        .buttons-container { margin-top: 30px; display: flex; justify-content: space-between; }
+        button { padding: 12px 25px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        .btn-next { background-color: var(--primary-color); color: white; }
+        .btn-prev { background-color: #ccc; color: #333; }
+        .btn-submit { background-color: #28a745; color: white; }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* Alerts */
+        .info-box { background-color: #e2e3e5; padding: 15px; border-radius: 4px; margin-bottom: 15px; border-right: 4px solid var(--secondary-color); font-size: 0.9em;}
+        .alert-warning { color: #856404; background-color: #fff3cd; border: 1px solid #ffeeba; padding: 10px; border-radius: 4px; margin-top: 10px; display: none;}
+
+        @media (max-width: 600px) {
+            .grid-2 { grid-template-columns: 1fr; }
+            .progressbar li { font-size: 10px; }
+            h3 { font-size: 1.1em; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>טופס הזמנה – תפריט חתונה</h1>
+    
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <ul class="progressbar">
+            <li class="active" onclick="tryNavigate(0)">פרטים</li>
+            <li onclick="tryNavigate(1)">כמויות</li>
+            <li onclick="tryNavigate(2)">סלטים</li>
+            <li onclick="tryNavigate(3)">עיקריות</li>
+            <li onclick="tryNavigate(4)">בר</li>
+            <li onclick="tryNavigate(5)">סיכום</li>
+        </ul>
+    </div>
+
+    <form id="weddingForm">
+        
+        <!-- STEP 1: Contact & Info -->
+        <div class="form-step active" id="step1">
+            <h3>פרטי המזמין והאירוע</h3>
+            <div class="grid-2">
+                <div class="form-group"><label>שם פרטי</label><input type="text" name="firstName" required></div>
+                <div class="form-group"><label>שם משפחה</label><input type="text" name="lastName" required></div>
+                <div class="form-group"><label>תעודת זהות</label><input type="text" name="idNumber"></div>
+                <div class="form-group"><label>טלפון</label><input type="text" name="phone" required></div>
+                <div class="form-group" style="grid-column: span 2;"><label>כתובת אימייל</label><input type="email" name="email" required></div>
+            </div>
+
+            <h3>פרטי החתונה</h3>
+            <div class="grid-2">
+                <div class="form-group"><label>צד החתן</label><input type="text" name="groomSide" required></div>
+                <div class="form-group"><label>צד הכלה</label><input type="text" name="brideSide" required></div>
+                <div class="form-group"><label>תאריך לועזי</label><input type="date" name="dateGregorian" required></div>
+                <div class="form-group"><label>יום בשבוע</label>
+                    <select name="dayOfWeek">
+                        <option value="ראשון">ראשון</option>
+                        <option value="שני">שני</option>
+                        <option value="שלישי">שלישי</option>
+                        <option value="רביעי">רביעי</option>
+                        <option value="חמישי">חמישי</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>שעת החופה</label><input type="time" name="chuppahTime"></div>
+            </div>
+            
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>סגנון אוכל</label>
+                    <div class="checkbox-item"><input type="radio" name="foodStyle" value="Ashkenazi" checked> אשכנזי <input type="radio" name="foodStyle" value="Mizrachi" style="margin-right:20px"> מזרחי</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 2: Quantities -->
+        <div class="form-step" id="step2">
+            <h3>כמויות ומחירים</h3>
+            <div class="info-box">כשרות: בד"צ העדה החרדית י-ם.</div>
+
+            <div class="form-group checkbox-item upgrade-item">
+                <input type="checkbox" name="kosherUpgrade" id="kosherUpgrade" value="5">
+                <label for="kosherUpgrade">כשרות עופות 'שארית ישראל' (+5 ₪ למנה)</label>
+            </div>
+
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>מנות סעודה (64 ₪)</label>
+                    <small>מינימום 300. מתחת לכך +5 ₪</small>
+                    <input type="number" id="mealPortions" name="mealPortions" min="0" placeholder="0">
+                </div>
+
+                <div class="form-group">
+                    <label>מנות קבלת פנים (18 ₪)</label>
+                    <small>מנה כוללת 5 עוגות</small>
+                    <input type="number" id="receptionPortions" name="receptionPortions" min="0" placeholder="0">
+                </div>
+
+                <div class="form-group">
+                    <label>מנות בר משמחים (22 ₪)</label>
+                    <small>מינימום 300. מתחת לכך +3 ₪</small>
+                    <input type="number" id="barPortions" name="barPortions" min="0" placeholder="0">
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 3: Salads & First Course -->
+        <div class="form-step" id="step3">
+            <h3>סלטים <span class="counter-badge" id="saladCounter">(0/6)</span></h3>
+            <small>6 לבחירה. סלט נוסף בתוספת 2 ₪ למנה לכל האורחים.</small>
+            <div id="extraSaladAlert" class="alert-warning">בחרת יותר מ-6 סלטים. תוספת תשלום תחושב בסוף.</div>
+            
+            <div class="checkbox-group" id="saladsContainer" data-soft-limit="6">
+                <!-- Salads (List shortened for code clarity, full list from PDF included) -->
+                <div class="checkbox-item"><input type="checkbox" name="salads" value="חומוס"><label>חומוס עם טחינה</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="salads" value="מטבוחה"><label>מטבוחה מרוקאי</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="salads" value="חמוצים"><label>חמוצים (מלפפון וזיתים)</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="salads" value="חמוצי הבית"><label>חמוצי הבית</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="salads" value="חצילים מטוגנים"><label>חצילים מטוגנים</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="salads" value="חציל ברוטב"><label>חציל ברוטב עגבניות</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="salads" value="חציל יוני"><label>חציל יוני</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="salads" value="חציל בטעם כבד"><label>חציל בטעם כבד</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="salads" value="חציל במיונז"><label>חציל במיונז</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="salads" value="פלפל חריף"><label>פלפל פיקנטי חריף מטוגן</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="salads" value="גזר חי"><label>גזר חי פיקנטי</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="salads" value="סלט גזר ואננס"><label>סלט גזר ואננס</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="salads" value="גזר מרוקאי"><label>גזר מרוקאי מבושל</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="salads" value="סלק"><label>סלק מבושל קוביות</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="salads" value="מלפפון בצל"><label>מלפפון בצל ושמיר</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="salads" value="וולדרוף"><label>וולדרוף</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="salads" value="עגבניות שום"><label>עגבניות פלפל ושום</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="salads" value="תירס"><label>תירס פטריות וגמבה</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="salads" value="סלט ישראלי"><label>סלט ירקות ישראלי</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="salads" value="טבולה"><label>סלט טבולה</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="salads" value="כרוב אדום"><label>כרוב אדום במיונז</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="salads" value="קולסלאו"><label>קולסלאו</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="salads" value="כרוב לבן"><label>כרוב לבן שקדים</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="salads" value="חסה ושרי"><label>סלט חסה ועגבניות שרי</label></div>
+            </div>
+
+            <h3>מנה ראשונה <span class="counter-badge" id="firstCounter">(0/3)</span></h3>
+            <div class="checkbox-group" data-hard-limit="3" data-counter-id="firstCounter">
+                <div class="checkbox-item"><input type="checkbox" name="firstCourse" value="אגרול"><label>אגרול סיני</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="firstCourse" value="בלינצ'ס"><label>בלינצ‘ס פטריות</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="firstCourse" value="בורקס"><label>בורקס פטריות</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="firstCourse" value="מאפה ירקות"><label>מאפה ירקות</label></div>
+            </div>
+
+            <h3>שדרוג מנה ראשונה</h3>
+            <div class="grid-2">
+                <div class="form-group"><label>פילו ממולא (2 ₪)</label><input type="number" class="price-calc" data-price="2" name="upg_philo" placeholder="כמות"></div>
+                <div class="form-group"><label>מוסקה בשרי (7 ₪)</label><input type="number" class="price-calc" data-price="7" name="upg_moussaka" placeholder="כמות"></div>
+                <div class="form-group"><label>דג מושט (15 ₪)</label><input type="number" class="price-calc" data-price="15" name="upg_fish_musht" placeholder="כמות"></div>
+                <div class="form-group"><label>סלמון (20 ₪)</label><input type="number" class="price-calc" data-price="20" name="upg_fish_salmon" placeholder="כמות"></div>
+                <div class="form-group"><label>נסיכה (14 ₪)</label><input type="number" class="price-calc" data-price="14" name="upg_fish_niles" placeholder="כמות"></div>
+                <div class="form-group"><label>מעורב (10 ₪)</label><input type="number" class="price-calc" data-price="10" name="upg_mix" placeholder="כמות"></div>
+                <div class="form-group"><label>רול ממולא (10 ₪)</label><input type="number" class="price-calc" data-price="10" name="upg_meat_roll" placeholder="כמות"></div>
+                <div class="form-group"><label>כבד (15 ₪)</label><input type="number" class="price-calc" data-price="15" name="upg_liver" placeholder="כמות"></div>
+            </div>
+        </div>
+
+        <!-- STEP 4: Main, Sides, Dessert -->
+        <div class="form-step" id="step4">
+            <h3>מנה עיקרית <span class="counter-badge" id="mainCounter">(0/4)</span></h3>
+            <div class="checkbox-group" data-hard-limit="4" data-counter-id="mainCounter">
+                <div class="checkbox-item"><input type="checkbox" name="mainCourse" value="כרעיים עוף"><label>כרעיים עוף</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="mainCourse" value="שניצל"><label>שניצל</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="mainCourse" value="שיפודי חזה עוף"><label>שיפודי חזה עוף וירקות</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="mainCourse" value="רולדה הודו"><label>רולדה הודו</label></div>
+            </div>
+
+            <h3>שדרוג מנה עיקרית</h3>
+            <div class="grid-2">
+                <div class="form-group"><label>סטייק פרגית (10 ₪)</label><input type="number" class="price-calc" data-price="10" name="upg_main_pargit" placeholder="כמות"></div>
+                <div class="form-group"><label>בשר בקר (20 ₪)</label><input type="number" class="price-calc" data-price="20" name="upg_main_beef" placeholder="כמות"></div>
+                <div class="form-group"><label>דג מושט (7.5 ₪)</label><input type="number" class="price-calc" data-price="7.5" name="upg_main_musht" placeholder="כמות"></div>
+                <div class="form-group"><label>דג סלמון (10 ₪)</label><input type="number" class="price-calc" data-price="10" name="upg_main_salmon" placeholder="כמות"></div>
+            </div>
+
+            <h3>תוספות <span class="counter-badge" id="sidesCounter">(0/3)</span></h3>
+            <div class="checkbox-group" data-hard-limit="3" data-counter-id="sidesCounter">
+                <div class="checkbox-item"><input type="checkbox" name="sides" value="תפו״א אפוי"><label>תפו"א אפוי בתנור</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="sides" value="אורז לבן חמוציות"><label>אורז לבן עם חמוציות</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="sides" value="אורז צהוב ירקות"><label>אורז צהוב עם ירקות</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="sides" value="ירקות מוקפצים"><label>ירקות מוקפצים</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="sides" value="אנטיפסטי"><label>אנטיפסטי</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="sides" value="קוסקוס"><label>קוסקוס עם ירקות</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="sides" value="צימעס"><label>צימעס</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="sides" value="גזר גמדי"><label>גזר גמדי</label></div>
+            </div>
+
+            <h3>מנה אחרונה <span class="counter-badge" id="dessertCounter">(0/1)</span></h3>
+            <div class="checkbox-group" data-hard-limit="1" data-counter-id="dessertCounter">
+                <div class="checkbox-item"><input type="checkbox" name="dessert" value="עוגת מוס"><label>עוגת מוס</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="dessert" value="קוקטייל פירות"><label>קוקטייל פירות</label></div>
+                <div class="checkbox-item"><input type="checkbox" name="dessert" value="גלידה"><label>גלידה</label></div>
+            </div>
+        </div>
+
+        <!-- STEP 5: Bar -->
+        <div class="form-step" id="step5">
+            <h3>בר משמחים</h3>
+            <div class="info-box">6 פריטים לבחירה (מעל 450 מנות ניתן לבחור 8).</div>
+            
+            <table class="bar-table">
+                <thead><tr><th>הפריט</th><th>גברים</th><th>נשים</th></tr></thead>
+                <tbody id="barItemsTable"></tbody>
+            </table>
+
+            <h3>שדרוג בר (7 ₪ למנה)</h3>
+            <div class="grid-2">
+                <div class="form-group"><label>כנפיים</label><input type="number" class="price-calc" data-price="7" name="bar_wings" placeholder="כמות מנות"></div>
+                <div class="form-group"><label>שניצלונים</label><input type="number" class="price-calc" data-price="7" name="bar_schnitzel" placeholder="כמות מנות"></div>
+                <div class="form-group"><label>נקניקיות</label><input type="number" class="price-calc" data-price="7" name="bar_sausage" placeholder="כמות מנות"></div>
+            </div>
+            
+            <h3>שדרוגים מיוחדים</h3>
+            <div class="checkbox-item upgrade-item">
+                <input type="checkbox" class="price-calc" data-price="700" name="bar_special_salmon">
+                <label>סלמון שלם על מצע ירקות (700 ₪)</label>
+            </div>
+            <div class="checkbox-item upgrade-item" style="margin-top:10px">
+                <input type="checkbox" class="price-calc" data-price="100" name="bar_special_challah">
+                <label>חלת קויליטש (100 ₪)</label>
+            </div>
+            
+            <div class="form-group" style="margin-top:20px;">
+                <label>הערות כלליות</label>
+                <textarea name="generalNotes" rows="3"></textarea>
+            </div>
+        </div>
+
+        <!-- STEP 6: Summary & Payment -->
+        <div class="form-step" id="step6">
+            <h3>סיכום הזמנה ותשלום</h3>
+            
+            <table class="summary-table">
+                <tbody id="summaryBody">
+                    <!-- Populated via JS -->
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="total-row">סה"כ לתשלום משוער:</td>
+                        <td class="total-row" id="finalTotalDisplay">0 ₪</td>
+                    </tr>
+                    <tr class="deposit-row">
+                        <td>סכום מקדמה להעברה (לפי 60 ₪ למנה):</td>
+                        <td id="depositDisplay">0 ₪</td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <div class="info-box" style="margin-top:20px;">
+                <strong>פרטי בנק:</strong> בנק הפועלים (12), סניף 538, ח"ן 633352, ע"ש יהודה זיאת סילאן.<br>
+                <small>* במידה וזה קייטרינג 'שארית ישראל', יש לקזז 5000 ש"ח למעדני האחוזה.</small>
+            </div>
+            <p style="color:red; text-align:center;">נא לשלוח אסמכתא ולסגור את ההזמנה עד שבועיים לפני האירוע.</p>
+        </div>
+
+        <!-- Buttons -->
+        <div class="buttons-container">
+            <button type="button" class="btn-prev" id="prevBtn" disabled>הקודם</button>
+            <button type="button" class="btn-next" id="nextBtn">הבא</button>
+            <button type="submit" class="btn-submit" id="submitBtn" style="display: none;">שלח הזמנה</button>
+        </div>
+
+    </form>
+</div>
+
+<script>
+    // --- Configuration & Data ---
+    const barItems = [
+        "סיגרים ופסטלים", "חיתוכי ירקות", "חיתוכי פירות", "בורקס מיני", 
+        "קוסקוס עם ירקות", "חמין", "פלפל ממולא", "עוגות", 
+        "חמוצים", "קוגל אטריות", "קוגל תפו\"א", "פשטידת ירקות", 
+        "פשטידת פטריות", "פשטידת בצל", "פסטה", "אטריות סיני"
+    ];
+
+    // --- State ---
+    let currentStep = 0;
+    const steps = document.querySelectorAll('.form-step');
+    const progressSteps = document.querySelectorAll('.progressbar li');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const submitBtn = document.getElementById('submitBtn');
+
+    // --- Init ---
+    document.addEventListener('DOMContentLoaded', () => {
+        renderBarItems();
+        initCheckboxes();
+    });
+
+    // --- Navigation ---
+    function tryNavigate(stepIndex) {
+        // Allow moving back or to current
+        if (stepIndex <= currentStep) {
+            goToStep(stepIndex);
+            return;
+        }
+        // Allow moving forward only if current step is valid
+        if (stepIndex > currentStep) {
+            if (validateStep(currentStep)) {
+                // If skipping multiple steps (e.g. 1 to 4), we ideally validate all in between
+                // For simplicity here, we allow click if CURRENT is valid, but usually we move 1 by 1.
+                // We'll treat click as "Jump to", but check validation of current first.
+                goToStep(stepIndex);
+            }
+        }
+    }
+
+    function goToStep(index) {
+        // Update UI
+        steps[currentStep].classList.remove('active');
+        progressSteps[currentStep].classList.remove('active');
+        if (index > currentStep) progressSteps[currentStep].classList.add('completed');
+        else progressSteps[currentStep].classList.remove('completed');
+
+        currentStep = index;
+
+        steps[currentStep].classList.add('active');
+        progressSteps[currentStep].classList.add('active');
+        
+        // Buttons
+        prevBtn.disabled = currentStep === 0;
+        if (currentStep === steps.length - 1) {
+            nextBtn.style.display = 'none';
+            submitBtn.style.display = 'block';
+            calculateTotal(); // Run calculation when hitting summary
+        } else {
+            nextBtn.style.display = 'block';
+            submitBtn.style.display = 'none';
+        }
+        window.scrollTo(0,0);
+    }
+
+    nextBtn.addEventListener('click', () => {
+        if (validateStep(currentStep)) goToStep(currentStep + 1);
+    });
+
+    prevBtn.addEventListener('click', () => goToStep(currentStep - 1));
+
+    function validateStep(index) {
+        const container = steps[index];
+        const required = container.querySelectorAll('[required]');
+        let valid = true;
+        required.forEach(inp => {
+            if(!inp.value.trim()){
+                inp.style.borderColor = 'red';
+                valid = false;
+            } else {
+                inp.style.borderColor = '#ddd';
+            }
+        });
+        if(!valid) alert("נא למלא שדות חובה");
+        return valid;
+    }
+
+    // --- Dynamic Checkbox Logic (Limits & Counters) ---
+    function initCheckboxes() {
+        // 1. Hard Limits (Main, Sides, etc)
+        document.querySelectorAll('[data-hard-limit]').forEach(group => {
+            const limit = parseInt(group.dataset.hardLimit);
+            const counterId = group.dataset.counterId;
+            const inputs = group.querySelectorAll('input[type="checkbox"]');
+            
+            updateCounterUI(counterId, 0, limit);
+
+            inputs.forEach(input => {
+                input.addEventListener('change', () => {
+                    const checkedCount = group.querySelectorAll('input:checked').length;
+                    if (checkedCount > limit) {
+                        input.checked = false;
+                        alert(`ניתן לבחור מקסימום ${limit} פריטים.`);
+                    } else {
+                        updateCounterUI(counterId, checkedCount, limit);
+                    }
+                });
+            });
+        });
+
+        // 2. Soft Limit (Salads)
+        const saladGroup = document.getElementById('saladsContainer');
+        const saladInputs = saladGroup.querySelectorAll('input[type="checkbox"]');
+        const saladCounterId = 'saladCounter';
+        const softLimit = 6;
+
+        saladInputs.forEach(input => {
+            input.addEventListener('change', () => {
+                const checkedCount = saladGroup.querySelectorAll('input:checked').length;
+                updateCounterUI(saladCounterId, checkedCount, softLimit, true);
+                
+                const alertBox = document.getElementById('extraSaladAlert');
+                if (checkedCount > softLimit) alertBox.style.display = 'block';
+                else alertBox.style.display = 'none';
+            });
+        });
+    }
+
+    function updateCounterUI(elementId, count, limit, isSoft = false) {
+        const el = document.getElementById(elementId);
+        if(!el) return;
+        el.textContent = `(${count}/${limit})`;
+        
+        el.classList.remove('limit-reached', 'over-limit');
+        if (count === limit) el.classList.add('limit-reached');
+        if (isSoft && count > limit) el.classList.add('over-limit');
+    }
+
+    // --- Render Bar Table ---
+    function renderBarItems() {
+        const tbody = document.getElementById('barItemsTable');
+        barItems.forEach((item, i) => {
+            tbody.insertAdjacentHTML('beforeend', 
+                `<tr><td>${item}</td>
+                <td><input type="checkbox" name="bar_men_${i}" value="${item}"></td>
+                <td><input type="checkbox" name="bar_women_${i}" value="${item}"></td></tr>`
+            );
+        });
+    }
+
+    // --- Calculator Logic ---
+    function calculateTotal() {
+        let summaryHTML = "";
+        let totalSum = 0;
+
+        // 1. Base Meals
+        const portions = parseInt(document.getElementById('mealPortions').value) || 0;
+        let mealPrice = 64;
+        if (portions > 0 && portions < 300) mealPrice += 5; // Penalty
+        if (document.getElementById('kosherUpgrade').checked) mealPrice += 5; // Upgrade
+
+        const mealTotal = portions * mealPrice;
+        totalSum += mealTotal;
+        if(portions > 0) summaryHTML += `<tr><td>מנות סעודה (${mealPrice} ₪ * ${portions})</td><td>${mealTotal.toLocaleString()} ₪</td></tr>`;
+
+        // 2. Reception
+        const recPortions = parseInt(document.getElementById('receptionPortions').value) || 0;
+        const recTotal = recPortions * 18;
+        totalSum += recTotal;
+        if(recPortions > 0) summaryHTML += `<tr><td>קבלת פנים (${recPortions})</td><td>${recTotal.toLocaleString()} ₪</td></tr>`;
+
+        // 3. Bar
+        const barPortions = parseInt(document.getElementById('barPortions').value) || 0;
+        let barPrice = 22;
+        if (barPortions > 0 && barPortions < 300) barPrice += 3;
+        const barTotal = barPortions * barPrice;
+        totalSum += barTotal;
+        if(barPortions > 0) summaryHTML += `<tr><td>בר משמחים (${barPrice} ₪ * ${barPortions})</td><td>${barTotal.toLocaleString()} ₪</td></tr>`;
+
+        // 4. Extra Salads
+        const saladsCount = document.querySelectorAll('#saladsContainer input:checked').length;
+        if (saladsCount > 6) {
+            const extra = saladsCount - 6;
+            const extraCost = extra * 2 * portions; // 2 NIS per portion per extra salad
+            totalSum += extraCost;
+            summaryHTML += `<tr><td>תוספת ${extra} סלטים (2 ₪ למנה)</td><td>${extraCost.toLocaleString()} ₪</td></tr>`;
+        }
+
+        // 5. Quantity Upgrades (Fish, Steak, Bar Upgrades)
+        document.querySelectorAll('.price-calc').forEach(input => {
+            // Checkboxes with fixed price OR number inputs
+            if (input.type === 'checkbox' && input.checked) {
+                const price = parseFloat(input.dataset.price);
+                totalSum += price;
+                // Get label text
+                const label = input.nextElementSibling.innerText;
+                summaryHTML += `<tr><td>${label}</td><td>${price} ₪</td></tr>`;
+            } 
+            else if (input.type === 'number' && input.value > 0) {
+                const qty = parseInt(input.value);
+                const price = parseFloat(input.dataset.price);
+                const subtotal = qty * price;
+                totalSum += subtotal;
+                // Find label
+                const label = input.parentElement.querySelector('label').innerText.split('-')[0]; // Clean label
+                summaryHTML += `<tr><td>${label} (${qty} יח')</td><td>${subtotal.toLocaleString()} ₪</td></tr>`;
+            }
+        });
+
+        // Update UI
+        document.getElementById('summaryBody').innerHTML = summaryHTML || "<tr><td colspan='2'>טרם הוזנו פריטים לחיוב</td></tr>";
+        document.getElementById('finalTotalDisplay').textContent = totalSum.toLocaleString() + " ₪";
+        
+        // Deposit Calculation (Portions * 60)
+        const deposit = portions * 60;
+        document.getElementById('depositDisplay').textContent = deposit.toLocaleString() + " ₪";
+    }
+
+    // --- Submit ---
+    document.getElementById('weddingForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        calculateTotal(); // Ensure calculation is fresh
+        
+        const formData = new FormData(e.target);
+        const formObj = {};
+        formData.forEach((v, k) => {
+            if(!formObj[k]) formObj[k] = v;
+            else {
+                if(!Array.isArray(formObj[k])) formObj[k] = [formObj[k]];
+                formObj[k].push(v);
+            }
+        });
+        
+        // Add Bar Details manually
+        const barSelection = [];
+        barItems.forEach((item, i) => {
+            const m = document.querySelector(`input[name="bar_men_${i}"]`).checked;
+            const w = document.querySelector(`input[name="bar_women_${i}"]`).checked;
+            if(m || w) barSelection.push({item, men: m, women: w});
+        });
+        formObj.barSelection = barSelection;
+        
+        // Get Total for API
+        formObj.estimatedTotal = document.getElementById('finalTotalDisplay').textContent;
+
+        console.log("Sending:", formObj);
+        alert("הטופס נשלח בהצלחה! (בדוק Console)");
+    });
+
+</script>
+</body>
+</html>
