@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>טופס הרשמה - IDEAL TOURS</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #0d47a1;
+            --secondary-color: #f8f9fa;
+            --accent-color: #ffc107;
+        }
+
+        body {
+            font-family: 'Rubik', sans-serif;
+            background-color: #e9ecef;
+            color: #333;
+        }
+
+        .paper-container {
+            background: #fff;
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 40px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            border-top: 6px solid var(--primary-color);
+            border-radius: 8px;
+        }
+
+        /* Header */
+        .header-title {
+            color: var(--primary-color);
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .contact-highlight {
+            background-color: var(--accent-color);
+            padding: 6px 12px;
+            font-weight: 600;
+            display: inline-block;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        /* Section Titles */
+        .section-title {
+            color: var(--primary-color);
+            font-weight: 700;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 8px;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .section-title i {
+            margin-left: 8px;
+        }
+
+        /* Table */
+        .table th {
+            background-color: #f1f3f5;
+            font-size: 0.85rem;
+            vertical-align: middle;
+            text-align: center;
+        }
+        
+        .table td {
+            vertical-align: middle;
+            padding: 8px;
+        }
+
+        .form-control, .form-select {
+            font-size: 0.9rem;
+            border-radius: 4px;
+        }
+
+        .btn-remove {
+            border: none;
+            background: transparent;
+            color: #dc3545;
+            transition: 0.2s;
+        }
+        
+        .btn-remove:disabled {
+            color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Upload Area */
+        .upload-area {
+            border: 2px dashed #b0c4de;
+            background-color: #f8fbff;
+            padding: 30px;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .upload-area.dragover {
+            background-color: #e3f2fd;
+            border-color: var(--primary-color);
+        }
+        
+        .file-list-item {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 8px 12px;
+            margin-top: 5px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        /* Bottom Text */
+        .terms-box {
+            background-color: #fdfdfe;
+            border: 1px solid #dee2e6;
+            padding: 20px;
+            font-size: 0.75rem;
+            line-height: 1.5;
+            color: #555;
+            text-align: justify;
+            margin-top: 20px;
+        }
+        
+        .terms-box h6 {
+            color: #000;
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-bottom: 4px;
+            margin-top: 10px;
+            text-decoration: underline;
+        }
+
+        .signature-input {
+            border: none;
+            border-bottom: 2px solid #333;
+            border-radius: 0;
+            background: transparent;
+            font-family: 'Rubik', cursive; /* Optional aesthetic */
+            padding-right: 0;
+        }
+
+        .btn-submit {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 60px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+        
+        .btn-submit:hover {
+            background-color: #08337a;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        /* Freq Flyer Input */
+        .freq-flyer-input {
+            display: none;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="paper-container">
+        
+        <!-- Header -->
+        <div class="text-center">
+            <h1 class="header-title">IDEAL TOURS LTD.</h1>
+            <p class="text-muted fw-bold">אידיאל טורס בע"מ</p>
+            <div class="contact-highlight mb-3">
+                נא להחזיר טופס זה בצירוף צילומי דרכונים לווצאפ 058-5396011 או לדוא"ל goski@idealtours.co.il
+            </div>
+            <h3>טופס הרשמה לחופשת סקי חורף 2025-2026</h3>
+            <h4 class="text-primary mt-2">מלון MY KOSHER HOTEL 4****</h4>
+        </div>
+
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-4 text-center">
+                <label class="form-label fw-bold">תאריך יציאה מבוקש:</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                    <input type="date" class="form-control" value="2026-01-18">
+                </div>
+            </div>
+        </div>
+
+        <form id="skiForm" onsubmit="submitForm(event)">
+            
+            <!-- Passengers -->
+            <div class="section-title"><i class="fas fa-users"></i> פרטי הנוסעים והלן (באנגלית לפי הדרכון)</div>
+            
+            <div class="table-responsive">
+                <table class="table table-bordered mb-2" id="passengersTable">
+                    <thead>
+                        <tr>
+                            <th style="width: 4%">#</th>
+                            <th style="width: 15%">שם משפחה (לועזי)</th>
+                            <th style="width: 15%">שם פרטי (לועזי)</th>
+                            <th style="width: 10%">ת. לידה</th>
+                            <th style="width: 12%">מס' דרכון</th>
+                            <th style="width: 12%">נוסע מתמיד?</th>
+                            <th style="width: 8%">סקי פס?</th>
+                            <th style="width: 15%">רמת סקי</th>
+                            <th style="width: 5%">מחק</th>
+                        </tr>
+                    </thead>
+                    <tbody id="passengersBody">
+                        <!-- JS creates rows here -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <button type="button" class="btn btn-sm btn-success rounded-pill px-3" onclick="addPassengerRow()">
+                <i class="fas fa-plus"></i> הוסף נוסע
+            </button>
+            <div class="text-danger small mt-2 fw-bold">* שימו לב! תוקף הדרכון חייב להיות מינימום 3 חודשים מיום שובכם לארץ.</div>
+
+            <!-- Documents Upload -->
+            <div class="section-title"><i class="fas fa-cloud-upload-alt"></i> צרוף צילומי דרכונים</div>
+            
+            <div class="upload-area" id="dropZone">
+                <i class="fas fa-passport fa-3x text-secondary mb-3"></i>
+                <h5>גרור קבצים לכאן או לחץ לבחירה</h5>
+                <p class="text-muted small mb-0">ניתן להעלות תמונות או קבצי PDF</p>
+                <input type="file" id="fileInput" multiple class="d-none" onchange="handleFiles(this.files)">
+            </div>
+            <div id="fileListDisplay" class="mt-2"></div>
+
+            <!-- Accommodation -->
+            <div class="section-title"><i class="fas fa-bed"></i> סוג חדר ושיעורים</div>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <label class="fw-bold mb-2">בחירת סוג חדר:</label>
+                    <div class="card p-3 bg-light border-0">
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="roomType" id="roomStandard" value="standard" checked>
+                            <label class="form-check-label" for="roomStandard">חדר סטנדרט</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="roomType" id="roomDeluxe" value="deluxe">
+                            <label class="form-check-label" for="roomDeluxe">חדר דלוקס (נוף + תוספת תשלום)</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label class="fw-bold mb-2">הדרכת סקי:</label>
+                    <div class="card p-3 bg-light border-0">
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="lessonGroup">
+                            <label class="form-check-label" for="lessonGroup">מעוניין להשתלב בביה"ס המקומי (בתשלום)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="lessonPrivate">
+                            <label class="form-check-label" for="lessonPrivate">מעוניין בהדרכה פרטית (בתשלום)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact & Payment Details (From Bottom of PDF) -->
+            <div class="section-title"><i class="fas fa-address-card"></i> פרטי המזמין ואמצעי תשלום</div>
+            
+            <div class="row g-3">
+                <div class="col-md-8">
+                    <label class="form-label">כתובת מלאה (רחוב, עיר, מיקוד)</label>
+                    <input type="text" class="form-control" name="address" required>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">טלפון נייד</label>
+                    <input type="tel" class="form-control" name="phone" placeholder="05x-xxxxxxx" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">כתובת דוא"ל</label>
+                    <input type="email" class="form-control" name="email" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">הערות ובקשות מיוחדות</label>
+                    <input type="text" class="form-control" name="notes">
+                </div>
+            </div>
+
+            <div class="bg-light p-3 rounded mt-3 border">
+                <div class="row g-3">
+                    <div class="col-12 fw-bold text-primary"><i class="far fa-credit-card"></i> פרטי אשראי לביטחון / תשלום:</div>
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" placeholder="מספר כרטיס אשראי">
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-select">
+                            <option>ויזה</option>
+                            <option>מאסטרקארד</option>
+                            <option>אמריקן אקספרס</option>
+                            <option>דיינרס</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control text-center" placeholder="תוקף (MM/YY)">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control text-center" placeholder="CVV">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" placeholder="ת.ז בעל הכרטיס">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" placeholder="שם בעל הכרטיס">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Terms Text -->
+            <div class="terms-box">
+                <h6>תשלומים:</h6>
+                עם ההרשמה יש להעביר מקדמה ע"ס 500€ לנוסע. (תוספת 1.5% לכרטיס אשראי אמריקן אקספרס ודיינרס) או בהעברה בנקאית לחשבון בבנק מזרחי, סניף גאולה, ירושלים מס' הסניף 417 מס' חשבון 116600 על שם אידיאל טורס בע"מ. במידה ונעשתה העברה בנקאית חשוב מאוד לשלוח לנו העתק של טופס ההעברה לכתובת דוא"ל או לווטסאפ כמופיע בראש עמוד זה. את יתרת התשלום יש לשלם 25 יום לפני היציאה. אי תשלום במועד הנקוב - משמעותו ביטול העסקה מצד הלקוח וכפוף לדמי הביטול כמפורט באתר.
+                
+                <h6>ביטולים:</h6>
+                ביטול כלשהו יתקבל בכתב בלבד במייל או בווטסאפ. בביטול עד 30 יום לפני תאריך היציאה התשלום יוחזר, למעט 150€ דמי טיפול לאדם. במידה והטיסה הינה Lowcost המקדמה לא תוחזר. פחות מ 30 יום לפני מועד היציאה - דמי הביטול כמפורט באתר האינטרנט של אידיאל טורס: https://www.idealtours.co.il . אי תשלום במועד הנקוב - משמעותו ביטול העסקה מצד הלקוח, וכפוף לדמי הביטול.
+
+                <h6>תנאים ואחריות:</h6>
+                תאריכי יציאה קבוצתיים מותנים במינימום 30 נרשמים. זמני הטיסות ותנאיהן עשויים להשתנות, והם באחריותן הבלעדית של חברות התעופה ואינם באחריותה של אידיאל טורס. המחירים כפופים לשערי החליפין בין היורו לדולר וכפופים למחירי חברות התעופה. המחיר כולל: טיסות, העברות, 7 לילות בבית מלון על בסיס חצי פנסיון, סנדוויצ'ים בהכנה עצמית לצהריים, קפה ועוגה אחרי הצהריים, שבת - פנסיון מלא, סקי פס מורחב 57 ק"מ, כניסה חופשית בריכה ולספא, WIFI. המחיר אינו כולל מס מקומי. מס מקומי ישולם בקבלה במלון. טל"ח.
+                
+                <h6>חובה לרכוש ביטוח:</h6>
+                בריאות, סקי, מטען וקורונה. ניתן לבצע דרך המשרד.
+            </div>
+
+            <!-- Confirmation & Signature -->
+            <div class="mt-4">
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="termsConfirm" required>
+                    <label class="form-check-label fw-bold" for="termsConfirm">
+                        קראתי את התנאים ואני מאשר אותם בחתימתי.
+                    </label>
+                </div>
+
+                <div class="row align-items-end">
+                    <div class="col-md-7">
+                        <label class="form-label">חתימה (שם מלא):</label>
+                        <input type="text" class="form-control signature-input fs-5" placeholder="הקלד שם לחתימה" required>
+                    </div>
+                    <div class="col-md-5 text-start">
+                        תאריך: <span id="currentDate" class="fw-bold text-decoration-underline"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <button type="submit" class="btn btn-submit shadow">
+                    שליחת טופס <i class="fas fa-paper-plane ms-2"></i>
+                </button>
+            </div>
+
+        </form>
+
+        <div class="text-center mt-4 text-muted small">
+            משרד: מלכי ישראל 53, ירושלים | טל: 02-5000821 | goski@idealtours.co.il
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- Passenger Logic ---
+    let passengers = [1]; // Tracks existing row IDs
+
+    function initTable() {
+        addPassengerRow(); // Add the first row on load
+        // Set Date
+        const d = new Date();
+        document.getElementById('currentDate').innerText = d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear();
+    }
+
+    function addPassengerRow() {
+        const tbody = document.getElementById('passengersBody');
+        const rowId = new Date().getTime(); // Unique ID
+        const index = tbody.children.length + 1;
+
+        const tr = document.createElement('tr');
+        tr.id = 'row-' + rowId;
+        tr.innerHTML = `
+            <td class="text-center fw-bold row-index">${index}</td>
+            <td><input type="text" class="form-control form-control-sm" placeholder="FIRST NAME"></td>
+            <td><input type="text" class="form-control form-control-sm" placeholder="LAST NAME"></td>
+            <td><input type="date" class="form-control form-control-sm"></td>
+            <td><input type="text" class="form-control form-control-sm"></td>
+            <td class="text-center">
+                <div class="d-flex flex-column align-items-center">
+                    <input type="checkbox" class="form-check-input" onchange="toggleFreq(this)">
+                    <input type="text" class="form-control form-control-sm freq-flyer-input" placeholder="מס' נוסע">
+                </div>
+            </td>
+            <td class="text-center"><input type="checkbox" class="form-check-input" checked></td>
+            <td>
+                <select class="form-select form-select-sm">
+                    <option value="">בחר...</option>
+                    <option value="4">4-מתקדם</option>
+                    <option value="3">3-בינוני</option>
+                    <option value="2">2-מתחיל+</option>
+                    <option value="1">1-מתחיל</option>
+                    <option value="SB">סנובורד</option>
+                </select>
+            </td>
+            <td class="text-center">
+                <button type="button" class="btn-remove" onclick="removeRow('${rowId}')">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+        updateRemoveButtons();
+    }
+
+    function removeRow(id) {
+        const row = document.getElementById('row-' + id);
+        if (row) {
+            row.remove();
+            reIndexRows();
+            updateRemoveButtons();
+        }
+    }
+
+    function reIndexRows() {
+        const rows = document.querySelectorAll('#passengersBody tr');
+        rows.forEach((row, index) => {
+            row.querySelector('.row-index').innerText = index + 1;
+        });
+    }
+
+    function updateRemoveButtons() {
+        const buttons = document.querySelectorAll('.btn-remove');
+        const isSingle = buttons.length === 1;
+        
+        buttons.forEach(btn => {
+            btn.disabled = isSingle;
+        });
+    }
+
+    function toggleFreq(checkbox) {
+        const input = checkbox.nextElementSibling;
+        input.style.display = checkbox.checked ? 'block' : 'none';
+        if(checkbox.checked) input.focus();
+    }
+
+    // --- File Upload Logic ---
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    const fileListDisplay = document.getElementById('fileListDisplay');
+    let uploadedFiles = []; // To store file objects
+
+    // Click to upload
+    dropZone.addEventListener('click', () => fileInput.click());
+
+    // Drag & Drop events
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('dragover');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('dragover');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+        const files = e.dataTransfer.files;
+        handleFiles(files);
+    });
+
+    function handleFiles(files) {
+        // Convert FileList to Array and add to our list
+        for (let i = 0; i < files.length; i++) {
+            uploadedFiles.push(files[i]);
+        }
+        renderFileList();
+    }
+
+    function renderFileList() {
+        fileListDisplay.innerHTML = '';
+        uploadedFiles.forEach((file, index) => {
+            const div = document.createElement('div');
+            div.className = 'file-list-item';
+            div.innerHTML = `
+                <span><i class="far fa-file-alt text-primary me-2"></i> ${file.name}</span>
+                <i class="fas fa-times text-danger" style="cursor:pointer" onclick="removeFile(${index})"></i>
+            `;
+            fileListDisplay.appendChild(div);
+        });
+    }
+
+    function removeFile(index) {
+        // In a real form, you'd need to manipulate the DataTransfer object to sync with input, 
+        // but for UI demo we just update the array
+        uploadedFiles.splice(index, 1);
+        renderFileList();
+    }
+
+    // --- Submit ---
+    function submitForm(e) {
+        e.preventDefault();
+        alert('הטופס נשלח בהצלחה למערכת!');
+    }
+
+    // Initialize
+    window.addEventListener('DOMContentLoaded', initTable);
+
+</script>
+
+</body>
+</html>
