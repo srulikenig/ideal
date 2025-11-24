@@ -723,11 +723,14 @@
     function submitForm(e) {
         e.preventDefault();
         
-        // Check if signature exists
-        if (!isSignatureEmpty()) {
-            // Save the signature data before submitting
-            saveSignature();
+        // Validate signature is provided
+        if (isSignatureEmpty()) {
+            alert('נא לחתום על הטופס לפני השליחה');
+            return;
         }
+        
+        // Save the signature data before submitting
+        saveSignature();
         
         alert('הטופס נשלח בהצלחה למערכת!');
     }
@@ -776,9 +779,13 @@
         
         if (!canvas || !wrapper) return;
         
-        // Save current signature data
-        const dataUrl = canvas.toDataURL();
         const hadSignature = wrapper.classList.contains('has-signature');
+        
+        // Only save signature data if there's actually a signature
+        let dataUrl = null;
+        if (hadSignature) {
+            dataUrl = canvas.toDataURL();
+        }
         
         // Resize canvas
         const rect = wrapper.getBoundingClientRect();
@@ -792,7 +799,7 @@
         signaturePad.lineJoin = 'round';
         
         // Restore signature if there was one
-        if (hadSignature) {
+        if (hadSignature && dataUrl) {
             const img = new Image();
             img.onload = function() {
                 signaturePad.drawImage(img, 0, 0);
@@ -843,24 +850,41 @@
         }
     }
     
+    function getTouchPos(e) {
+        const canvas = document.getElementById('signaturePad');
+        const rect = canvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        
+        return {
+            x: touch.clientX - rect.left,
+            y: touch.clientY - rect.top
+        };
+    }
+    
     function handleTouchStart(e) {
         e.preventDefault();
-        const touch = e.touches[0];
-        const mouseEvent = new MouseEvent('mousedown', {
-            clientX: touch.clientX,
-            clientY: touch.clientY
-        });
-        startDrawing(mouseEvent);
+        isDrawing = true;
+        const pos = getTouchPos(e);
+        lastX = pos.x;
+        lastY = pos.y;
+        
+        // Mark that we have a signature
+        document.getElementById('signaturePadWrapper').classList.add('has-signature');
     }
     
     function handleTouchMove(e) {
+        if (!isDrawing) return;
         e.preventDefault();
-        const touch = e.touches[0];
-        const mouseEvent = new MouseEvent('mousemove', {
-            clientX: touch.clientX,
-            clientY: touch.clientY
-        });
-        draw(mouseEvent);
+        
+        const pos = getTouchPos(e);
+        
+        signaturePad.beginPath();
+        signaturePad.moveTo(lastX, lastY);
+        signaturePad.lineTo(pos.x, pos.y);
+        signaturePad.stroke();
+        
+        lastX = pos.x;
+        lastY = pos.y;
     }
     
     function clearSignature() {
@@ -888,8 +912,12 @@
         return !wrapper || !wrapper.classList.contains('has-signature');
     }
     
+    /**
+     * Public API function to retrieve the signature as a base64 PNG image.
+     * Can be used by external scripts or form handlers to get the signature data.
+     * @returns {string} Base64 encoded PNG data URL of the signature
+     */
     function getSignatureAsImage() {
-        // Returns the signature as a base64 encoded PNG image
         return document.getElementById('signatureData').value;
     }
 
