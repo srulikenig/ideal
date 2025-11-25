@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>בדיקת תיק פנסיוני - מקסום תנאים</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4F5E45', // ירוק זית כהה (מהלוגו)
+                        secondary: '#9CCB68', // ירוק בהיר (מהלוגו)
+                        accent: '#F3F4F6',
+                        dark: '#1F2937'
+                    },
+                    fontFamily: {
+                        sans: ['Heebo', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Heebo', sans-serif; background-color: #FAFAFA; }
+        .hero-pattern {
+            background-color: #4F5E45;
+            background-image: radial-gradient(circle at 10% 20%, rgba(156, 203, 104, 0.1) 0%, transparent 20%),
+                              radial-gradient(circle at 90% 80%, rgba(156, 203, 104, 0.1) 0%, transparent 20%);
+        }
+        .custom-shadow { box-shadow: 0 20px 40px -10px rgba(79, 94, 69, 0.15); }
+        .input-field {
+            transition: all 0.3s ease;
+            border: 1px solid #E5E7EB;
+        }
+        .input-field:focus {
+            border-color: #9CCB68;
+            box-shadow: 0 0 0 4px rgba(156, 203, 104, 0.1);
+            outline: none;
+        }
+        /* Tab Switching Animation */
+        .tab-active {
+            background-color: #4F5E45;
+            color: white;
+            border-color: #4F5E45;
+        }
+        .tab-inactive {
+            background-color: white;
+            color: #4F5E45;
+            border-color: #E5E7EB;
+        }
+        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased">
+
+    <!-- Header -->
+    <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
+        <div class="container mx-auto px-6 py-4 flex justify-center md:justify-between items-center">
+            <div class="w-48">
+                <!-- הלוגו שלך -->
+                <img src="logo.png" alt="קניג ביטוחים" class="w-full h-auto object-contain">
+            </div>
+            <div class="hidden md:block text-primary font-medium">
+                מצמיחים עתיד בטוח
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-pattern text-white py-20 lg:py-28 relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight tracking-tight">
+                הגיע הזמן שהפנסיה שלך <br>
+                <span class="text-[#9CCB68]">תתחיל להרוויח יותר.</span>
+            </h1>
+            <p class="text-lg md:text-2xl font-light text-gray-200 mb-10 max-w-2xl mx-auto">
+                בדיקה מקצועית לתיק הפנסיוני, קרנות השתלמות וקופות גמל.
+                אנחנו מורידים דמי ניהול, משפרים מסלולי השקעה ומייצרים לך עתיד שקט.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#lead-form-section" class="bg-[#9CCB68] text-white hover:bg-[#8AB55A] font-bold py-4 px-10 rounded-xl text-xl transition-all transform hover:-translate-y-1 shadow-lg shadow-green-900/20">
+                    אני רוצה בדיקת תיק 
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us (Features) -->
+    <section class="py-20 -mt-10">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white p-8 rounded-2xl custom-shadow transform hover:-translate-y-2 transition duration-300 border-t-4 border-[#9CCB68]">
+                    <div class="w-14 h-14 bg-green-50 rounded-full flex items-center justify-center text-2xl mb-6">📈</div>
+                    <h3 class="text-xl font-bold text-primary mb-3">תשואות מקסימליות</h3>
+                    <p class="text-gray-500 leading-relaxed">אנחנו בוחנים את ביצועי הקופות שלך מול כל האפשרויות בשוק כדי לוודא שהכסף שלך נמצא במסלול הרווחי ביותר.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white p-8 rounded-2xl custom-shadow transform hover:-translate-y-2 transition duration-300 border-t-4 border-primary">
+                    <div class="w-14 h-14 bg-green-50 rounded-full flex items-center justify-center text-2xl mb-6">📉</div>
+                    <h3 class="text-xl font-bold text-primary mb-3">מינימום דמי ניהול</h3>
+                    <p class="text-gray-500 leading-relaxed">הכוח שלנו כסוכנות מאפשר לנו להשיג עבורך הנחות בדמי הניהול שלקוח פרטי פשוט לא יכול לקבל לבד.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white p-8 rounded-2xl custom-shadow transform hover:-translate-y-2 transition duration-300 border-t-4 border-[#9CCB68]">
+                    <div class="w-14 h-14 bg-green-50 rounded-full flex items-center justify-center text-2xl mb-6">🤝</div>
+                    <h3 class="text-xl font-bold text-primary mb-3">ליווי אישי ארוך טווח</h3>
+                    <p class="text-gray-500 leading-relaxed">אנחנו לא רק "מוכרים והולכים". אנחנו מלווים את התיק הפנסיוני שלך, מעדכנים ודואגים שתמיד תהיה בתנאים האופטימליים.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Form Section -->
+    <section id="lead-form-section" class="py-16 bg-white relative">
+        <div class="absolute inset-0 bg-gray-50 skew-y-3 transform origin-top-left -z-10 h-full"></div>
+        <div class="container mx-auto px-4 max-w-4xl">
+            
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">בוא נבדוק מה מגיע לך</h2>
+                <p class="text-gray-500">מלא את הפרטים ונחזור אליך עם ניתוח ראשוני ללא התחייבות</p>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
+                <!-- Form Header / Tabs -->
+                <div class="flex flex-col sm:flex-row border-b border-gray-100 bg-gray-50/50 p-2 gap-2">
+                    <button type="button" onclick="switchTab('private')" id="btn-private" class="flex-1 py-4 text-center rounded-xl font-bold text-lg transition-all tab-active flex items-center justify-center gap-2">
+                        <span>👤</span> לקוח פרטי
+                    </button>
+                    <button type="button" onclick="switchTab('business')" id="btn-business" class="flex-1 py-4 text-center rounded-xl font-bold text-lg transition-all tab-inactive flex items-center justify-center gap-2">
+                        <span>🏢</span> מעסיק / חברה
+                    </button>
+                </div>
+
+                <div class="p-8 md:p-12">
+                    <form id="campaignForm" action="#" method="POST"> <!-- שים כאן את הלינק למערכת הדיוור -->
+                        
+                        <!-- שדה נסתר למזהה סוכן -->
+                        <input type="hidden" id="referrer_id" name="referrer_id" value="">
+                        <!-- שדה נסתר לסוג לקוח -->
+                        <input type="hidden" id="customer_type" name="customer_type" value="private">
+
+                        <!-- === שדות לקוח פרטי === -->
+                        <div id="form-private" class="fade-in space-y-6">
+                            <div class="bg-green-50/50 p-4 rounded-lg border border-green-100 mb-6">
+                                <p class="text-primary text-sm font-medium text-center">👇 פרטים לאיתור חסכונות ומסלקה פנסיונית 👇</p>
+                            </div>
+
+                            <div>
+                                <label class="block text-gray-700 font-bold mb-2">שם מלא</label>
+                                <input type="text" name="p_fullname" class="w-full px-5 py-4 rounded-xl input-field bg-gray-50 text-lg" placeholder="ישראל ישראלי" required>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-gray-700 font-bold mb-2">מספר טלפון</label>
+                                    <input type="tel" name="p_phone" class="w-full px-5 py-4 rounded-xl input-field bg-gray-50 text-lg" placeholder="050-0000000" required>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-bold mb-2">כתובת מייל</label>
+                                    <input type="email" name="p_email" class="w-full px-5 py-4 rounded-xl input-field bg-gray-50 text-lg" placeholder="mail@example.com" required>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-gray-700 font-bold mb-2">תעודת זהות</label>
+                                    <input type="text" name="p_id" class="w-full px-5 py-4 rounded-xl input-field bg-gray-50 text-lg" placeholder="נדרש לבדיקת התיק" required>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-bold mb-2">תאריך לידה</label>
+                                    <input type="date" name="p_dob" class="w-full px-5 py-4 rounded-xl input-field bg-gray-50 text-lg" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- === שדות לקוח עסקי === -->
+                        <div id="form-business" class="hidden fade-in space-y-6">
+                            <div class="bg-blue-50/50 p-4 rounded-lg border border-blue-100 mb-6">
+                                <p class="text-blue-800 text-sm font-medium text-center">👇 פרטים לתיאום פגישה ובדיקת הסדר פנסיוני 👇</p>
+                            </div>
+
+                            <div>
+                                <label class="block text-gray-700 font-bold mb-2">שם העסק / חברה</label>
+                                <input type="text" name="b_company_name" class="w-full px-5 py-4 rounded-xl input-field bg-gray-50 text-lg" placeholder="שם החברה בע''מ">
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-gray-700 font-bold mb-2">טלפון איש קשר</label>
+                                    <input type="tel" name="b_contact_phone" class="w-full px-5 py-4 rounded-xl input-field bg-gray-50 text-lg" placeholder="050-0000000">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-bold mb-2">מייל איש קשר</label>
+                                    <input type="email" name="b_contact_email" class="w-full px-5 py-4 rounded-xl input-field bg-gray-50 text-lg" placeholder="hr@company.com">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-gray-700 font-bold mb-2">כמות עובדים</label>
+                                <select name="b_employees_count" class="w-full px-5 py-4 rounded-xl input-field bg-gray-50 text-lg bg-white">
+                                    <option value="" disabled selected>בחר כמות עובדים...</option>
+                                    <option value="1-10">1-10 עובדים</option>
+                                    <option value="11-50">11-50 עובדים</option>
+                                    <option value="51-100">51-100 עובדים</option>
+                                    <option value="100+">מעל 100 עובדים</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-gray-700 font-bold mb-2">הערות חשובות</label>
+                                <textarea name="b_notes" rows="3" class="w-full px-5 py-4 rounded-xl input-field bg-gray-50 text-lg" placeholder="פרטים נוספים שחשוב שנדע..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="mt-10">
+                            <button type="submit" class="w-full bg-[#9CCB68] hover:bg-[#8AB55A] text-white text-xl font-bold py-5 rounded-xl shadow-lg shadow-green-500/30 transition-all transform hover:-translate-y-1">
+                                שלח פרטים לבדיקה &larr;
+                            </button>
+                            <p class="text-center text-gray-400 text-xs mt-4">
+                                * השירות ניתן ללא עלות ראשונית וכרוך בבדיקת מסלקה פנסיונית. פרטיך נשמרים בסודיות מלאה.
+                            </p>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-10 border-t border-green-800">
+        <div class="container mx-auto px-6 text-center">
+            <p class="opacity-80 mb-2">&copy; 2024 קניג ביטוחים ופיננסים.</p>
+            <p class="text-sm opacity-60">הדף נבנה כדי לעזור לך למקסם את החיסכון שלך.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // פונקציה להחלפת טאבים
+        function switchTab(type) {
+            const formPrivate = document.getElementById('form-private');
+            const formBusiness = document.getElementById('form-business');
+            const btnPrivate = document.getElementById('btn-private');
+            const btnBusiness = document.getElementById('btn-business');
+            const customerTypeInput = document.getElementById('customer_type');
+
+            // עדכון שדה נסתר
+            customerTypeInput.value = type;
+
+            if (type === 'private') {
+                // הצגת פרטי
+                formPrivate.classList.remove('hidden');
+                formBusiness.classList.add('hidden');
+                
+                // עיצוב כפתורים
+                btnPrivate.classList.add('tab-active');
+                btnPrivate.classList.remove('tab-inactive');
+                btnBusiness.classList.add('tab-inactive');
+                btnBusiness.classList.remove('tab-active');
+
+                // ניהול שדות חובה (Required)
+                toggleRequired(formPrivate, true);
+                toggleRequired(formBusiness, false);
+
+            } else {
+                // הצגת עסקי
+                formPrivate.classList.add('hidden');
+                formBusiness.classList.remove('hidden');
+
+                // עיצוב כפתורים
+                btnBusiness.classList.add('tab-active');
+                btnBusiness.classList.remove('tab-inactive');
+                btnPrivate.classList.add('tab-inactive');
+                btnPrivate.classList.remove('tab-active');
+
+                // ניהול שדות חובה
+                toggleRequired(formPrivate, false);
+                toggleRequired(formBusiness, true);
+            }
+        }
+
+        // פונקציית עזר לביטול/הפעלת שדות חובה כדי למנוע שגיאות שליחה
+        function toggleRequired(container, isRequired) {
+            const inputs = container.querySelectorAll('input, select, textarea');
+            inputs.forEach(input => {
+                // אנחנו לא הופכים הערות לחובה
+                if(input.name !== 'b_notes' && input.name !== 'b_company_name') { 
+                    if(isRequired) {
+                        input.setAttribute('required', '');
+                    } else {
+                        input.removeAttribute('required');
+                    }
+                }
+            });
+        }
+
+        // זיהוי סוכן מה-URL
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const refID = urlParams.get('ref') || urlParams.get('agent');
+            if (refID) {
+                document.getElementById('referrer_id').value = refID;
+            }
+        });
+    </script>
+</body>
+</html>
