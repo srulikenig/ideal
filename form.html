@@ -78,27 +78,101 @@
             border-radius: 4px;
         }
 
-        /* Larger inputs for passenger table on desktop */
-        @media (min-width: 769px) {
-            #passengersTable .form-control,
-            #passengersTable .form-select {
-                font-size: 1rem;
-                padding: 10px 12px;
-                min-height: 44px;
+        /* Passenger Card Styles */
+        .passenger-card {
+            background: #fff;
+            border: 2px solid #dee2e6;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        .passenger-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .passenger-number {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            background: #e3f2fd;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        .passenger-fields {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .passenger-field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .passenger-field label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .passenger-field .form-control,
+        .passenger-field .form-select {
+            font-size: 1rem;
+            padding: 10px 12px;
+            min-height: 44px;
+        }
+
+        .passenger-field.checkbox-field {
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+            padding-top: 25px;
+        }
+
+        .passenger-field.checkbox-field label {
+            margin-bottom: 0;
+        }
+
+        .passenger-field.checkbox-field .form-check-input {
+            width: 20px;
+            height: 20px;
+        }
+
+        .freq-flyer-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .freq-flyer-wrapper .freq-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @media (max-width: 992px) {
+            .passenger-fields {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .passenger-fields {
+                grid-template-columns: 1fr;
             }
             
-            #passengersTable td {
-                padding: 12px 8px;
-            }
-            
-            #passengersTable th {
-                font-size: 0.9rem;
-                padding: 12px 8px;
-            }
-            
-            #passengersTable td .freq-flyer-input {
-                min-height: 36px;
-                font-size: 0.9rem;
+            .passenger-card {
+                padding: 15px;
             }
         }
 
@@ -259,122 +333,8 @@
             margin-top: 4px;
         }
 
-        /* Responsive Table for Small Screens */
+        /* Mobile responsive adjustments */
         @media (max-width: 768px) {
-            /* Hide table headers on mobile */
-            .table thead {
-                display: none;
-            }
-
-            /* Convert table rows to cards */
-            .table tbody tr {
-                display: block;
-                margin-bottom: 20px;
-                border: 2px solid #dee2e6;
-                border-radius: 8px;
-                background: #fff;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-                padding: 15px;
-                position: relative;
-            }
-
-            .table tbody td {
-                display: block;
-                text-align: right !important;
-                padding: 10px 5px;
-                border: none;
-                position: relative;
-                padding-right: 45%;
-                min-height: 40px;
-            }
-
-            /* Add labels before each cell */
-            .table tbody td:before {
-                content: attr(data-label);
-                position: absolute;
-                right: 10px;
-                font-weight: bold;
-                color: var(--primary-color);
-                white-space: nowrap;
-            }
-
-            /* Style for row number */
-            .table tbody td:nth-child(1):before {
-                content: "#";
-            }
-
-            .table tbody td:nth-child(1) {
-                font-size: 1.2rem;
-                font-weight: bold;
-                color: var(--primary-color);
-                text-align: center !important;
-                padding-right: 5px;
-                margin-bottom: 10px;
-                border-bottom: 2px solid #e0e0e0;
-            }
-
-            .table tbody td:nth-child(2):before {
-                content: "שם משפחה:";
-            }
-
-            .table tbody td:nth-child(3):before {
-                content: "שם פרטי:";
-            }
-
-            .table tbody td:nth-child(4):before {
-                content: "ת. לידה:";
-            }
-
-            .table tbody td:nth-child(5):before {
-                content: "מס' דרכון:";
-            }
-
-            .table tbody td:nth-child(6):before {
-                content: "נוסע מתמיד:";
-            }
-
-            .table tbody td:nth-child(7):before {
-                content: "סקי פס:";
-            }
-
-            .table tbody td:nth-child(8):before {
-                content: "רמת סקי:";
-            }
-
-            .table tbody td:nth-child(9) {
-                text-align: center !important;
-                padding-right: 5px;
-                margin-top: 10px;
-                border-top: 1px solid #e0e0e0;
-                padding-top: 15px;
-            }
-
-            .table tbody td:nth-child(9):before {
-                content: "";
-            }
-
-            /* Adjust form controls for mobile */
-            .table .form-control,
-            .table .form-select {
-                width: 100%;
-                max-width: none;
-            }
-
-            /* Better spacing for frequent flyer checkbox and input */
-            .table tbody td:nth-child(6) .d-flex {
-                flex-direction: column;
-                align-items: flex-start !important;
-            }
-
-            .table tbody td:nth-child(6) .form-check-input {
-                margin-bottom: 5px;
-            }
-
-            /* Center checkbox cells better */
-            .table tbody td:nth-child(7) {
-                text-align: right !important;
-            }
-
             /* Make paper container more mobile-friendly */
             .paper-container {
                 padding: 20px 15px;
@@ -420,25 +380,8 @@
             <!-- Passengers -->
             <div class="section-title"><i class="fas fa-users"></i> פרטי הנוסעים והלן (באנגלית לפי הדרכון)</div>
             
-            <div class="table-responsive">
-                <table class="table table-bordered mb-2" id="passengersTable">
-                    <thead>
-                        <tr>
-                            <th style="width: 4%">#</th>
-                            <th style="width: 15%">שם משפחה (לועזי)</th>
-                            <th style="width: 15%">שם פרטי (לועזי)</th>
-                            <th style="width: 10%">ת. לידה</th>
-                            <th style="width: 12%">מס' דרכון</th>
-                            <th style="width: 12%">נוסע מתמיד?</th>
-                            <th style="width: 8%">סקי פס?</th>
-                            <th style="width: 15%">רמת סקי</th>
-                            <th style="width: 5%">מחק</th>
-                        </tr>
-                    </thead>
-                    <tbody id="passengersBody">
-                        <!-- JS creates rows here -->
-                    </tbody>
-                </table>
+            <div id="passengersContainer">
+                <!-- JS creates passenger cards here -->
             </div>
             
             <button type="button" class="btn btn-sm btn-success rounded-pill px-3" onclick="addPassengerRow()">
@@ -646,42 +589,65 @@
     }
 
     function addPassengerRow() {
-        const tbody = document.getElementById('passengersBody');
+        const container = document.getElementById('passengersContainer');
         const rowId = new Date().getTime(); // Unique ID
-        const index = tbody.children.length + 1;
+        const index = container.children.length + 1;
 
-        const tr = document.createElement('tr');
-        tr.id = 'row-' + rowId;
-        tr.innerHTML = `
-            <td class="text-center fw-bold row-index">${index}</td>
-            <td><input type="text" class="form-control form-control-sm" placeholder="FIRST NAME"></td>
-            <td><input type="text" class="form-control form-control-sm" placeholder="LAST NAME"></td>
-            <td><input type="date" class="form-control form-control-sm"></td>
-            <td><input type="text" class="form-control form-control-sm"></td>
-            <td class="text-center">
-                <div class="d-flex flex-column align-items-center">
-                    <input type="checkbox" class="form-check-input" onchange="toggleFreq(this)">
-                    <input type="text" class="form-control form-control-sm freq-flyer-input" placeholder="מס' נוסע">
-                </div>
-            </td>
-            <td class="text-center"><input type="checkbox" class="form-check-input" checked></td>
-            <td>
-                <select class="form-select form-select-sm">
-                    <option value="">בחר...</option>
-                    <option value="4">4-מתקדם</option>
-                    <option value="3">3-בינוני</option>
-                    <option value="2">2-מתחיל+</option>
-                    <option value="1">1-מתחיל</option>
-                    <option value="SB">סנובורד</option>
-                </select>
-            </td>
-            <td class="text-center">
+        const card = document.createElement('div');
+        card.className = 'passenger-card';
+        card.id = 'row-' + rowId;
+        card.innerHTML = `
+            <div class="passenger-card-header">
+                <span class="passenger-number row-index">נוסע ${index}</span>
                 <button type="button" class="btn-remove" onclick="removeRow('${rowId}')">
-                    <i class="fas fa-trash-alt"></i>
+                    <i class="fas fa-trash-alt"></i> מחק
                 </button>
-            </td>
+            </div>
+            <div class="passenger-fields">
+                <div class="passenger-field">
+                    <label>שם משפחה (לועזי)</label>
+                    <input type="text" class="form-control" placeholder="LAST NAME">
+                </div>
+                <div class="passenger-field">
+                    <label>שם פרטי (לועזי)</label>
+                    <input type="text" class="form-control" placeholder="FIRST NAME">
+                </div>
+                <div class="passenger-field">
+                    <label>תאריך לידה</label>
+                    <input type="date" class="form-control">
+                </div>
+                <div class="passenger-field">
+                    <label>מס' דרכון</label>
+                    <input type="text" class="form-control" placeholder="מספר דרכון">
+                </div>
+                <div class="passenger-field">
+                    <label>נוסע מתמיד?</label>
+                    <div class="freq-flyer-wrapper">
+                        <div class="freq-row">
+                            <input type="checkbox" class="form-check-input" onchange="toggleFreq(this)">
+                            <span>כן, יש לי מספר</span>
+                        </div>
+                        <input type="text" class="form-control freq-flyer-input" placeholder="מס' נוסע מתמיד">
+                    </div>
+                </div>
+                <div class="passenger-field checkbox-field">
+                    <input type="checkbox" class="form-check-input" checked>
+                    <label>סקי פס?</label>
+                </div>
+                <div class="passenger-field">
+                    <label>רמת סקי</label>
+                    <select class="form-select">
+                        <option value="">בחר...</option>
+                        <option value="4">4-מתקדם</option>
+                        <option value="3">3-בינוני</option>
+                        <option value="2">2-מתחיל+</option>
+                        <option value="1">1-מתחיל</option>
+                        <option value="SB">סנובורד</option>
+                    </select>
+                </div>
+            </div>
         `;
-        tbody.appendChild(tr);
+        container.appendChild(card);
         updateRemoveButtons();
     }
 
@@ -695,9 +661,9 @@
     }
 
     function reIndexRows() {
-        const rows = document.querySelectorAll('#passengersBody tr');
-        rows.forEach((row, index) => {
-            row.querySelector('.row-index').innerText = index + 1;
+        const cards = document.querySelectorAll('#passengersContainer .passenger-card');
+        cards.forEach((card, index) => {
+            card.querySelector('.row-index').innerText = 'נוסע ' + (index + 1);
         });
     }
 
@@ -711,7 +677,8 @@
     }
 
     function toggleFreq(checkbox) {
-        const input = checkbox.nextElementSibling;
+        const wrapper = checkbox.closest('.freq-flyer-wrapper');
+        const input = wrapper.querySelector('.freq-flyer-input');
         input.style.display = checkbox.checked ? 'block' : 'none';
         if(checkbox.checked) input.focus();
     }
