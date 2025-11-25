@@ -717,10 +717,9 @@
                                 <label class="small fw-bold">בחר נוסעים לחדר דלוקס:</label>
                                 <div class="participant-list" id="deluxePassengerList"></div>
                                 <div class="participant-select-wrapper">
-                                    <select class="form-select form-select-sm" id="deluxePassengerDropdown">
+                                    <select class="form-select form-select-sm" id="deluxePassengerDropdown" onchange="addDeluxePassenger()">
                                         <option value="">בחר נוסע...</option>
                                     </select>
-                                    <button type="button" class="btn btn-sm btn-primary" onclick="addDeluxePassenger()"><i class="fas fa-plus"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -741,10 +740,9 @@
                             <label class="small fw-bold">בחר משתתפים מרשימת הנוסעים:</label>
                             <div class="participant-list" id="kidsParticipantList"></div>
                             <div class="participant-select-wrapper">
-                                <select class="form-select form-select-sm" id="kidsParticipantSelect">
+                                <select class="form-select form-select-sm" id="kidsParticipantSelect" onchange="addParticipantFromSelect('kids')">
                                     <option value="">בחר נוסע...</option>
                                 </select>
-                                <button type="button" class="btn btn-sm btn-primary" onclick="addParticipantFromSelect('kids')"><i class="fas fa-plus"></i></button>
                             </div>
                             <div class="error-message" id="kidsParticipantError"><i class="fas fa-exclamation-circle"></i> יש להוסיף לפחות משתתף אחד</div>
                         </div>
@@ -761,10 +759,9 @@
                             <label class="small fw-bold">בחר משתתפים מרשימת הנוסעים:</label>
                             <div class="participant-list" id="adultsParticipantList"></div>
                             <div class="participant-select-wrapper">
-                                <select class="form-select form-select-sm" id="adultsParticipantSelect">
+                                <select class="form-select form-select-sm" id="adultsParticipantSelect" onchange="addParticipantFromSelect('adults')">
                                     <option value="">בחר נוסע...</option>
                                 </select>
-                                <button type="button" class="btn btn-sm btn-primary" onclick="addParticipantFromSelect('adults')"><i class="fas fa-plus"></i></button>
                             </div>
                             <div class="error-message" id="adultsParticipantError"><i class="fas fa-exclamation-circle"></i> יש להוסיף לפחות משתתף אחד</div>
                         </div>
@@ -781,10 +778,9 @@
                             <label class="small fw-bold">בחר משתתפים מרשימת הנוסעים:</label>
                             <div class="participant-list" id="privateParticipantList"></div>
                             <div class="participant-select-wrapper">
-                                <select class="form-select form-select-sm" id="privateParticipantSelect">
+                                <select class="form-select form-select-sm" id="privateParticipantSelect" onchange="addParticipantFromSelect('private')">
                                     <option value="">בחר נוסע...</option>
                                 </select>
-                                <button type="button" class="btn btn-sm btn-primary" onclick="addParticipantFromSelect('private')"><i class="fas fa-plus"></i></button>
                             </div>
                             <div class="error-message" id="privateParticipantError"><i class="fas fa-exclamation-circle"></i> יש להוסיף לפחות משתתף אחד</div>
                         </div>
@@ -1209,6 +1205,8 @@
                 renderDeluxePassengers();
                 updateDeluxePassengerDropdown();
             }
+            // Reset select to default option
+            select.selectedIndex = 0;
         }
     }
 
@@ -1316,6 +1314,8 @@
                 // Hide error
                 document.getElementById(type + 'ParticipantError').classList.remove('show');
             }
+            // Reset select to default option
+            select.selectedIndex = 0;
         }
     }
 
