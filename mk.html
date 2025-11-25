@@ -11,8 +11,8 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#4F5E45', // ירוק זית כהה (מהלוגו)
-                        secondary: '#9CCB68', // ירוק בהיר (מהלוגו)
+                        primary: '#4F5E45',
+                        secondary: '#9CCB68',
                         accent: '#F3F4F6',
                         dark: '#1F2937'
                     },
@@ -40,21 +40,20 @@
             box-shadow: 0 0 0 4px rgba(156, 203, 104, 0.1);
             outline: none;
         }
-        /* Tab Switching Animation */
-        .tab-active {
-            background-color: #4F5E45;
-            color: white;
-            border-color: #4F5E45;
-        }
-        .tab-inactive {
-            background-color: white;
-            color: #4F5E45;
-            border-color: #E5E7EB;
-        }
+        .tab-active { background-color: #4F5E45; color: white; border-color: #4F5E45; }
+        .tab-inactive { background-color: white; color: #4F5E45; border-color: #E5E7EB; }
         .fade-in { animation: fadeIn 0.5s ease-in-out; }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+        /* עיצוב צ'קבוקס מותאם אישית */
+        .checkbox-wrapper input:checked + div {
+            background-color: #4F5E45;
+            border-color: #4F5E45;
+        }
+        .checkbox-wrapper input:checked + div svg {
+            display: block;
         }
     </style>
 </head>
@@ -64,7 +63,6 @@
     <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
         <div class="container mx-auto px-6 py-4 flex justify-center md:justify-between items-center">
             <div class="w-48">
-                <!-- הלוגו שלך -->
                 <img src="logo.png" alt="קניג ביטוחים" class="w-full h-auto object-contain">
             </div>
             <div class="hidden md:block text-primary font-medium">
@@ -96,19 +94,16 @@
     <section class="py-20 -mt-10">
         <div class="container mx-auto px-6">
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Card 1 -->
                 <div class="bg-white p-8 rounded-2xl custom-shadow transform hover:-translate-y-2 transition duration-300 border-t-4 border-[#9CCB68]">
                     <div class="w-14 h-14 bg-green-50 rounded-full flex items-center justify-center text-2xl mb-6">📈</div>
                     <h3 class="text-xl font-bold text-primary mb-3">תשואות מקסימליות</h3>
                     <p class="text-gray-500 leading-relaxed">אנחנו בוחנים את ביצועי הקופות שלך מול כל האפשרויות בשוק כדי לוודא שהכסף שלך נמצא במסלול הרווחי ביותר.</p>
                 </div>
-                <!-- Card 2 -->
                 <div class="bg-white p-8 rounded-2xl custom-shadow transform hover:-translate-y-2 transition duration-300 border-t-4 border-primary">
                     <div class="w-14 h-14 bg-green-50 rounded-full flex items-center justify-center text-2xl mb-6">📉</div>
                     <h3 class="text-xl font-bold text-primary mb-3">מינימום דמי ניהול</h3>
                     <p class="text-gray-500 leading-relaxed">הכוח שלנו כסוכנות מאפשר לנו להשיג עבורך הנחות בדמי הניהול שלקוח פרטי פשוט לא יכול לקבל לבד.</p>
                 </div>
-                <!-- Card 3 -->
                 <div class="bg-white p-8 rounded-2xl custom-shadow transform hover:-translate-y-2 transition duration-300 border-t-4 border-[#9CCB68]">
                     <div class="w-14 h-14 bg-green-50 rounded-full flex items-center justify-center text-2xl mb-6">🤝</div>
                     <h3 class="text-xl font-bold text-primary mb-3">ליווי אישי ארוך טווח</h3>
@@ -128,8 +123,22 @@
                 <p class="text-gray-500">מלא את הפרטים ונחזור אליך עם ניתוח ראשוני ללא התחייבות</p>
             </div>
 
-            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
-                <!-- Form Header / Tabs -->
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 relative">
+                
+                <!-- Loading Overlay -->
+                <div id="loading-overlay" class="absolute inset-0 bg-white/90 z-20 hidden flex flex-col items-center justify-center">
+                    <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#9CCB68]"></div>
+                    <p class="mt-4 text-xl font-bold text-primary">שולח את הפרטים...</p>
+                </div>
+
+                <!-- Success Message -->
+                <div id="success-message" class="absolute inset-0 bg-white z-20 hidden flex flex-col items-center justify-center text-center p-8">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center text-4xl mb-6 text-green-600">✓</div>
+                    <h3 class="text-3xl font-bold text-primary mb-2">הפרטים התקבלו בהצלחה!</h3>
+                    <p class="text-gray-600 text-lg">תודה שבחרת בקניג ביטוחים.<br>הצוות שלנו כבר עובר על הנתונים ונחזור אליך בהקדם לתיאום הבדיקה.</p>
+                </div>
+
+                <!-- Tabs -->
                 <div class="flex flex-col sm:flex-row border-b border-gray-100 bg-gray-50/50 p-2 gap-2">
                     <button type="button" onclick="switchTab('private')" id="btn-private" class="flex-1 py-4 text-center rounded-xl font-bold text-lg transition-all tab-active flex items-center justify-center gap-2">
                         <span>👤</span> לקוח פרטי
@@ -140,14 +149,13 @@
                 </div>
 
                 <div class="p-8 md:p-12">
-                    <form id="campaignForm" action="#" method="POST"> <!-- שים כאן את הלינק למערכת הדיוור -->
+                    <!-- Form start -->
+                    <form id="campaignForm" onsubmit="submitToGoogleSheets(event)">
                         
-                        <!-- שדה נסתר למזהה סוכן -->
                         <input type="hidden" id="referrer_id" name="referrer_id" value="">
-                        <!-- שדה נסתר לסוג לקוח -->
                         <input type="hidden" id="customer_type" name="customer_type" value="private">
 
-                        <!-- === שדות לקוח פרטי === -->
+                        <!-- Private Fields -->
                         <div id="form-private" class="fade-in space-y-6">
                             <div class="bg-green-50/50 p-4 rounded-lg border border-green-100 mb-6">
                                 <p class="text-primary text-sm font-medium text-center">👇 פרטים לאיתור חסכונות ומסלקה פנסיונית 👇</p>
@@ -179,9 +187,22 @@
                                     <input type="date" name="p_dob" class="w-full px-5 py-4 rounded-xl input-field bg-gray-50 text-lg" required>
                                 </div>
                             </div>
+
+                            <!-- Checkbox for Masleka -->
+                            <div class="mt-6 p-4 bg-gray-50 rounded-xl border border-gray-100">
+                                <label class="flex items-start cursor-pointer checkbox-wrapper group">
+                                    <input type="checkbox" name="p_consent" class="sr-only" required>
+                                    <div class="w-6 h-6 border-2 border-gray-300 rounded bg-white flex items-center justify-center mr-0 ml-3 mt-1 transition-colors">
+                                        <svg class="w-4 h-4 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                    </div>
+                                    <span class="text-sm text-gray-600 flex-1 leading-relaxed select-none group-hover:text-primary transition-colors">
+                                        אני מאשר לקניג ביטוחים להפיק מידע מהמסלקה הפנסיונית על שמי לצורך בדיקת התיק ומקסום התנאים.
+                                    </span>
+                                </label>
+                            </div>
                         </div>
 
-                        <!-- === שדות לקוח עסקי === -->
+                        <!-- Business Fields -->
                         <div id="form-business" class="hidden fade-in space-y-6">
                             <div class="bg-blue-50/50 p-4 rounded-lg border border-blue-100 mb-6">
                                 <p class="text-blue-800 text-sm font-medium text-center">👇 פרטים לתיאום פגישה ובדיקת הסדר פנסיוני 👇</p>
@@ -226,10 +247,9 @@
                                 שלח פרטים לבדיקה &larr;
                             </button>
                             <p class="text-center text-gray-400 text-xs mt-4">
-                                * השירות ניתן ללא עלות ראשונית וכרוך בבדיקת מסלקה פנסיונית. פרטיך נשמרים בסודיות מלאה.
+                                * הטופס מאובטח ונשלח ישירות למערכות הסוכנות.
                             </p>
                         </div>
-
                     </form>
                 </div>
             </div>
@@ -240,13 +260,17 @@
     <footer class="bg-primary text-white py-10 border-t border-green-800">
         <div class="container mx-auto px-6 text-center">
             <p class="opacity-80 mb-2">&copy; 2024 קניג ביטוחים ופיננסים.</p>
-            <p class="text-sm opacity-60">הדף נבנה כדי לעזור לך למקסם את החיסכון שלך.</p>
         </div>
     </footer>
 
     <!-- JavaScript Logic -->
     <script>
-        // פונקציה להחלפת טאבים
+        // ==========================================
+        // הוסף כאן את הקישור שקיבלת מגוגל סקריפט
+        // ==========================================
+        const GOOGLE_SCRIPT_URL = "הדבק_כאן_את_הקישור_מגוגל_סקריפט";
+        // ==========================================
+
         function switchTab(type) {
             const formPrivate = document.getElementById('form-private');
             const formBusiness = document.getElementById('form-business');
@@ -254,46 +278,32 @@
             const btnBusiness = document.getElementById('btn-business');
             const customerTypeInput = document.getElementById('customer_type');
 
-            // עדכון שדה נסתר
             customerTypeInput.value = type;
 
             if (type === 'private') {
-                // הצגת פרטי
                 formPrivate.classList.remove('hidden');
                 formBusiness.classList.add('hidden');
-                
-                // עיצוב כפתורים
                 btnPrivate.classList.add('tab-active');
                 btnPrivate.classList.remove('tab-inactive');
                 btnBusiness.classList.add('tab-inactive');
                 btnBusiness.classList.remove('tab-active');
-
-                // ניהול שדות חובה (Required)
                 toggleRequired(formPrivate, true);
                 toggleRequired(formBusiness, false);
-
             } else {
-                // הצגת עסקי
                 formPrivate.classList.add('hidden');
                 formBusiness.classList.remove('hidden');
-
-                // עיצוב כפתורים
                 btnBusiness.classList.add('tab-active');
                 btnBusiness.classList.remove('tab-inactive');
                 btnPrivate.classList.add('tab-inactive');
                 btnPrivate.classList.remove('tab-active');
-
-                // ניהול שדות חובה
                 toggleRequired(formPrivate, false);
                 toggleRequired(formBusiness, true);
             }
         }
 
-        // פונקציית עזר לביטול/הפעלת שדות חובה כדי למנוע שגיאות שליחה
         function toggleRequired(container, isRequired) {
             const inputs = container.querySelectorAll('input, select, textarea');
             inputs.forEach(input => {
-                // אנחנו לא הופכים הערות לחובה
                 if(input.name !== 'b_notes' && input.name !== 'b_company_name') { 
                     if(isRequired) {
                         input.setAttribute('required', '');
@@ -312,6 +322,55 @@
                 document.getElementById('referrer_id').value = refID;
             }
         });
+
+        // שליחת הטופס לגוגל שיטס
+        function submitToGoogleSheets(e) {
+            e.preventDefault(); // מניעת רענון הדף
+
+            if (GOOGLE_SCRIPT_URL.includes("הדבק_כאן")) {
+                alert("עדיין לא הגדרנו אופציה לשליחה\nתוך יום יומיים זה גם יהיה מוכן 😉");
+                return;
+            }
+
+            const form = e.target;
+            const loadingOverlay = document.getElementById('loading-overlay');
+            const successMessage = document.getElementById('success-message');
+
+            // הצגת מסך טעינה
+            loadingOverlay.classList.remove('hidden');
+
+            // איסוף הנתונים
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => data[key] = value);
+            // טיפול בצ'קבוקס (אם לא מסומן הוא לא עובר בפורם-דאטה, אבל אם הוא required הוא חייב להיות מסומן)
+            data.p_consent = formData.get('p_consent') === 'on';
+
+            // שליחה ב-Fetch
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify(data),
+                // הגדרה זו חשובה כדי למנוע חסימת CORS מגוגל
+                headers: {
+                    "Content-Type": "text/plain;charset=utf-8",
+                },
+            })
+            .then(response => response.json())
+            .then(result => {
+                loadingOverlay.classList.add('hidden');
+                if(result.result === 'success') {
+                    successMessage.classList.remove('hidden');
+                    form.reset();
+                } else {
+                    alert('הייתה שגיאה בשליחה: ' + result.error);
+                }
+            })
+            .catch(error => {
+                loadingOverlay.classList.add('hidden');
+                console.error('Error:', error);
+                alert('אירעה שגיאה בתקשורת, נסה שוב.');
+            });
+        }
     </script>
 </body>
 </html>
