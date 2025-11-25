@@ -347,7 +347,7 @@
         }
 
         .error-message i {
-            margin-left: 5px;
+            margin-inline-start: 5px;
         }
 
         .form-control.is-invalid,
@@ -386,7 +386,7 @@
         }
 
         .validation-alert h5 i {
-            margin-left: 10px;
+            margin-inline-start: 10px;
         }
 
         .validation-alert ul {
@@ -961,8 +961,8 @@
     }
 
     function isValidPhoneNumber(phone) {
-        // Allow Israeli phone formats: 05X-XXXXXXX, 05XXXXXXXX, 0X-XXXXXXX
-        const phoneRegex = /^0\d{1,2}[-]?\d{7}$/;
+        // Allow Israeli phone formats: mobile (05X-XXXXXXX), landline (0X-XXXXXXX)
+        const phoneRegex = /^0\d{1,2}[-]?\d{7,8}$/;
         return phoneRegex.test(phone.replace(/\s/g, ''));
     }
 
@@ -996,11 +996,14 @@
 
     // --- Collect Form Data for API ---
     function collectFormData() {
+        const roomTypeElement = document.querySelector('input[name="roomType"]:checked');
+        const currentDateElement = document.getElementById('currentDate');
+        
         const data = {
             vacationDate: document.getElementById('vacationDateSelect').value,
             passengers: [],
             files: [],
-            roomType: document.querySelector('input[name="roomType"]:checked').value,
+            roomType: roomTypeElement ? roomTypeElement.value : 'standard',
             skiLessons: {
                 groupLesson: document.getElementById('lessonGroup').checked,
                 privateLesson: document.getElementById('lessonPrivate').checked
@@ -1021,7 +1024,7 @@
             },
             termsAccepted: document.getElementById('termsConfirm').checked,
             signature: document.getElementById('signatureData').value,
-            submissionDate: document.getElementById('currentDate').innerText
+            submissionDate: currentDateElement ? currentDateElement.innerText : new Date().toLocaleDateString('he-IL')
         };
 
         // Collect passenger data
