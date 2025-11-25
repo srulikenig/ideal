@@ -85,6 +85,30 @@
             border-radius: 4px;
         }
 
+        /* Larger inputs for passenger table on desktop */
+        @media (min-width: 769px) {
+            #passengersTable .form-control,
+            #passengersTable .form-select {
+                font-size: 1rem;
+                padding: 10px 12px;
+                min-height: 44px;
+            }
+            
+            #passengersTable td {
+                padding: 12px 8px;
+            }
+            
+            #passengersTable th {
+                font-size: 0.9rem;
+                padding: 12px 8px;
+            }
+            
+            .freq-flyer-input {
+                min-height: 36px !important;
+                font-size: 0.9rem !important;
+            }
+        }
+
         .btn-remove {
             border: none;
             background: transparent;
@@ -392,7 +416,9 @@
                 <label class="form-label fw-bold">תאריך יציאה מבוקש:</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                    <input type="date" class="form-control" value="2026-01-18">
+                    <select class="form-select" id="vacationDateSelect">
+                        <option value="">טוען תאריכים...</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -584,6 +610,34 @@
 </div>
 
 <script>
+    // --- Configuration ---
+    const BASE_URL = 'https://script.google.com/macros/s/AKfycbyqn2I4Q7P4Z_1k_qUVNQhc3aD6Cl1VYZ6DAEsZg3mBfK1_iGLO4X4zGIJphv9qz-Ll/exec';
+
+    // --- Vacation Dates Logic ---
+    async function loadVacationDates() {
+        const select = document.getElementById('vacationDateSelect');
+        try {
+            const response = await fetch(`${BASE_URL}?action=getVacationDates`);
+            const dates = await response.json();
+            
+            select.innerHTML = '<option value="">בחר תאריך...</option>';
+            
+            if (Array.isArray(dates) && dates.length > 0) {
+                dates.forEach(date => {
+                    const option = document.createElement('option');
+                    option.value = date;
+                    option.textContent = date;
+                    select.appendChild(option);
+                });
+            } else {
+                select.innerHTML = '<option value="">אין תאריכים זמינים</option>';
+            }
+        } catch (error) {
+            console.error('Error loading vacation dates:', error);
+            select.innerHTML = '<option value="">שגיאה בטעינת תאריכים</option>';
+        }
+    }
+
     // --- Passenger Logic ---
     let passengers = [1]; // Tracks existing row IDs
 
@@ -925,6 +979,7 @@
     window.addEventListener('DOMContentLoaded', () => {
         initTable();
         initSignaturePad();
+        loadVacationDates();
     });
 
 </script>
