@@ -103,9 +103,9 @@
                 padding: 12px 8px;
             }
             
-            .freq-flyer-input {
-                min-height: 36px !important;
-                font-size: 0.9rem !important;
+            #passengersTable td .freq-flyer-input {
+                min-height: 36px;
+                font-size: 0.9rem;
             }
         }
 
@@ -618,6 +618,11 @@
         const select = document.getElementById('vacationDateSelect');
         try {
             const response = await fetch(`${BASE_URL}?action=getVacationDates`);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error: ${response.status}`);
+            }
+            
             const dates = await response.json();
             
             select.innerHTML = '<option value="">בחר תאריך...</option>';
