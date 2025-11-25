@@ -47,6 +47,7 @@ Content-Type: application/json
   "vacationDate": "string",
   "passengers": [
     {
+      "tempId": "string",
       "lastName": "string",
       "firstName": "string",
       "birthDate": "YYYY-MM-DD",
@@ -70,19 +71,19 @@ Content-Type: application/json
   ],
   "roomType": "standard | deluxe",
   "deluxeFor": "all | some | null",
-  "deluxePassengers": ["string"] | null,
+  "deluxePassengers": [{"rowId": "string", "name": "string"}] | null,
   "skiLessons": {
     "kids": {
       "selected": "boolean",
-      "participants": ["string"]
+      "participants": [{"rowId": "string", "name": "string"}]
     },
     "adults": {
       "selected": "boolean",
-      "participants": ["string"]
+      "participants": [{"rowId": "string", "name": "string"}]
     },
     "private": {
       "selected": "boolean",
-      "participants": ["string"]
+      "participants": [{"rowId": "string", "name": "string"}]
     }
   },
   "contactInfo": {
@@ -126,6 +127,7 @@ Content-Type: application/json
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
+| `tempId` | string | Yes | Temporary unique ID for tracking within the form session. Used to link participants in ski lessons and deluxe room selections back to this passenger. |
 | `lastName` | string | Yes | Last name in English (as in passport) - English letters only |
 | `firstName` | string | Yes | First name in English (as in passport) - English letters only |
 | `birthDate` | string | Yes | Date of birth in YYYY-MM-DD format |
@@ -137,6 +139,13 @@ Content-Type: application/json
 | `frequentFlyer.number` | string | Conditional | Frequent flyer number (required if hasNumber is true) |
 | `skiPass` | boolean | Yes | Whether passenger needs ski pass |
 | `skiLevel` | string | Conditional | Ski level (required if skiPass is true): "1" (beginner), "2" (beginner+), "3" (intermediate), "4" (advanced), "SB" (snowboard) |
+
+### Participant Reference Object
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `rowId` | string | Yes | References the `tempId` of a passenger from the passengers array |
+| `name` | string | Yes | Display name of the participant (updated dynamically as passenger names change) |
 
 ### File Object
 
@@ -172,7 +181,7 @@ Each ski lesson object contains:
 | Field | Type | Description |
 |-------|------|-------------|
 | `selected` | boolean | Whether this lesson type is selected |
-| `participants` | array | List of participant names from registered passengers |
+| `participants` | array | Array of Participant Reference Objects (with rowId linking to passenger tempId) |
 
 ### Contact Info Object
 
@@ -296,6 +305,7 @@ const formData = {
   vacationDate: "15/02/2026 - 22/02/2026",
   passengers: [
     {
+      tempId: "1732540800000",
       lastName: "COHEN",
       firstName: "DAVID",
       birthDate: "1985-03-15",
@@ -310,6 +320,7 @@ const formData = {
       skiLevel: "3"
     },
     {
+      tempId: "1732540800001",
       lastName: "COHEN",
       firstName: "SARAH",
       birthDate: "1987-07-22",
@@ -346,7 +357,10 @@ const formData = {
     },
     adults: {
       selected: true,
-      participants: ["DAVID COHEN", "SARAH COHEN"]
+      participants: [
+        { rowId: "1732540800000", name: "DAVID COHEN" },
+        { rowId: "1732540800001", name: "SARAH COHEN" }
+      ]
     },
     private: {
       selected: false,

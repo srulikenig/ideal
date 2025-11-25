@@ -1149,7 +1149,7 @@
     }
 
     // --- Deluxe Room Options ---
-    let deluxePassengers = [];
+    let deluxePassengers = []; // Array of {rowId, name}
     
     function toggleDeluxeOptions() {
         const deluxeRadio = document.getElementById('roomDeluxe');
@@ -1182,12 +1182,13 @@
     function updateDeluxePassengerDropdown() {
         const select = document.getElementById('deluxePassengerDropdown');
         const passengers = getRegisteredPassengers();
+        const selectedRowIds = deluxePassengers.map(p => p.rowId);
         
         select.innerHTML = '<option value="">בחר נוסע...</option>';
-        passengers.forEach((p, index) => {
-            if (!deluxePassengers.includes(p.name)) {
+        passengers.forEach((p) => {
+            if (!selectedRowIds.includes(p.rowId)) {
                 const option = document.createElement('option');
-                option.value = index;
+                option.value = p.rowId;
                 option.textContent = p.name;
                 select.appendChild(option);
             }
@@ -1199,9 +1200,12 @@
         const selectedOption = select.options[select.selectedIndex];
         
         if (selectedOption.value) {
+            const rowId = selectedOption.value;
             const name = selectedOption.textContent;
-            if (!deluxePassengers.includes(name)) {
-                deluxePassengers.push(name);
+            const selectedRowIds = deluxePassengers.map(p => p.rowId);
+            
+            if (!selectedRowIds.includes(rowId)) {
+                deluxePassengers.push({ rowId, name });
                 renderDeluxePassengers();
                 updateDeluxePassengerDropdown();
             }
@@ -1220,19 +1224,26 @@
         const list = document.getElementById('deluxePassengerList');
         list.innerHTML = '';
         
-        deluxePassengers.forEach((name, index) => {
+        // Update names from current passenger data
+        const passengers = getRegisteredPassengers();
+        deluxePassengers.forEach((selected, index) => {
+            const currentPassenger = passengers.find(p => p.rowId === selected.rowId);
+            const displayName = currentPassenger ? currentPassenger.name : selected.name;
+            // Update stored name
+            selected.name = displayName;
+            
             const tag = document.createElement('span');
             tag.className = 'participant-tag';
-            tag.innerHTML = `${name} <i class="fas fa-times remove-participant" onclick="removeDeluxePassenger(${index})"></i>`;
+            tag.innerHTML = `${displayName} <i class="fas fa-times remove-participant" onclick="removeDeluxePassenger(${index})"></i>`;
             list.appendChild(tag);
         });
     }
 
     // --- Ski Lesson Participants ---
     const skiLessonParticipants = {
-        kids: [],
-        adults: [],
-        private: []
+        kids: [],    // Array of {rowId, name}
+        adults: [],  // Array of {rowId, name}
+        private: []  // Array of {rowId, name}
     };
 
     // Get list of registered passengers
@@ -1274,12 +1285,13 @@
         if (!select) return;
         
         const passengers = getRegisteredPassengers();
+        const selectedRowIds = skiLessonParticipants[type].map(p => p.rowId);
         
         select.innerHTML = '<option value="">בחר נוסע...</option>';
-        passengers.forEach((p, index) => {
-            if (!skiLessonParticipants[type].includes(p.name)) {
+        passengers.forEach((p) => {
+            if (!selectedRowIds.includes(p.rowId)) {
                 const option = document.createElement('option');
-                option.value = index;
+                option.value = p.rowId;
                 option.textContent = p.name;
                 select.appendChild(option);
             }
@@ -1306,9 +1318,12 @@
         const selectedOption = select.options[select.selectedIndex];
         
         if (selectedOption.value) {
+            const rowId = selectedOption.value;
             const name = selectedOption.textContent;
-            if (!skiLessonParticipants[type].includes(name)) {
-                skiLessonParticipants[type].push(name);
+            const selectedRowIds = skiLessonParticipants[type].map(p => p.rowId);
+            
+            if (!selectedRowIds.includes(rowId)) {
+                skiLessonParticipants[type].push({ rowId, name });
                 renderParticipants(type);
                 updateParticipantDropdown(type);
                 // Hide error
@@ -1329,10 +1344,17 @@
         const list = document.getElementById(type + 'ParticipantList');
         list.innerHTML = '';
         
-        skiLessonParticipants[type].forEach((name, index) => {
+        // Update names from current passenger data
+        const passengers = getRegisteredPassengers();
+        skiLessonParticipants[type].forEach((selected, index) => {
+            const currentPassenger = passengers.find(p => p.rowId === selected.rowId);
+            const displayName = currentPassenger ? currentPassenger.name : selected.name;
+            // Update stored name
+            selected.name = displayName;
+            
             const tag = document.createElement('span');
             tag.className = 'participant-tag';
-            tag.innerHTML = `${name} <i class="fas fa-times remove-participant" onclick="removeParticipant('${type}', ${index})"></i>`;
+            tag.innerHTML = `${displayName} <i class="fas fa-times remove-participant" onclick="removeParticipant('${type}', ${index})"></i>`;
             list.appendChild(tag);
         });
     }
@@ -1753,6 +1775,7 @@
         passengerCards.forEach(card => {
             const rowId = card.id.replace('row-', '');
             const passenger = {
+                tempId: rowId,  // Temporary ID for tracking within the form
                 lastName: card.querySelector(`input[name="lastName_${rowId}"]`).value,
                 firstName: card.querySelector(`input[name="firstName_${rowId}"]`).value,
                 birthDate: card.querySelector(`input[name="birthDate_${rowId}"]`).value,
