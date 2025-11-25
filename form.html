@@ -525,7 +525,7 @@
         <div class="text-center">
             <img src="sitelogo.png" alt="אידיאל טורס" class="img-fluid mb-3" style="max-height: 100px;">
             <div class="contact-highlight mb-3">
-                נא להחזיר טופס זה בצירוף צילומי דרכונים לווצאפ 058-5396011 או לדוא"ל goski@idealtours.co.il
+                ווצאפ 058-5396011 או  goski@idealtours.co.il
             </div>
             <h3>טופס הרשמה לחופשת סקי חורף 2025-2026</h3>
             <h4 class="text-primary mt-2">מלון MY KOSHER HOTEL 4****</h4>
@@ -535,7 +535,7 @@
             <div class="col-md-4 text-center">
                 <label class="form-label fw-bold">תאריך יציאה מבוקש:</label>
                 <div class="input-group">
-                    <select class="form-select" id="vacationDateSelect" required>
+                    <select class="form-select" id="vacationDateSelect" required disabled>
                         <option value="">טוען תאריכים...</option>
                     </select>
                     <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
@@ -828,14 +828,14 @@
 
 <script>
     // --- Configuration ---
-    const BASE_URL = 'https://script.google.com/macros/s/AKfycbyqn2I4Q7P4Z_1k_qUVNQhc3aD6Cl1VYZ6DAEsZg3mBfK1_iGLO4X4zGIJphv9qz-Ll/exec';
+    const BASE_URL = 'https://script.google.com/macros/s/AKfycbxMxpBKCbtaXD-VAOHFaxsczTCLeMXgHaHwiWei5CLvjkOterT3sXKQ3lbeorRiZeUA/exec';
 
     // --- Vacation Dates Logic ---
     async function loadVacationDates() {
         const select = document.getElementById('vacationDateSelect');
         try {
             const response = await fetch(`${BASE_URL}?action=getVacationDates`);
-            
+
             if (!response.ok) {
                 throw new Error(`HTTP error: ${response.status}`);
             }
@@ -843,9 +843,9 @@
             const dates = await response.json();
             
             select.innerHTML = '<option value="">בחר תאריך...</option>';
-            
-            if (Array.isArray(dates) && dates.length > 0) {
-                dates.forEach(date => {
+            select.disabled = false;
+            if (Array.isArray(dates.data) && dates.data.length > 0) {
+                dates.data.forEach(date => {
                     const option = document.createElement('option');
                     option.value = date;
                     option.textContent = date;
@@ -907,7 +907,7 @@
                     <div class="error-message"><i class="fas fa-exclamation-circle"></i> שדה חובה</div>
                 </div>
                 <div class="passenger-field">
-                    <label>מין</label>
+                    <label>מגדר</label>
                     <select class="form-select" name="gender_${rowId}" required>
                         <option value="">בחר...</option>
                         <option value="male">זכר</option>
@@ -1255,7 +1255,7 @@
             const genderSelect = card.querySelector(`select[name="gender_${rowId}"]`);
             if (!genderSelect.value) {
                 showFieldError(genderSelect, 'שדה חובה');
-                errors.push(`נוסע ${passengerNum}: מין - שדה חובה`);
+                errors.push(`נוסע ${passengerNum}: מגדר - שדה חובה`);
                 if (!firstInvalidElement) firstInvalidElement = genderSelect;
             }
 
