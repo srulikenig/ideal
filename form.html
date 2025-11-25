@@ -38,11 +38,96 @@
         
         .contact-highlight {
             background-color: var(--accent-color);
-            padding: 6px 12px;
+            padding: 10px 20px;
             font-weight: 600;
             display: inline-block;
-            border-radius: 4px;
+            border-radius: 8px;
             font-size: 0.9rem;
+        }
+
+        .contact-info-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-item i {
+            font-size: 1.2rem;
+        }
+
+        .contact-item.whatsapp i {
+            color: #25D366;
+        }
+
+        .contact-item.email i {
+            color: #0d47a1;
+        }
+
+        /* Receipt Upload (smaller style) */
+        .receipt-upload-area {
+            border: 2px dashed #b0c4de;
+            background-color: #f8fbff;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .receipt-upload-area:hover {
+            background-color: #e3f2fd;
+            border-color: var(--primary-color);
+        }
+
+        .receipt-upload-area.dragover {
+            background-color: #e3f2fd;
+            border-color: var(--primary-color);
+        }
+
+        .receipt-upload-area .upload-icon {
+            font-size: 1.5rem;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+
+        .receipt-upload-area h6 {
+            margin: 0;
+            font-size: 0.85rem;
+        }
+
+        .receipt-file-list {
+            margin-top: 8px;
+        }
+
+        .receipt-file-item {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 6px 10px;
+            margin-top: 4px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+
+        /* Passenger Select Dropdown for Ski Lessons */
+        .participant-select-wrapper {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .participant-select-wrapper select {
+            flex: 1;
         }
 
         /* Section Titles */
@@ -76,6 +161,26 @@
         .form-control, .form-select {
             font-size: 0.9rem;
             border-radius: 4px;
+        }
+
+        /* RTL fix for input-group rounded corners */
+        .input-group {
+            direction: rtl;
+        }
+        
+        .input-group > .form-control:not(:last-child),
+        .input-group > .form-select:not(:last-child) {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+        
+        .input-group > .input-group-text:last-child {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
         }
 
         /* Passenger Card Styles */
@@ -525,7 +630,16 @@
         <div class="text-center">
             <img src="sitelogo.png" alt="אידיאל טורס" class="img-fluid mb-3" style="max-height: 100px;">
             <div class="contact-highlight mb-3">
-                ווצאפ 058-5396011 או  goski@idealtours.co.il
+                <div class="contact-info-wrapper">
+                    <div class="contact-item whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>058-5396011</span>
+                    </div>
+                    <div class="contact-item email">
+                        <i class="fas fa-envelope"></i>
+                        <span>goski@idealtours.co.il</span>
+                    </div>
+                </div>
             </div>
             <h3>טופס הרשמה לחופשת סקי חורף 2025-2026</h3>
             <h4 class="text-primary mt-2">מלון MY KOSHER HOTEL 4****</h4>
@@ -592,12 +706,22 @@
                         <div class="deluxe-options" id="deluxeOptions">
                             <label class="fw-bold mb-2">חדר דלוקס עבור:</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="deluxeFor" id="deluxeAll" value="all" checked>
+                                <input class="form-check-input" type="radio" name="deluxeFor" id="deluxeAll" value="all" checked onchange="toggleDeluxePassengerSelect()">
                                 <label class="form-check-label" for="deluxeAll">כל הנוסעים</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="deluxeFor" id="deluxeSome" value="some">
-                                <label class="form-check-label" for="deluxeSome">חלק מהנוסעים (פרט בהערות)</label>
+                                <input class="form-check-input" type="radio" name="deluxeFor" id="deluxeSome" value="some" onchange="toggleDeluxePassengerSelect()">
+                                <label class="form-check-label" for="deluxeSome">חלק מהנוסעים</label>
+                            </div>
+                            <div class="deluxe-passenger-select" id="deluxePassengerSelect" style="display: none; margin-top: 10px;">
+                                <label class="small fw-bold">בחר נוסעים לחדר דלוקס:</label>
+                                <div class="participant-list" id="deluxePassengerList"></div>
+                                <div class="participant-select-wrapper">
+                                    <select class="form-select form-select-sm" id="deluxePassengerDropdown">
+                                        <option value="">בחר נוסע...</option>
+                                    </select>
+                                    <button type="button" class="btn btn-sm btn-primary" onclick="addDeluxePassenger()"><i class="fas fa-plus"></i></button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -614,11 +738,13 @@
                             </label>
                         </div>
                         <div class="ski-lesson-participants" id="lessonKidsParticipants">
-                            <label class="small fw-bold">שמות המשתתפים:</label>
+                            <label class="small fw-bold">בחר משתתפים מרשימת הנוסעים:</label>
                             <div class="participant-list" id="kidsParticipantList"></div>
-                            <div class="add-participant-wrapper">
-                                <input type="text" class="form-control form-control-sm name-only" id="kidsParticipantInput" placeholder="הוסף שם (עברית/אנגלית)">
-                                <button type="button" class="btn btn-sm btn-primary" onclick="addParticipant('kids')"><i class="fas fa-plus"></i></button>
+                            <div class="participant-select-wrapper">
+                                <select class="form-select form-select-sm" id="kidsParticipantSelect">
+                                    <option value="">בחר נוסע...</option>
+                                </select>
+                                <button type="button" class="btn btn-sm btn-primary" onclick="addParticipantFromSelect('kids')"><i class="fas fa-plus"></i></button>
                             </div>
                             <div class="error-message" id="kidsParticipantError"><i class="fas fa-exclamation-circle"></i> יש להוסיף לפחות משתתף אחד</div>
                         </div>
@@ -632,11 +758,13 @@
                             </label>
                         </div>
                         <div class="ski-lesson-participants" id="lessonAdultsParticipants">
-                            <label class="small fw-bold">שמות המשתתפים:</label>
+                            <label class="small fw-bold">בחר משתתפים מרשימת הנוסעים:</label>
                             <div class="participant-list" id="adultsParticipantList"></div>
-                            <div class="add-participant-wrapper">
-                                <input type="text" class="form-control form-control-sm name-only" id="adultsParticipantInput" placeholder="הוסף שם (עברית/אנגלית)">
-                                <button type="button" class="btn btn-sm btn-primary" onclick="addParticipant('adults')"><i class="fas fa-plus"></i></button>
+                            <div class="participant-select-wrapper">
+                                <select class="form-select form-select-sm" id="adultsParticipantSelect">
+                                    <option value="">בחר נוסע...</option>
+                                </select>
+                                <button type="button" class="btn btn-sm btn-primary" onclick="addParticipantFromSelect('adults')"><i class="fas fa-plus"></i></button>
                             </div>
                             <div class="error-message" id="adultsParticipantError"><i class="fas fa-exclamation-circle"></i> יש להוסיף לפחות משתתף אחד</div>
                         </div>
@@ -650,11 +778,13 @@
                             </label>
                         </div>
                         <div class="ski-lesson-participants" id="lessonPrivateParticipants">
-                            <label class="small fw-bold">שמות המשתתפים:</label>
+                            <label class="small fw-bold">בחר משתתפים מרשימת הנוסעים:</label>
                             <div class="participant-list" id="privateParticipantList"></div>
-                            <div class="add-participant-wrapper">
-                                <input type="text" class="form-control form-control-sm name-only" id="privateParticipantInput" placeholder="הוסף שם (עברית/אנגלית)">
-                                <button type="button" class="btn btn-sm btn-primary" onclick="addParticipant('private')"><i class="fas fa-plus"></i></button>
+                            <div class="participant-select-wrapper">
+                                <select class="form-select form-select-sm" id="privateParticipantSelect">
+                                    <option value="">בחר נוסע...</option>
+                                </select>
+                                <button type="button" class="btn btn-sm btn-primary" onclick="addParticipantFromSelect('private')"><i class="fas fa-plus"></i></button>
                             </div>
                             <div class="error-message" id="privateParticipantError"><i class="fas fa-exclamation-circle"></i> יש להוסיף לפחות משתתף אחד</div>
                         </div>
@@ -729,8 +859,17 @@
                         <label class="form-label">סכום שהועבר (€)</label>
                         <input type="number" class="form-control" name="bankTransferAmount" placeholder="סכום ביורו">
                     </div>
+                    <div class="col-12">
+                        <label class="form-label">העלאת אסמכתא:</label>
+                        <div class="receipt-upload-area" id="receiptDropZone">
+                            <i class="fas fa-file-upload upload-icon"></i>
+                            <h6>גרור קובץ או לחץ לבחירה</h6>
+                            <small class="text-muted">תמונה או PDF של אישור ההעברה</small>
+                            <input type="file" id="receiptFileInput" class="d-none" accept="image/*,.pdf" onchange="handleReceiptFile(this.files)">
+                        </div>
+                        <div id="receiptFileList" class="receipt-file-list"></div>
+                    </div>
                 </div>
-                <div class="text-muted small mt-2">* נא לשלוח אסמכתא לווטסאפ או למייל</div>
             </div>
 
             <!-- Credit Card Section -->
@@ -955,6 +1094,8 @@
         englishInputs.forEach(input => {
             input.addEventListener('input', function(e) {
                 this.value = this.value.replace(/[^A-Za-z\s\-]/g, '');
+                // Update dropdowns when name changes
+                updateAllPassengerDropdowns();
             });
         });
     }
@@ -965,6 +1106,7 @@
             row.remove();
             reIndexRows();
             updateRemoveButtons();
+            updateAllPassengerDropdowns();
         }
     }
 
@@ -1011,15 +1153,81 @@
     }
 
     // --- Deluxe Room Options ---
+    let deluxePassengers = [];
+    
     function toggleDeluxeOptions() {
         const deluxeRadio = document.getElementById('roomDeluxe');
         const deluxeOptions = document.getElementById('deluxeOptions');
         
         if (deluxeRadio.checked) {
             deluxeOptions.classList.add('show');
+            updateDeluxePassengerDropdown();
         } else {
             deluxeOptions.classList.remove('show');
+            deluxePassengers = [];
+            renderDeluxePassengers();
         }
+    }
+
+    function toggleDeluxePassengerSelect() {
+        const deluxeSome = document.getElementById('deluxeSome');
+        const selectDiv = document.getElementById('deluxePassengerSelect');
+        
+        if (deluxeSome.checked) {
+            selectDiv.style.display = 'block';
+            updateDeluxePassengerDropdown();
+        } else {
+            selectDiv.style.display = 'none';
+            deluxePassengers = [];
+            renderDeluxePassengers();
+        }
+    }
+
+    function updateDeluxePassengerDropdown() {
+        const select = document.getElementById('deluxePassengerDropdown');
+        const passengers = getRegisteredPassengers();
+        
+        select.innerHTML = '<option value="">בחר נוסע...</option>';
+        passengers.forEach((p, index) => {
+            if (!deluxePassengers.includes(p.name)) {
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = p.name;
+                select.appendChild(option);
+            }
+        });
+    }
+
+    function addDeluxePassenger() {
+        const select = document.getElementById('deluxePassengerDropdown');
+        const selectedOption = select.options[select.selectedIndex];
+        
+        if (selectedOption.value) {
+            const name = selectedOption.textContent;
+            if (!deluxePassengers.includes(name)) {
+                deluxePassengers.push(name);
+                renderDeluxePassengers();
+                updateDeluxePassengerDropdown();
+            }
+        }
+    }
+
+    function removeDeluxePassenger(index) {
+        deluxePassengers.splice(index, 1);
+        renderDeluxePassengers();
+        updateDeluxePassengerDropdown();
+    }
+
+    function renderDeluxePassengers() {
+        const list = document.getElementById('deluxePassengerList');
+        list.innerHTML = '';
+        
+        deluxePassengers.forEach((name, index) => {
+            const tag = document.createElement('span');
+            tag.className = 'participant-tag';
+            tag.innerHTML = `${name} <i class="fas fa-times remove-participant" onclick="removeDeluxePassenger(${index})"></i>`;
+            list.appendChild(tag);
+        });
     }
 
     // --- Ski Lesson Participants ---
@@ -1029,12 +1237,64 @@
         private: []
     };
 
+    // Get list of registered passengers
+    function getRegisteredPassengers() {
+        const passengers = [];
+        const cards = document.querySelectorAll('.passenger-card');
+        cards.forEach((card, index) => {
+            const rowId = card.id.replace('row-', '');
+            const firstName = card.querySelector(`input[name="firstName_${rowId}"]`)?.value || '';
+            const lastName = card.querySelector(`input[name="lastName_${rowId}"]`)?.value || '';
+            if (firstName || lastName) {
+                passengers.push({
+                    index: index + 1,
+                    name: `${firstName} ${lastName}`.trim() || `נוסע ${index + 1}`,
+                    rowId: rowId
+                });
+            } else {
+                passengers.push({
+                    index: index + 1,
+                    name: `נוסע ${index + 1}`,
+                    rowId: rowId
+                });
+            }
+        });
+        return passengers;
+    }
+
+    // Update all passenger dropdowns
+    function updateAllPassengerDropdowns() {
+        const types = ['kids', 'adults', 'private'];
+        types.forEach(type => {
+            updateParticipantDropdown(type);
+        });
+        updateDeluxePassengerDropdown();
+    }
+
+    function updateParticipantDropdown(type) {
+        const select = document.getElementById(type + 'ParticipantSelect');
+        if (!select) return;
+        
+        const passengers = getRegisteredPassengers();
+        
+        select.innerHTML = '<option value="">בחר נוסע...</option>';
+        passengers.forEach((p, index) => {
+            if (!skiLessonParticipants[type].includes(p.name)) {
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = p.name;
+                select.appendChild(option);
+            }
+        });
+    }
+
     function toggleSkiLessonParticipants(type) {
         const checkbox = document.getElementById(type === 'kids' ? 'lessonKids' : type === 'adults' ? 'lessonAdults' : 'lessonPrivate');
         const participantsDiv = document.getElementById('lesson' + type.charAt(0).toUpperCase() + type.slice(1) + 'Participants');
         
         if (checkbox.checked) {
             participantsDiv.classList.add('show');
+            updateParticipantDropdown(type);
         } else {
             participantsDiv.classList.remove('show');
             // Clear participants when unchecked
@@ -1043,25 +1303,26 @@
         }
     }
 
-    function addParticipant(type) {
-        const input = document.getElementById(type + 'ParticipantInput');
-        const name = input.value.trim();
+    function addParticipantFromSelect(type) {
+        const select = document.getElementById(type + 'ParticipantSelect');
+        const selectedOption = select.options[select.selectedIndex];
         
-        // Validate: only Hebrew and English letters
-        if (name && /^[A-Za-zא-ת\s\-]+$/.test(name)) {
-            skiLessonParticipants[type].push(name);
-            renderParticipants(type);
-            input.value = '';
-            // Hide error
-            document.getElementById(type + 'ParticipantError').classList.remove('show');
-        } else if (name) {
-            alert('יש להזין שם באותיות עברית או אנגלית בלבד');
+        if (selectedOption.value) {
+            const name = selectedOption.textContent;
+            if (!skiLessonParticipants[type].includes(name)) {
+                skiLessonParticipants[type].push(name);
+                renderParticipants(type);
+                updateParticipantDropdown(type);
+                // Hide error
+                document.getElementById(type + 'ParticipantError').classList.remove('show');
+            }
         }
     }
 
     function removeParticipant(type, index) {
         skiLessonParticipants[type].splice(index, 1);
         renderParticipants(type);
+        updateParticipantDropdown(type);
     }
 
     function renderParticipants(type) {
@@ -1091,6 +1352,57 @@
             bankSection.classList.remove('show');
             cardSection.classList.add('show');
         }
+    }
+
+    // --- Receipt File Upload ---
+    let receiptFiles = [];
+    
+    const receiptDropZone = document.getElementById('receiptDropZone');
+    const receiptFileInput = document.getElementById('receiptFileInput');
+    
+    if (receiptDropZone) {
+        receiptDropZone.addEventListener('click', () => receiptFileInput.click());
+        
+        receiptDropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            receiptDropZone.classList.add('dragover');
+        });
+        
+        receiptDropZone.addEventListener('dragleave', () => {
+            receiptDropZone.classList.remove('dragover');
+        });
+        
+        receiptDropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            receiptDropZone.classList.remove('dragover');
+            handleReceiptFile(e.dataTransfer.files);
+        });
+    }
+    
+    function handleReceiptFile(files) {
+        for (let i = 0; i < files.length; i++) {
+            receiptFiles.push(files[i]);
+        }
+        renderReceiptFiles();
+    }
+    
+    function renderReceiptFiles() {
+        const list = document.getElementById('receiptFileList');
+        list.innerHTML = '';
+        receiptFiles.forEach((file, index) => {
+            const div = document.createElement('div');
+            div.className = 'receipt-file-item';
+            div.innerHTML = `
+                <span><i class="far fa-file-alt text-primary me-2"></i> ${file.name}</span>
+                <i class="fas fa-times text-danger" style="cursor:pointer" onclick="removeReceiptFile(${index})"></i>
+            `;
+            list.appendChild(div);
+        });
+    }
+    
+    function removeReceiptFile(index) {
+        receiptFiles.splice(index, 1);
+        renderReceiptFiles();
     }
 
     // --- File Upload Logic ---
@@ -1395,6 +1707,7 @@
             files: [],
             roomType: roomTypeElement ? roomTypeElement.value : 'standard',
             deluxeFor: roomTypeElement?.value === 'deluxe' && deluxeForElement ? deluxeForElement.value : null,
+            deluxePassengers: roomTypeElement?.value === 'deluxe' && deluxeForElement?.value === 'some' ? deluxePassengers : null,
             skiLessons: {
                 kids: {
                     selected: document.getElementById('lessonKids').checked,
@@ -1419,7 +1732,8 @@
             bankTransfer: paymentMethodElement?.value === 'bank' ? {
                 date: document.querySelector('input[name="bankTransferDate"]')?.value || null,
                 reference: document.querySelector('input[name="bankTransferRef"]')?.value || null,
-                amount: document.querySelector('input[name="bankTransferAmount"]')?.value || null
+                amount: document.querySelector('input[name="bankTransferAmount"]')?.value || null,
+                receiptFiles: receiptFiles.map(f => ({ name: f.name, type: f.type, size: f.size }))
             } : null,
             creditCard: paymentMethodElement?.value === 'card' ? {
                 cardNumber: document.querySelector('#cardPaymentSection input[name="cardNumber"]')?.value || null,
