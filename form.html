@@ -333,6 +333,87 @@
             margin-top: 4px;
         }
 
+        /* Error Message Styles */
+        .error-message {
+            color: #dc3545;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .error-message i {
+            margin-left: 5px;
+        }
+
+        .form-control.is-invalid,
+        .form-select.is-invalid {
+            border-color: #dc3545;
+            background-color: #fff8f8;
+        }
+
+        .form-control.is-invalid:focus,
+        .form-select.is-invalid:focus {
+            border-color: #dc3545;
+            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+        }
+
+        /* Error Alert Box */
+        .validation-alert {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .validation-alert.show {
+            display: block;
+        }
+
+        .validation-alert h5 {
+            margin: 0 0 10px 0;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .validation-alert h5 i {
+            margin-left: 10px;
+        }
+
+        .validation-alert ul {
+            margin: 0;
+            padding-right: 20px;
+        }
+
+        .validation-alert li {
+            margin-bottom: 5px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from { 
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         /* Mobile responsive adjustments */
         @media (max-width: 768px) {
             /* Make paper container more mobile-friendly */
@@ -368,14 +449,21 @@
                 <label class="form-label fw-bold">תאריך יציאה מבוקש:</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                    <select class="form-select" id="vacationDateSelect">
+                    <select class="form-select" id="vacationDateSelect" required>
                         <option value="">טוען תאריכים...</option>
                     </select>
                 </div>
+                <div class="error-message"><i class="fas fa-exclamation-circle"></i> יש לבחור תאריך יציאה</div>
             </div>
         </div>
 
-        <form id="skiForm" onsubmit="submitForm(event)">
+        <form id="skiForm" onsubmit="submitForm(event)" novalidate>
+            
+            <!-- Validation Alert -->
+            <div id="validationAlert" class="validation-alert">
+                <h5><i class="fas fa-exclamation-triangle"></i> נא לתקן את השגיאות הבאות:</h5>
+                <ul id="validationErrors"></ul>
+            </div>
             
             <!-- Passengers -->
             <div class="section-title"><i class="fas fa-users"></i> פרטי הנוסעים והלן (באנגלית לפי הדרכון)</div>
@@ -438,14 +526,17 @@
                 <div class="col-md-8">
                     <label class="form-label">כתובת מלאה (רחוב, עיר, מיקוד)</label>
                     <input type="text" class="form-control" name="address" required>
+                    <div class="error-message"><i class="fas fa-exclamation-circle"></i> שדה חובה</div>
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">טלפון נייד</label>
                     <input type="tel" class="form-control" name="phone" placeholder="05x-xxxxxxx" required>
+                    <div class="error-message"><i class="fas fa-exclamation-circle"></i> שדה חובה</div>
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">כתובת דוא"ל</label>
                     <input type="email" class="form-control" name="email" required>
+                    <div class="error-message"><i class="fas fa-exclamation-circle"></i> שדה חובה</div>
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">הערות ובקשות מיוחדות</label>
@@ -457,27 +548,27 @@
                 <div class="row g-3">
                     <div class="col-12 fw-bold text-primary"><i class="far fa-credit-card"></i> פרטי אשראי לביטחון / תשלום:</div>
                     <div class="col-md-5">
-                        <input type="text" class="form-control" placeholder="מספר כרטיס אשראי">
+                        <input type="text" class="form-control" name="cardNumber" placeholder="מספר כרטיס אשראי">
                     </div>
                     <div class="col-md-3">
-                        <select class="form-select">
-                            <option>ויזה</option>
-                            <option>מאסטרקארד</option>
-                            <option>אמריקן אקספרס</option>
-                            <option>דיינרס</option>
+                        <select class="form-select" name="cardType">
+                            <option value="ויזה">ויזה</option>
+                            <option value="מאסטרקארד">מאסטרקארד</option>
+                            <option value="אמריקן אקספרס">אמריקן אקספרס</option>
+                            <option value="דיינרס">דיינרס</option>
                         </select>
                     </div>
                     <div class="col-md-2">
-                        <input type="text" class="form-control text-center" placeholder="תוקף (MM/YY)">
+                        <input type="text" class="form-control text-center" name="cardExpiry" placeholder="תוקף (MM/YY)">
                     </div>
                     <div class="col-md-2">
-                        <input type="text" class="form-control text-center" placeholder="CVV">
+                        <input type="text" class="form-control text-center" name="cardCvv" placeholder="CVV">
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" placeholder="ת.ז בעל הכרטיס">
+                        <input type="text" class="form-control" name="cardHolderId" placeholder="ת.ז בעל הכרטיס">
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" placeholder="שם בעל הכרטיס">
+                        <input type="text" class="form-control" name="cardHolderName" placeholder="שם בעל הכרטיס">
                     </div>
                 </div>
             </div>
@@ -606,37 +697,41 @@
             <div class="passenger-fields">
                 <div class="passenger-field">
                     <label>שם משפחה (לועזי)</label>
-                    <input type="text" class="form-control" placeholder="LAST NAME">
+                    <input type="text" class="form-control" name="lastName_${rowId}" placeholder="LAST NAME" required>
+                    <div class="error-message"><i class="fas fa-exclamation-circle"></i> שדה חובה</div>
                 </div>
                 <div class="passenger-field">
                     <label>שם פרטי (לועזי)</label>
-                    <input type="text" class="form-control" placeholder="FIRST NAME">
+                    <input type="text" class="form-control" name="firstName_${rowId}" placeholder="FIRST NAME" required>
+                    <div class="error-message"><i class="fas fa-exclamation-circle"></i> שדה חובה</div>
                 </div>
                 <div class="passenger-field">
                     <label>תאריך לידה</label>
-                    <input type="date" class="form-control">
+                    <input type="date" class="form-control" name="birthDate_${rowId}" required>
+                    <div class="error-message"><i class="fas fa-exclamation-circle"></i> שדה חובה</div>
                 </div>
                 <div class="passenger-field">
                     <label>מס' דרכון</label>
-                    <input type="text" class="form-control" placeholder="מספר דרכון">
+                    <input type="text" class="form-control" name="passportNumber_${rowId}" placeholder="מספר דרכון" required>
+                    <div class="error-message"><i class="fas fa-exclamation-circle"></i> שדה חובה</div>
                 </div>
                 <div class="passenger-field">
                     <label>נוסע מתמיד?</label>
                     <div class="freq-flyer-wrapper">
                         <div class="freq-row">
-                            <input type="checkbox" class="form-check-input" onchange="toggleFreq(this)">
+                            <input type="checkbox" class="form-check-input" name="hasFreqFlyer_${rowId}" onchange="toggleFreq(this)">
                             <span>כן, יש לי מספר</span>
                         </div>
-                        <input type="text" class="form-control freq-flyer-input" placeholder="מס' נוסע מתמיד" style="display: none;">
+                        <input type="text" class="form-control freq-flyer-input" name="freqFlyerNumber_${rowId}" placeholder="מס' נוסע מתמיד" style="display: none;">
                     </div>
                 </div>
                 <div class="passenger-field checkbox-field">
-                    <input type="checkbox" class="form-check-input" checked>
+                    <input type="checkbox" class="form-check-input" name="skiPass_${rowId}" checked>
                     <label>סקי פס?</label>
                 </div>
                 <div class="passenger-field">
                     <label>רמת סקי</label>
-                    <select class="form-select">
+                    <select class="form-select" name="skiLevel_${rowId}" required>
                         <option value="">בחר...</option>
                         <option value="4">4-מתקדם</option>
                         <option value="3">3-בינוני</option>
@@ -644,6 +739,7 @@
                         <option value="1">1-מתחיל</option>
                         <option value="SB">סנובורד</option>
                     </select>
+                    <div class="error-message"><i class="fas fa-exclamation-circle"></i> יש לבחור רמת סקי</div>
                 </div>
             </div>
         `;
@@ -737,20 +833,227 @@
         renderFileList();
     }
 
+    // --- Validation Functions ---
+    function clearAllErrors() {
+        // Clear validation alert
+        const validationAlert = document.getElementById('validationAlert');
+        validationAlert.classList.remove('show');
+        document.getElementById('validationErrors').innerHTML = '';
+        
+        // Clear all inline error messages
+        document.querySelectorAll('.error-message').forEach(el => {
+            el.classList.remove('show');
+        });
+        
+        // Remove invalid class from all inputs
+        document.querySelectorAll('.is-invalid').forEach(el => {
+            el.classList.remove('is-invalid');
+        });
+    }
+
+    function showFieldError(inputElement, message) {
+        inputElement.classList.add('is-invalid');
+        // Try to find error message in parent or sibling elements
+        let errorDiv = inputElement.parentElement.querySelector('.error-message');
+        if (!errorDiv) {
+            // Try grandparent (for input-group structure)
+            errorDiv = inputElement.closest('.col-md-4, .col-md-6, .col-md-8, .passenger-field, [class*="col-"]')?.querySelector('.error-message');
+        }
+        if (errorDiv) {
+            if (message) {
+                errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
+            }
+            errorDiv.classList.add('show');
+        }
+    }
+
+    function showValidationAlert(errors) {
+        const validationAlert = document.getElementById('validationAlert');
+        const errorsList = document.getElementById('validationErrors');
+        
+        errorsList.innerHTML = errors.map(err => `<li>${err}</li>`).join('');
+        validationAlert.classList.add('show');
+        
+        // Scroll to the alert
+        validationAlert.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function validateForm() {
+        clearAllErrors();
+        const errors = [];
+        let firstInvalidElement = null;
+
+        // 1. Validate vacation date
+        const vacationDateSelect = document.getElementById('vacationDateSelect');
+        if (!vacationDateSelect.value) {
+            showFieldError(vacationDateSelect, 'יש לבחור תאריך יציאה');
+            errors.push('יש לבחור תאריך יציאה');
+            if (!firstInvalidElement) firstInvalidElement = vacationDateSelect;
+        }
+
+        // 2. Validate passengers
+        const passengerCards = document.querySelectorAll('.passenger-card');
+        passengerCards.forEach((card, index) => {
+            const passengerNum = index + 1;
+            
+            // Check required inputs in passenger card
+            const inputs = card.querySelectorAll('input[required], select[required]');
+            inputs.forEach(input => {
+                if (!input.value || input.value.trim() === '') {
+                    showFieldError(input);
+                    const label = input.closest('.passenger-field').querySelector('label');
+                    const fieldName = label ? label.textContent : 'שדה';
+                    errors.push(`נוסע ${passengerNum}: ${fieldName} - שדה חובה`);
+                    if (!firstInvalidElement) firstInvalidElement = input;
+                }
+            });
+        });
+
+        // 3. Validate contact info
+        const addressInput = document.querySelector('input[name="address"]');
+        const phoneInput = document.querySelector('input[name="phone"]');
+        const emailInput = document.querySelector('input[name="email"]');
+
+        if (!addressInput.value.trim()) {
+            showFieldError(addressInput, 'יש למלא כתובת מלאה');
+            errors.push('יש למלא כתובת מלאה');
+            if (!firstInvalidElement) firstInvalidElement = addressInput;
+        }
+
+        if (!phoneInput.value.trim()) {
+            showFieldError(phoneInput, 'יש למלא מספר טלפון');
+            errors.push('יש למלא מספר טלפון');
+            if (!firstInvalidElement) firstInvalidElement = phoneInput;
+        } else if (!isValidPhoneNumber(phoneInput.value)) {
+            showFieldError(phoneInput, 'מספר טלפון לא תקין');
+            errors.push('מספר טלפון לא תקין');
+            if (!firstInvalidElement) firstInvalidElement = phoneInput;
+        }
+
+        if (!emailInput.value.trim()) {
+            showFieldError(emailInput, 'יש למלא כתובת דוא"ל');
+            errors.push('יש למלא כתובת דוא"ל');
+            if (!firstInvalidElement) firstInvalidElement = emailInput;
+        } else if (!isValidEmail(emailInput.value)) {
+            showFieldError(emailInput, 'כתובת דוא"ל לא תקינה');
+            errors.push('כתובת דוא"ל לא תקינה');
+            if (!firstInvalidElement) firstInvalidElement = emailInput;
+        }
+
+        // 4. Validate terms acceptance
+        const termsConfirm = document.getElementById('termsConfirm');
+        if (!termsConfirm.checked) {
+            errors.push('יש לאשר את התנאים');
+            if (!firstInvalidElement) firstInvalidElement = termsConfirm;
+        }
+
+        // 5. Validate signature
+        if (isSignatureEmpty()) {
+            errors.push('יש לחתום על הטופס');
+        }
+
+        return { isValid: errors.length === 0, errors, firstInvalidElement };
+    }
+
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    function isValidPhoneNumber(phone) {
+        // Allow Israeli phone formats: 05X-XXXXXXX, 05XXXXXXXX, 0X-XXXXXXX
+        const phoneRegex = /^0\d{1,2}[-]?\d{7}$/;
+        return phoneRegex.test(phone.replace(/\s/g, ''));
+    }
+
     // --- Submit ---
     function submitForm(e) {
         e.preventDefault();
         
-        // Validate signature is provided
-        if (isSignatureEmpty()) {
-            alert('נא לחתום על הטופס לפני השליחה');
+        // Validate all fields
+        const validation = validateForm();
+        
+        if (!validation.isValid) {
+            showValidationAlert(validation.errors);
+            
+            // Focus on first invalid element
+            if (validation.firstInvalidElement) {
+                validation.firstInvalidElement.focus();
+            }
             return;
         }
         
         // Save the signature data before submitting
         saveSignature();
         
+        // Collect form data for API submission
+        const formData = collectFormData();
+        
+        // For now, just show success
         alert('הטופס נשלח בהצלחה למערכת!');
+        console.log('Form data:', formData);
+    }
+
+    // --- Collect Form Data for API ---
+    function collectFormData() {
+        const data = {
+            vacationDate: document.getElementById('vacationDateSelect').value,
+            passengers: [],
+            files: [],
+            roomType: document.querySelector('input[name="roomType"]:checked').value,
+            skiLessons: {
+                groupLesson: document.getElementById('lessonGroup').checked,
+                privateLesson: document.getElementById('lessonPrivate').checked
+            },
+            contactInfo: {
+                address: document.querySelector('input[name="address"]').value,
+                phone: document.querySelector('input[name="phone"]').value,
+                email: document.querySelector('input[name="email"]').value,
+                notes: document.querySelector('input[name="notes"]').value || null
+            },
+            payment: {
+                cardNumber: document.querySelector('input[name="cardNumber"]').value || null,
+                cardType: document.querySelector('select[name="cardType"]').value,
+                expiryDate: document.querySelector('input[name="cardExpiry"]').value || null,
+                cvv: document.querySelector('input[name="cardCvv"]').value || null,
+                cardHolderId: document.querySelector('input[name="cardHolderId"]').value || null,
+                cardHolderName: document.querySelector('input[name="cardHolderName"]').value || null
+            },
+            termsAccepted: document.getElementById('termsConfirm').checked,
+            signature: document.getElementById('signatureData').value,
+            submissionDate: document.getElementById('currentDate').innerText
+        };
+
+        // Collect passenger data
+        const passengerCards = document.querySelectorAll('.passenger-card');
+        passengerCards.forEach(card => {
+            const rowId = card.id.replace('row-', '');
+            const passenger = {
+                lastName: card.querySelector(`input[name="lastName_${rowId}"]`).value,
+                firstName: card.querySelector(`input[name="firstName_${rowId}"]`).value,
+                birthDate: card.querySelector(`input[name="birthDate_${rowId}"]`).value,
+                passportNumber: card.querySelector(`input[name="passportNumber_${rowId}"]`).value,
+                frequentFlyer: {
+                    hasNumber: card.querySelector(`input[name="hasFreqFlyer_${rowId}"]`).checked,
+                    number: card.querySelector(`input[name="freqFlyerNumber_${rowId}"]`).value || null
+                },
+                skiPass: card.querySelector(`input[name="skiPass_${rowId}"]`).checked,
+                skiLevel: card.querySelector(`select[name="skiLevel_${rowId}"]`).value
+            };
+            data.passengers.push(passenger);
+        });
+
+        // Collect file data (as base64)
+        // Note: In a real implementation, you would read files as base64
+        uploadedFiles.forEach(file => {
+            data.files.push({
+                name: file.name,
+                type: file.type,
+                size: file.size
+            });
+        });
+
+        return data;
     }
 
     // --- Signature Pad Logic ---
