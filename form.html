@@ -801,6 +801,16 @@
                     <div class="col-md-6">
                         <label class="fw-bold mb-2">בחירת סוג חדר:</label>
                         <div class="card p-3 bg-light border-0">
+                            <!-- Number of rooms input -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">מספר חדרים:</label>
+                                <input type="number" class="form-control" id="totalRooms" name="totalRooms" 
+                                    min="1" max="20" value="1" required onchange="updateDeluxeRoomsMax()">
+                                <div class="error-message"><i class="fas fa-exclamation-circle"></i> שדה חובה</div>
+                            </div>
+
+                            <!-- Room type selection -->
+                            <label class="fw-bold mb-2">סוג חדר:</label>
                             <div class="form-check mb-2">
                                 <input class="form-check-input" type="radio" name="roomType" id="roomStandard"
                                     value="standard" checked onchange="toggleDeluxeOptions()">
@@ -813,27 +823,24 @@
                                         class="price-tag">+300€ לכל השבוע</span></label>
                             </div>
                             <div class="deluxe-options" id="deluxeOptions">
-                                <label class="fw-bold mb-2">חדר דלוקס עבור:</label>
+                                <label class="fw-bold mb-2 mt-2">חדר דלוקס עבור:</label>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="deluxeFor" id="deluxeAll"
-                                        value="all" checked onchange="toggleDeluxePassengerSelect()">
-                                    <label class="form-check-label" for="deluxeAll">כל הנוסעים</label>
+                                        value="all" checked onchange="toggleDeluxeRoomsInput()">
+                                    <label class="form-check-label" for="deluxeAll">כל החדרים</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="deluxeFor" id="deluxeSome"
-                                        value="some" onchange="toggleDeluxePassengerSelect()">
-                                    <label class="form-check-label" for="deluxeSome">חלק מהנוסעים</label>
+                                        value="some" onchange="toggleDeluxeRoomsInput()">
+                                    <label class="form-check-label" for="deluxeSome">חלק מהחדרים</label>
                                 </div>
-                                <div class="deluxe-passenger-select" id="deluxePassengerSelect"
+                                <div class="deluxe-rooms-input" id="deluxeRoomsInput"
                                     style="display: none; margin-top: 10px;">
-                                    <label class="small fw-bold">בחר נוסעים לחדר דלוקס:</label>
-                                    <div class="participant-list" id="deluxePassengerList"></div>
-                                    <div class="participant-select-wrapper">
-                                        <select class="form-select form-select-sm" id="deluxePassengerDropdown"
-                                            onchange="addDeluxePassenger()">
-                                            <option value="">בחר נוסע...</option>
-                                        </select>
-                                    </div>
+                                    <label class="small fw-bold">מספר חדרי דלוקס:</label>
+                                    <input type="number" class="form-control form-control-sm" id="deluxeRoomsCount" 
+                                        name="deluxeRoomsCount" min="1" max="1" value="1" oninput="validateDeluxeRoomsInput()">
+                                    <small class="text-muted">עד <span id="maxDeluxeRooms">1</span> חדרים</small>
+                                    <div class="error-message" id="deluxeRoomsError"><i class="fas fa-exclamation-circle"></i> מספר החדרים חייב להיות בין 1 ל-<span id="maxDeluxeRoomsError">1</span></div>
                                 </div>
                             </div>
                         </div>
@@ -1500,7 +1507,21 @@
         }
 
         // --- Deluxe Room Options ---
-        let deluxePassengers = []; // Array of {rowId, name}
+        function updateDeluxeRoomsMax() {
+            const totalRooms = parseInt(document.getElementById('totalRooms').value) || 1;
+            const deluxeRoomsCount = document.getElementById('deluxeRoomsCount');
+            const maxDeluxeRoomsSpan = document.getElementById('maxDeluxeRooms');
+            const maxDeluxeRoomsError = document.getElementById('maxDeluxeRoomsError');
+            
+            deluxeRoomsCount.max = totalRooms;
+            maxDeluxeRoomsSpan.textContent = totalRooms;
+            maxDeluxeRoomsError.textContent = totalRooms;
+            
+            // Reset deluxe rooms count if it exceeds new max
+            if (parseInt(deluxeRoomsCount.value) > totalRooms) {
+                deluxeRoomsCount.value = totalRooms;
+            }
+        }
 
         function toggleDeluxeOptions() {
             const deluxeRadio = document.getElementById('roomDeluxe');
@@ -1508,87 +1529,45 @@
 
             if (deluxeRadio.checked) {
                 deluxeOptions.classList.add('show');
-                updateDeluxePassengerDropdown();
+                updateDeluxeRoomsMax();
             } else {
                 deluxeOptions.classList.remove('show');
-                deluxePassengers = [];
-                renderDeluxePassengers();
             }
         }
 
-        function toggleDeluxePassengerSelect() {
+        function toggleDeluxeRoomsInput() {
             const deluxeSome = document.getElementById('deluxeSome');
-            const selectDiv = document.getElementById('deluxePassengerSelect');
+            const deluxeRoomsInput = document.getElementById('deluxeRoomsInput');
 
             if (deluxeSome.checked) {
-                selectDiv.style.display = 'block';
-                updateDeluxePassengerDropdown();
+                deluxeRoomsInput.style.display = 'block';
+                updateDeluxeRoomsMax();
             } else {
-                selectDiv.style.display = 'none';
-                deluxePassengers = [];
-                renderDeluxePassengers();
+                deluxeRoomsInput.style.display = 'none';
             }
         }
 
-        function updateDeluxePassengerDropdown() {
-            const select = document.getElementById('deluxePassengerDropdown');
-            const passengers = getRegisteredPassengers();
-            const selectedRowIds = deluxePassengers.map(p => p.rowId);
+        function validateDeluxeRoomsInput() {
+            const deluxeRoomsCount = document.getElementById('deluxeRoomsCount');
+            const totalRooms = parseInt(document.getElementById('totalRooms').value) || 1;
+            const deluxeRooms = parseInt(deluxeRoomsCount.value);
+            const errorDiv = document.getElementById('deluxeRoomsError');
 
-            select.innerHTML = '<option value="">בחר נוסע...</option>';
-            passengers.forEach((p) => {
-                if (!selectedRowIds.includes(p.rowId)) {
-                    const option = document.createElement('option');
-                    option.value = p.rowId;
-                    option.textContent = p.name;
-                    select.appendChild(option);
-                }
-            });
-        }
-
-        function addDeluxePassenger() {
-            const select = document.getElementById('deluxePassengerDropdown');
-            const selectedOption = select.options[select.selectedIndex];
-
-            if (selectedOption.value) {
-                const rowId = selectedOption.value;
-                const name = selectedOption.textContent;
-                const selectedRowIds = deluxePassengers.map(p => p.rowId);
-
-                if (!selectedRowIds.includes(rowId)) {
-                    deluxePassengers.push({ rowId, name });
-                    renderDeluxePassengers();
-                    updateDeluxePassengerDropdown();
-                }
-                // Reset select to default option
-                select.selectedIndex = 0;
+            // Limit input value to max
+            if (deluxeRooms > totalRooms) {
+                deluxeRoomsCount.value = totalRooms;
+                errorDiv.classList.add('show');
+                setTimeout(() => errorDiv.classList.remove('show'), 2000);
+            } else if (deluxeRooms < 1 && deluxeRoomsCount.value !== '') {
+                deluxeRoomsCount.value = 1;
+                errorDiv.classList.add('show');
+                setTimeout(() => errorDiv.classList.remove('show'), 2000);
+            } else {
+                errorDiv.classList.remove('show');
             }
         }
 
-        function removeDeluxePassenger(index) {
-            deluxePassengers.splice(index, 1);
-            renderDeluxePassengers();
-            updateDeluxePassengerDropdown();
-        }
 
-        function renderDeluxePassengers() {
-            const list = document.getElementById('deluxePassengerList');
-            list.innerHTML = '';
-
-            // Update names from current passenger data
-            const passengers = getRegisteredPassengers();
-            deluxePassengers.forEach((selected, index) => {
-                const currentPassenger = passengers.find(p => p.rowId === selected.rowId);
-                const displayName = currentPassenger ? currentPassenger.name : selected.name;
-                // Update stored name
-                selected.name = displayName;
-
-                const tag = document.createElement('span');
-                tag.className = 'participant-tag';
-                tag.innerHTML = `${displayName} <i class="fas fa-times remove-participant" onclick="removeDeluxePassenger(${index})"></i>`;
-                list.appendChild(tag);
-            });
-        }
 
         // --- Ski Lesson Participants ---
         const skiLessonParticipants = {
@@ -2052,7 +2031,31 @@
                 }
             }
 
-            // 4. Validate contact info
+            // 4. Validate room selection
+            const totalRoomsInput = document.getElementById('totalRooms');
+            const totalRooms = parseInt(totalRoomsInput.value) || 0;
+            
+            if (totalRooms < 1) {
+                showFieldError(totalRoomsInput, 'יש להזין מספר חדרים');
+                errors.push('יש להזין מספר חדרים תקין');
+                if (!firstInvalidElement) firstInvalidElement = totalRoomsInput;
+            }
+
+            // Validate deluxe rooms count if "some" is selected
+            const roomDeluxe = document.getElementById('roomDeluxe');
+            const deluxeSome = document.getElementById('deluxeSome');
+            if (roomDeluxe.checked && deluxeSome.checked) {
+                const deluxeRoomsCount = parseInt(document.getElementById('deluxeRoomsCount').value) || 0;
+                if (deluxeRoomsCount < 1 || deluxeRoomsCount > totalRooms) {
+                    const deluxeRoomsInput = document.getElementById('deluxeRoomsCount');
+                    showFieldError(deluxeRoomsInput, `מספר חדרי דלוקס חייב להיות בין 1 ל-${totalRooms}`);
+                    errors.push(`מספר חדרי דלוקס חייב להיות בין 1 ל-${totalRooms}`);
+                    document.getElementById('deluxeRoomsError').classList.add('show');
+                    if (!firstInvalidElement) firstInvalidElement = deluxeRoomsInput;
+                }
+            }
+
+            // 5. Validate contact info
             const addressInput = document.querySelector('input[name="address"]');
             const phoneInput = document.querySelector('input[name="phone"]');
             const emailInput = document.querySelector('input[name="email"]');
@@ -2083,7 +2086,7 @@
                 if (!firstInvalidElement) firstInvalidElement = emailInput;
             }
 
-            // 5. Validate payment method
+            // 6. Validate payment method
             const paymentBank = document.getElementById('paymentBank');
             const paymentCard = document.getElementById('paymentCard');
             if (!paymentBank.checked && !paymentCard.checked) {
@@ -2092,7 +2095,7 @@
                 if (!firstInvalidElement) firstInvalidElement = paymentBank;
             }
 
-            // 6. Validate terms acceptance
+            // 7. Validate terms acceptance
             const termsConfirm = document.getElementById('termsConfirm');
             if (!termsConfirm.checked) {
                 errors.push('יש לאשר את התנאים');
@@ -2178,9 +2181,13 @@
                 vacationDate: document.getElementById('vacationDateSelect').value,
                 passengers: [],
                 files: [],
-                roomType: roomTypeElement ? roomTypeElement.value : 'standard',
-                deluxeFor: roomTypeElement?.value === 'deluxe' && deluxeForElement ? deluxeForElement.value : null,
-                deluxePassengers: roomTypeElement?.value === 'deluxe' && deluxeForElement?.value === 'some' ? deluxePassengers : null,
+                rooms: {
+                    totalRooms: parseInt(document.getElementById('totalRooms').value) || 1,
+                    roomType: roomTypeElement ? roomTypeElement.value : 'standard',
+                    deluxeFor: roomTypeElement?.value === 'deluxe' && deluxeForElement ? deluxeForElement.value : null,
+                    deluxeRoomsCount: roomTypeElement?.value === 'deluxe' && deluxeForElement?.value === 'some' ? 
+                        parseInt(document.getElementById('deluxeRoomsCount').value) : null
+                },
                 skiLessons: {
                     notInterested: document.getElementById('noSkiLessons').checked,
                     kids: {
