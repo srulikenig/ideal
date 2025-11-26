@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>טופס הרשמה - IDEAL TOURS</title>
-    
+
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Google Fonts -->
@@ -30,12 +31,12 @@
             max-width: 1000px;
             margin: 30px auto;
             padding: 40px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
             border-top: 6px solid var(--primary-color);
             border-radius: 8px;
         }
 
-        
+
         .contact-highlight {
             background-color: var(--accent-color);
             padding: 10px 20px;
@@ -140,7 +141,7 @@
             margin-bottom: 20px;
             font-size: 1.2rem;
         }
-        
+
         .section-title i {
             margin-left: 8px;
         }
@@ -152,13 +153,14 @@
             vertical-align: middle;
             text-align: center;
         }
-        
+
         .table td {
             vertical-align: middle;
             padding: 8px;
         }
 
-        .form-control, .form-select {
+        .form-control,
+        .form-select {
             font-size: 0.9rem;
             border-radius: 4px;
         }
@@ -201,16 +203,16 @@
         .input-group {
             direction: rtl;
         }
-        
-        .input-group > .form-control:not(:last-child),
-        .input-group > .form-select:not(:last-child) {
+
+        .input-group>.form-control:not(:last-child),
+        .input-group>.form-select:not(:last-child) {
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
             border-top-right-radius: 4px;
             border-bottom-right-radius: 4px;
         }
-        
-        .input-group > .input-group-text:last-child {
+
+        .input-group>.input-group-text:last-child {
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
             border-top-left-radius: 4px;
@@ -224,7 +226,7 @@
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             position: relative;
         }
 
@@ -312,7 +314,7 @@
             .passenger-fields {
                 grid-template-columns: 1fr;
             }
-            
+
             .passenger-card {
                 padding: 15px;
             }
@@ -324,7 +326,7 @@
             color: #dc3545;
             transition: 0.2s;
         }
-        
+
         .btn-remove:disabled {
             color: #ccc;
             cursor: not-allowed;
@@ -341,12 +343,12 @@
             transition: all 0.3s;
             position: relative;
         }
-        
+
         .upload-area.dragover {
             background-color: #e3f2fd;
             border-color: var(--primary-color);
         }
-        
+
         .file-list-item {
             background: #f8f9fa;
             border: 1px solid #dee2e6;
@@ -370,7 +372,7 @@
             text-align: justify;
             margin-top: 20px;
         }
-        
+
         .terms-box h6 {
             color: #000;
             font-weight: 700;
@@ -385,7 +387,8 @@
             border-bottom: 2px solid #333;
             border-radius: 0;
             background: transparent;
-            font-family: 'Rubik', cursive; /* Optional aesthetic */
+            font-family: 'Rubik', cursive;
+            /* Optional aesthetic */
             padding-right: 0;
         }
 
@@ -463,12 +466,12 @@
             font-weight: 700;
             transition: 0.3s;
         }
-        
+
         .btn-submit:hover {
             background-color: #08337a;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
-        
+
         /* Freq Flyer Input */
         .freq-flyer-input {
             display: none;
@@ -628,16 +631,22 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         @keyframes slideDown {
-            from { 
+            from {
                 opacity: 0;
                 transform: translateY(-10px);
             }
-            to { 
+
+            to {
                 opacity: 1;
                 transform: translateY(0);
             }
@@ -645,6 +654,7 @@
 
         /* Mobile responsive adjustments */
         @media (max-width: 768px) {
+
             /* Make paper container more mobile-friendly */
             .paper-container {
                 padding: 20px 15px;
@@ -658,454 +668,498 @@
         }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <div class="paper-container">
-        
-        <!-- Header -->
-        <div class="text-center">
-            <img src="sitelogo.png" alt="אידיאל טורס" class="img-fluid mb-3" style="max-height: 100px;">
-            <p style="color: var(--accent-color); font-size: 1.1rem; font-weight: 600; margin: 5px 0;">
-                בכשרות גלאט מהדרין
-            </p>
-            <div class="contact-highlight mb-3">
-                <div class="contact-info-wrapper">
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <span>טלפון: 02-5000821</span>
-                    </div>
-                    <div class="contact-item whatsapp">
-                        <i class="fab fa-whatsapp"></i>
-                        <span>ווטסאפ: 058-5396011</span>
-                    </div>
-                    <div class="contact-item email">
-                        <i class="fas fa-envelope"></i>
-                        <span>דוא"ל: GOSKI@IDEAL-TOURS.CO.IL</span>
+    <div class="container">
+        <div class="paper-container">
+
+            <!-- Header -->
+            <div class="text-center">
+                <img src="sitelogo.png" alt="אידיאל טורס" class="img-fluid mb-3" style="max-height: 100px;">
+                <p style="color: var(--accent-color); font-size: 1.8rem; font-weight: 600; margin: 5px 0;">
+                    בכשרות גלאט מהדרין
+                </p>
+                <div class="contact-highlight mb-3">
+                    <div class="contact-info-wrapper">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>טלפון: 02-5000821</span>
+                        </div>
+                        <div class="contact-item whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>ווטסאפ: 058-5396011</span>
+                        </div>
+                        <div class="contact-item email">
+                            <i class="fas fa-envelope"></i>
+                            <span>דוא"ל: GOSKI@IDEAL-TOURS.CO.IL</span>
+                        </div>
                     </div>
                 </div>
+                <h3>טופס הרשמה לחופשת סקי</h3>
+                <h4 class="text-primary mt-2">מלון MY KOSHER HOTEL 4⭐⭐⭐⭐</h4>
             </div>
-            <h3>טופס הרשמה לחופשת סקי</h3>
-            <h4 class="text-primary mt-2">מלון MY KOSHER HOTEL 4⭐⭐⭐⭐</h4>
-        </div>
 
-        <div class="row justify-content-center mt-4">
-            <div class="col-md-4 text-center">
-                <label class="form-label fw-bold">תאריך מבוקש:</label>
-                <div class="input-group">
-                    <select class="form-select" id="vacationDateSelect" required disabled>
-                        <option value="">טוען תאריכים...</option>
-                    </select>
-                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+            <div class="row justify-content-center mt-4">
+                <div class="col-md-4 text-center">
+                    <label class="form-label fw-bold">תאריך מבוקש:</label>
+                    <div class="input-group">
+                        <select class="form-select" id="vacationDateSelect" required disabled>
+                            <option value="">טוען תאריכים...</option>
+                        </select>
+                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                    </div>
+                    <div class="error-message"><i class="fas fa-exclamation-circle"></i> יש לבחור תאריך יציאה</div>
                 </div>
-                <div class="error-message"><i class="fas fa-exclamation-circle"></i> יש לבחור תאריך יציאה</div>
             </div>
-        </div>
 
-        <form id="skiForm" onsubmit="submitForm(event)" novalidate>
-            
-            <!-- Validation Alert -->
-            <div id="validationAlert" class="validation-alert">
-                <h5><i class="fas fa-exclamation-triangle"></i> נא לתקן את השגיאות הבאות:</h5>
-                <ul id="validationErrors"></ul>
-            </div>
-            
-            <!-- Passengers -->
-            <div class="section-title"><i class="fas fa-users"></i> פרטי הנוסעים (באנגלית לפי הדרכון)</div>
-            
-            <div id="passengersContainer">
-                <!-- JS creates passenger cards here -->
-            </div>
-            
-            <button type="button" class="btn btn-sm btn-success rounded-pill px-3" onclick="addPassengerRow()">
-                <i class="fas fa-plus"></i> הוסף נוסע
-            </button>
-            <div class="text-danger small mt-2 fw-bold">* שימו לב! תוקף הדרכון חייב להיות מינימום 3 חודשים מיום שובכם לארץ.</div>
+            <form id="skiForm" onsubmit="submitForm(event)" novalidate>
 
-            <!-- Documents Upload -->
-            <div class="section-title"><i class="fas fa-cloud-upload-alt"></i> צרוף צילומי דרכונים</div>
-            
-            <div class="upload-area" id="dropZone">
-                <i class="fas fa-passport fa-3x text-secondary mb-3"></i>
-                <h5>גרור קבצים לכאן או לחץ לבחירה</h5>
-                <p class="text-muted small mb-0">ניתן להעלות תמונות או קבצי PDF</p>
-                <input type="file" id="fileInput" multiple class="d-none" onchange="handleFiles(this.files)">
-            </div>
-            <div id="fileListDisplay" class="mt-2"></div>
+                <!-- Validation Alert -->
+                <div id="validationAlert" class="validation-alert">
+                    <h5><i class="fas fa-exclamation-triangle"></i> נא לתקן את השגיאות הבאות:</h5>
+                    <ul id="validationErrors"></ul>
+                </div>
 
-            <!-- Accommodation -->
-            <div class="section-title"><i class="fas fa-bed"></i> סוג חדר ושיעורים</div>
-            <div class="row g-4">
-                <div class="col-md-6">
-                    <label class="fw-bold mb-2">בחירת סוג חדר:</label>
-                    <div class="card p-3 bg-light border-0">
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="roomType" id="roomStandard" value="standard" checked onchange="toggleDeluxeOptions()">
-                            <label class="form-check-label" for="roomStandard">חדר סטנדרט</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="roomType" id="roomDeluxe" value="deluxe" onchange="toggleDeluxeOptions()">
-                            <label class="form-check-label" for="roomDeluxe">חדר דלוקס (נוף) <span class="price-tag">+300€ לכל השבוע</span></label>
-                        </div>
-                        <div class="deluxe-options" id="deluxeOptions">
-                            <label class="fw-bold mb-2">חדר דלוקס עבור:</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="deluxeFor" id="deluxeAll" value="all" checked onchange="toggleDeluxePassengerSelect()">
-                                <label class="form-check-label" for="deluxeAll">כל הנוסעים</label>
+                <!-- Passengers -->
+                <div class="section-title"><i class="fas fa-users"></i> פרטי הנוסעים (באנגלית לפי הדרכון)</div>
+
+                <div id="passengersContainer">
+                    <!-- JS creates passenger cards here -->
+                </div>
+
+                <button type="button" class="btn btn-sm btn-success rounded-pill px-3" onclick="addPassengerRow()">
+                    <i class="fas fa-plus"></i> הוסף נוסע
+                </button>
+                <div class="text-danger small mt-2 fw-bold">* שימו לב! תוקף הדרכון חייב להיות מינימום 3 חודשים מיום
+                    שובכם לארץ.</div>
+
+                <!-- Documents Upload -->
+                <div class="section-title"><i class="fas fa-cloud-upload-alt"></i> צרוף צילומי דרכונים</div>
+
+                <div class="upload-area" id="dropZone">
+                    <i class="fas fa-passport fa-3x text-secondary mb-3"></i>
+                    <h5>גרור קבצים לכאן או לחץ לבחירה</h5>
+                    <p class="text-muted small mb-0">ניתן להעלות תמונות או קבצי PDF</p>
+                    <input type="file" id="fileInput" multiple class="d-none" onchange="handleFiles(this.files)">
+                </div>
+                <div id="fileListDisplay" class="mt-2"></div>
+
+                <!-- Accommodation -->
+                <div class="section-title"><i class="fas fa-bed"></i> סוג חדר ושיעורים</div>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <label class="fw-bold mb-2">בחירת סוג חדר:</label>
+                        <div class="card p-3 bg-light border-0">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="roomType" id="roomStandard"
+                                    value="standard" checked onchange="toggleDeluxeOptions()">
+                                <label class="form-check-label" for="roomStandard">חדר סטנדרט</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="deluxeFor" id="deluxeSome" value="some" onchange="toggleDeluxePassengerSelect()">
-                                <label class="form-check-label" for="deluxeSome">חלק מהנוסעים</label>
+                                <input class="form-check-input" type="radio" name="roomType" id="roomDeluxe"
+                                    value="deluxe" onchange="toggleDeluxeOptions()">
+                                <label class="form-check-label" for="roomDeluxe">חדר דלוקס (נוף) <span
+                                        class="price-tag">+300€ לכל השבוע</span></label>
                             </div>
-                            <div class="deluxe-passenger-select" id="deluxePassengerSelect" style="display: none; margin-top: 10px;">
-                                <label class="small fw-bold">בחר נוסעים לחדר דלוקס:</label>
-                                <div class="participant-list" id="deluxePassengerList"></div>
-                                <div class="participant-select-wrapper">
-                                    <select class="form-select form-select-sm" id="deluxePassengerDropdown" onchange="addDeluxePassenger()">
-                                        <option value="">בחר נוסע...</option>
-                                    </select>
+                            <div class="deluxe-options" id="deluxeOptions">
+                                <label class="fw-bold mb-2">חדר דלוקס עבור:</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="deluxeFor" id="deluxeAll"
+                                        value="all" checked onchange="toggleDeluxePassengerSelect()">
+                                    <label class="form-check-label" for="deluxeAll">כל הנוסעים</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="deluxeFor" id="deluxeSome"
+                                        value="some" onchange="toggleDeluxePassengerSelect()">
+                                    <label class="form-check-label" for="deluxeSome">חלק מהנוסעים</label>
+                                </div>
+                                <div class="deluxe-passenger-select" id="deluxePassengerSelect"
+                                    style="display: none; margin-top: 10px;">
+                                    <label class="small fw-bold">בחר נוסעים לחדר דלוקס:</label>
+                                    <div class="participant-list" id="deluxePassengerList"></div>
+                                    <div class="participant-select-wrapper">
+                                        <select class="form-select form-select-sm" id="deluxePassengerDropdown"
+                                            onchange="addDeluxePassenger()">
+                                            <option value="">בחר נוסע...</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <label class="fw-bold mb-2">הדרכת סקי:</label>
-                    <div class="card p-3 bg-light border-0">
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="checkbox" id="lessonKids" onchange="toggleSkiLessonParticipants('kids')">
-                            <label class="form-check-label" for="lessonKids">
-                                בי"ס לסקי - קבוצת ילדים/נוער<br>
-                                <small class="text-muted">5 ימים מלאים 10:00-16:00</small>
-                                <span class="price-tag">430€</span>
-                            </label>
-                        </div>
-                        <div class="ski-lesson-participants" id="lessonKidsParticipants">
-                            <label class="small fw-bold">בחר משתתפים מרשימת הנוסעים:</label>
-                            <div class="participant-list" id="kidsParticipantList"></div>
-                            <div class="participant-select-wrapper">
-                                <select class="form-select form-select-sm" id="kidsParticipantSelect" onchange="addParticipantFromSelect('kids')">
-                                    <option value="">בחר נוסע...</option>
-                                </select>
+                    <div class="col-md-6">
+                        <label class="fw-bold mb-2">הדרכת סקי:</label>
+                        <div class="card p-3 bg-light border-0">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="lessonKids"
+                                    onchange="toggleSkiLessonParticipants('kids')">
+                                <label class="form-check-label" for="lessonKids">
+                                    בי"ס לסקי - קבוצת ילדים/נוער<br>
+                                    <small class="text-muted">5 ימים מלאים 10:00-16:00</small>
+                                    <span class="price-tag">430€</span>
+                                </label>
                             </div>
-                            <div class="error-message" id="kidsParticipantError"><i class="fas fa-exclamation-circle"></i> יש להוסיף לפחות משתתף אחד</div>
-                        </div>
-                        
-                        <div class="form-check mb-2 mt-3">
-                            <input class="form-check-input" type="checkbox" id="lessonAdults" onchange="toggleSkiLessonParticipants('adults')">
-                            <label class="form-check-label" for="lessonAdults">
-                                בי"ס לסקי - קבוצת מבוגרים<br>
-                                <small class="text-muted">3 חצאי ימים (ב-ד) 10:00-13:00 + יום מלא (ה) 10:00-16:00</small>
-                                <span class="price-tag">260€</span>
-                            </label>
-                        </div>
-                        <div class="ski-lesson-participants" id="lessonAdultsParticipants">
-                            <label class="small fw-bold">בחר משתתפים מרשימת הנוסעים:</label>
-                            <div class="participant-list" id="adultsParticipantList"></div>
-                            <div class="participant-select-wrapper">
-                                <select class="form-select form-select-sm" id="adultsParticipantSelect" onchange="addParticipantFromSelect('adults')">
-                                    <option value="">בחר נוסע...</option>
-                                </select>
+                            <div class="ski-lesson-participants" id="lessonKidsParticipants">
+                                <label class="small fw-bold">בחר משתתפים מרשימת הנוסעים:</label>
+                                <div class="participant-list" id="kidsParticipantList"></div>
+                                <div class="participant-select-wrapper">
+                                    <select class="form-select form-select-sm" id="kidsParticipantSelect"
+                                        onchange="addParticipantFromSelect('kids')">
+                                        <option value="">בחר נוסע...</option>
+                                    </select>
+                                </div>
+                                <div class="error-message" id="kidsParticipantError"><i
+                                        class="fas fa-exclamation-circle"></i> יש להוסיף לפחות משתתף אחד</div>
                             </div>
-                            <div class="error-message" id="adultsParticipantError"><i class="fas fa-exclamation-circle"></i> יש להוסיף לפחות משתתף אחד</div>
-                        </div>
-                        
-                        <div class="form-check mt-3">
-                            <input class="form-check-input" type="checkbox" id="lessonPrivate" onchange="toggleSkiLessonParticipants('private')">
-                            <label class="form-check-label" for="lessonPrivate">
-                                שיעורים פרטיים<br>
-                                <small class="text-muted">מינימום 3 שעות, כל אדם נוסף +15€</small>
-                                <span class="price-tag">65€ לשעה</span>
-                            </label>
-                        </div>
-                        <div class="ski-lesson-participants" id="lessonPrivateParticipants">
-                            <label class="small fw-bold">בחר משתתפים מרשימת הנוסעים:</label>
-                            <div class="participant-list" id="privateParticipantList"></div>
-                            <div class="participant-select-wrapper">
-                                <select class="form-select form-select-sm" id="privateParticipantSelect" onchange="addParticipantFromSelect('private')">
-                                    <option value="">בחר נוסע...</option>
-                                </select>
+
+                            <div class="form-check mb-2 mt-3">
+                                <input class="form-check-input" type="checkbox" id="lessonAdults"
+                                    onchange="toggleSkiLessonParticipants('adults')">
+                                <label class="form-check-label" for="lessonAdults">
+                                    בי"ס לסקי - קבוצת מבוגרים<br>
+                                    <small class="text-muted">3 חצאי ימים (ב-ד) 10:00-13:00 + יום מלא (ה)
+                                        10:00-16:00</small>
+                                    <span class="price-tag">260€</span>
+                                </label>
                             </div>
-                            <div class="error-message" id="privateParticipantError"><i class="fas fa-exclamation-circle"></i> יש להוסיף לפחות משתתף אחד</div>
+                            <div class="ski-lesson-participants" id="lessonAdultsParticipants">
+                                <label class="small fw-bold">בחר משתתפים מרשימת הנוסעים:</label>
+                                <div class="participant-list" id="adultsParticipantList"></div>
+                                <div class="participant-select-wrapper">
+                                    <select class="form-select form-select-sm" id="adultsParticipantSelect"
+                                        onchange="addParticipantFromSelect('adults')">
+                                        <option value="">בחר נוסע...</option>
+                                    </select>
+                                </div>
+                                <div class="error-message" id="adultsParticipantError"><i
+                                        class="fas fa-exclamation-circle"></i> יש להוסיף לפחות משתתף אחד</div>
+                            </div>
+
+                            <div class="form-check mt-3">
+                                <input class="form-check-input" type="checkbox" id="lessonPrivate"
+                                    onchange="toggleSkiLessonParticipants('private')">
+                                <label class="form-check-label" for="lessonPrivate">
+                                    שיעורים פרטיים<br>
+                                    <span class="price-tag">65€ לשעה</span>
+                                    <small class="text-muted">מינימום 3 שעות
+                                        <br />
+                                        כל אדם נוסף +15€</small>
+                                </label>
+                            </div>
+                            <div class="ski-lesson-participants" id="lessonPrivateParticipants">
+                                <label class="small fw-bold">בחר משתתפים מרשימת הנוסעים:</label>
+                                <div class="participant-list" id="privateParticipantList"></div>
+                                <div class="participant-select-wrapper">
+                                    <select class="form-select form-select-sm" id="privateParticipantSelect"
+                                        onchange="addParticipantFromSelect('private')">
+                                        <option value="">בחר נוסע...</option>
+                                    </select>
+                                </div>
+                                <div class="error-message" id="privateParticipantError"><i
+                                        class="fas fa-exclamation-circle"></i> יש להוסיף לפחות משתתף אחד</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Contact & Payment Details (From Bottom of PDF) -->
-            <div class="section-title"><i class="fas fa-address-card"></i> פרטי המזמין ואמצעי תשלום</div>
-            
-            <!-- Euro Rate Display -->
-            <div class="mb-3" style="background-color: #fff3cd; border: 2px solid #ffc107; padding: 12px 20px; border-radius: 8px;">
-                <i class="fas fa-euro-sign" style="color: #856404; margin-left: 8px;"></i>
-                <strong style="font-size: 1.05rem; color: #856404;">שער היורו עדכני: <span id="euroRate">טוען...</span> ₪</strong>
-            </div>
-            
-            <div class="row g-3">
-                <div class="col-md-8">
-                    <label class="form-label">כתובת מלאה (רחוב, עיר, מיקוד)</label>
-                    <input type="text" class="form-control" name="address" required>
-                    <div class="error-message"><i class="fas fa-exclamation-circle"></i> שדה חובה</div>
-                </div>
-                <div class="col-md-4">
-                    <label class="form-label">טלפון נייד</label>
-                    <input type="tel" class="form-control" name="phone" placeholder="05x-xxxxxxx" required>
-                    <div class="error-message"><i class="fas fa-exclamation-circle"></i> שדה חובה</div>
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label">כתובת דוא"ל</label>
-                    <input type="email" class="form-control" name="email" required>
-                    <div class="error-message"><i class="fas fa-exclamation-circle"></i> שדה חובה</div>
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label">הערות ובקשות מיוחדות</label>
-                    <input type="text" class="form-control" name="notes">
-                </div>
-            </div>
+                <!-- Contact & Payment Details (From Bottom of PDF) -->
+                <div class="section-title"><i class="fas fa-address-card"></i> פרטי המזמין ואמצעי תשלום</div>
 
-            <!-- Payment Method Selection -->
-            <div class="mt-4">
-                <label class="fw-bold mb-2">אמצעי תשלום:</label>
-                <div class="payment-method-selector">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="paymentMethod" id="paymentBank" value="bank" onchange="togglePaymentSection('bank')">
-                        <label class="form-check-label" for="paymentBank">
-                            <i class="fas fa-university"></i> העברה בנקאית
+                <!-- Euro Rate Display -->
+                <div class="mb-3"
+                    style="background-color: #fff3cd; border: 2px solid #ffc107; padding: 12px 20px; border-radius: 8px;">
+                    <i class="fas fa-euro-sign" style="color: #856404; margin-left: 8px;"></i>
+                    <strong style="font-size: 1.05rem; color: #856404;">שער היורו עדכני: <span
+                            id="euroRate">טוען...</span> ₪</strong>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-md-8">
+                        <label class="form-label">כתובת מלאה (רחוב, עיר, מיקוד)</label>
+                        <input type="text" class="form-control" name="address" required>
+                        <div class="error-message"><i class="fas fa-exclamation-circle"></i> שדה חובה</div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">טלפון נייד</label>
+                        <input type="tel" class="form-control" name="phone" placeholder="05x-xxxxxxx" required>
+                        <div class="error-message"><i class="fas fa-exclamation-circle"></i> שדה חובה</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">כתובת דוא"ל</label>
+                        <input type="email" class="form-control" name="email" required>
+                        <div class="error-message"><i class="fas fa-exclamation-circle"></i> שדה חובה</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">הערות ובקשות מיוחדות</label>
+                        <input type="text" class="form-control" name="notes">
+                    </div>
+                </div>
+
+                <!-- Payment Method Selection -->
+                <div class="mt-4">
+                    <label class="fw-bold mb-2">אמצעי תשלום:</label>
+                    <div class="payment-method-selector">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="paymentBank"
+                                value="bank" onchange="togglePaymentSection('bank')">
+                            <label class="form-check-label" for="paymentBank">
+                                <i class="fas fa-university"></i> העברה בנקאית
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="paymentCard"
+                                value="card" onchange="togglePaymentSection('card')">
+                            <label class="form-check-label" for="paymentCard">
+                                <i class="far fa-credit-card"></i> כרטיס אשראי
+                            </label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="paymentMethodError"><i class="fas fa-exclamation-circle"></i> יש
+                        לבחור אמצעי תשלום</div>
+                </div>
+
+                <!-- Bank Transfer Section -->
+                <div class="payment-section" id="bankPaymentSection">
+                    <div class="fw-bold text-primary mb-3"><i class="fas fa-university"></i> פרטי העברה בנקאית:</div>
+
+                    <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px;">
+                        <!-- Hebrew Bank Details -->
+                        <div
+                            style="flex: 1; min-width: 300px; background: #f8f9fa; padding: 15px; border-radius: 8px; border: 2px solid #dee2e6;">
+                            <h6 style="color: var(--primary-color); font-weight: 600; margin-bottom: 10px;">פרטי בנק
+                                בעברית</h6>
+                            <div style="font-size: 0.9rem;">
+                                <strong>על שם: אידיאל טורס בע"מ</strong><br>
+                                בנק מזרחי טפחות<br>
+                                סניף: 417 - מלכי ישראל 16 ירושלים<br>
+                                מספר חשבון: 116600<br>
+                                BIC/SWIFT: MIZBILIT<br>
+                                IBAN: IL760204170000000116600
+                            </div>
+                        </div>
+
+                        <!-- English Bank Details -->
+                        <div
+                            style="flex: 1; min-width: 300px; background: #e3f2fd; padding: 15px; border-radius: 8px; border: 2px solid #90caf9;">
+                            <h6 style="color: var(--primary-color); font-weight: 600; margin-bottom: 10px;">Bank Details
+                                in English</h6>
+                            <div style="font-size: 0.9rem;">
+                                <strong>Beneficiary Name: IDEAL TOURS (1982) (ISRAEL) LTD</strong><br>
+                                Beneficiary Address: Malchei Israel 53, Jerusalem 94395<br>
+                                Bank Name: BANK MIZRACHI TEFAHOT<br>
+                                Bank Address: Malchei Israel 16 Jerusalem<br>
+                                Branch: 417<br>
+                                Account Number: 116600<br>
+                                BIC/SWIFT CODE: MIZBILIT<br>
+                                IBAN: IL760204170000000116600
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">תאריך העברה</label>
+                            <input type="date" class="form-control" name="bankTransferDate">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">מספר אסמכתא</label>
+                            <input type="text" class="form-control" name="bankTransferRef"
+                                placeholder="מספר אסמכתא מהבנק">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">סכום שהועבר</label>
+                            <input type="number" class="form-control" name="bankTransferAmount" placeholder="הזן סכום">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">העלאת אסמכתא:</label>
+                            <div class="receipt-upload-area" id="receiptDropZone">
+                                <i class="fas fa-file-upload upload-icon"></i>
+                                <h6>גרור קובץ או לחץ לבחירה</h6>
+                                <small class="text-muted">תמונה או PDF של אישור ההעברה</small>
+                                <input type="file" id="receiptFileInput" class="d-none" accept="image/*,.pdf"
+                                    onchange="handleReceiptFile(this.files)">
+                            </div>
+                            <div id="receiptFileList" class="receipt-file-list"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Credit Card Section -->
+                <div class="payment-section" id="cardPaymentSection">
+                    <div class="fw-bold text-primary mb-3"><i class="far fa-credit-card"></i> פרטי כרטיס אשראי:</div>
+                    <div class="row g-3">
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" name="cardNumber" placeholder="מספר כרטיס אשראי">
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select" name="cardType">
+                                <option value="">סוג כרטיס</option>
+                                <option value="ויזה">ויזה</option>
+                                <option value="מאסטרקארד">מאסטרקארד</option>
+                                <option value="אמריקן אקספרס">אמריקן אקספרס (+1.5%)</option>
+                                <option value="דיינרס">דיינרס (+1.5%)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control text-center" name="cardExpiry"
+                                placeholder="תוקף (MM/YY)">
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control text-center" name="cardCvv" placeholder="CVV">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="cardHolderId" placeholder="ת.ז בעל הכרטיס">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="cardHolderName" placeholder="שם בעל הכרטיס">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Full Terms Text -->
+                <div class="terms-box">
+                    <h6>תשלומים:</h6>
+                    עם ההרשמה יש להעביר מקדמה ע"ס 500€ לנוסע. (תוספת 1.5% לכרטיס אשראי אמריקן אקספרס ודיינרס) או בהעברה
+                    בנקאית לחשבון בבנק מזרחי, סניף גאולה, ירושלים מס' הסניף 417 מס' חשבון 116600 על שם אידיאל טורס בע"מ.
+                    במידה ונעשתה העברה בנקאית חשוב מאוד לשלוח לנו העתק של טופס ההעברה לכתובת דוא"ל או לווטסאפ כמופיע
+                    בראש עמוד זה. את יתרת התשלום יש לשלם 25 יום לפני היציאה. אי תשלום במועד הנקוב - משמעותו ביטול העסקה
+                    מצד הלקוח וכפוף לדמי הביטול כמפורט באתר.
+
+                    <h6>ביטולים:</h6>
+                    ביטול כלשהו יתקבל בכתב בלבד במייל או בווטסאפ. בביטול עד 30 יום לפני תאריך היציאה התשלום יוחזר, למעט
+                    150€ דמי טיפול לאדם. במידה והטיסה הינה Lowcost המקדמה לא תוחזר. פחות מ 30 יום לפני מועד היציאה - דמי
+                    הביטול כמפורט באתר האינטרנט של אידיאל טורס: https://www.idealtours.co.il . אי תשלום במועד הנקוב -
+                    משמעותו ביטול העסקה מצד הלקוח, וכפוף לדמי הביטול.
+
+                    <h6>תנאים ואחריות:</h6>
+                    תאריכי יציאה קבוצתיים מותנים במינימום 30 נרשמים. זמני הטיסות ותנאיהן עשויים להשתנות, והם באחריותן
+                    הבלעדית של חברות התעופה ואינם באחריותה של אידיאל טורס. המחירים כפופים לשערי החליפין בין היורו לדולר
+                    וכפופים למחירי חברות התעופה. המחיר כולל: טיסות, העברות, 7 לילות בבית מלון על בסיס חצי פנסיון,
+                    סנדוויצ'ים בהכנה עצמית לצהריים, קפה ועוגה אחרי הצהריים, שבת - פנסיון מלא, סקי פס מורחב 57 ק"מ, כניסה
+                    חופשית בריכה ולספא, WIFI. המחיר אינו כולל מס מקומי. מס מקומי ישולם בקבלה במלון. טל"ח.
+
+                    <h6>חובה לרכוש ביטוח:</h6>
+                    בריאות, סקי, מטען וקורונה. ניתן לבצע דרך המשרד.
+                </div>
+
+                <!-- Confirmation & Signature -->
+                <div class="mt-4">
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="termsConfirm" required>
+                        <label class="form-check-label fw-bold" for="termsConfirm">
+                            קראתי את התנאים ואני מאשר אותם בחתימתי.
                         </label>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="paymentMethod" id="paymentCard" value="card" onchange="togglePaymentSection('card')">
-                        <label class="form-check-label" for="paymentCard">
-                            <i class="far fa-credit-card"></i> כרטיס אשראי
-                        </label>
-                    </div>
-                </div>
-                <div class="error-message" id="paymentMethodError"><i class="fas fa-exclamation-circle"></i> יש לבחור אמצעי תשלום</div>
-            </div>
 
-            <!-- Bank Transfer Section -->
-            <div class="payment-section" id="bankPaymentSection">
-                <div class="fw-bold text-primary mb-3"><i class="fas fa-university"></i> פרטי העברה בנקאית:</div>
-                
-                <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px;">
-                    <!-- Hebrew Bank Details -->
-                    <div style="flex: 1; min-width: 300px; background: #f8f9fa; padding: 15px; border-radius: 8px; border: 2px solid #dee2e6;">
-                        <h6 style="color: var(--primary-color); font-weight: 600; margin-bottom: 10px;">פרטי בנק בעברית</h6>
-                        <div style="font-size: 0.9rem;">
-                            <strong>על שם: אידיאל טורס בע"מ</strong><br>
-                            בנק מזרחי טפחות<br>
-                            סניף: 417 - מלכי ישראל 16 ירושלים<br>
-                            מספר חשבון: 116600<br>
-                            BIC/SWIFT: MIZBILIT<br>
-                            IBAN: IL760204170000000116600
-                        </div>
-                    </div>
-
-                    <!-- English Bank Details -->
-                    <div style="flex: 1; min-width: 300px; background: #e3f2fd; padding: 15px; border-radius: 8px; border: 2px solid #90caf9;">
-                        <h6 style="color: var(--primary-color); font-weight: 600; margin-bottom: 10px;">Bank Details in English</h6>
-                        <div style="font-size: 0.9rem;">
-                            <strong>Beneficiary Name: IDEAL TOURS (1982) (ISRAEL) LTD</strong><br>
-                            Beneficiary Address: Malchei Israel 53, Jerusalem 94395<br>
-                            Bank Name: BANK MIZRACHI TEFAHOT<br>
-                            Bank Address: Malchei Israel 16 Jerusalem<br>
-                            Branch: 417<br>
-                            Account Number: 116600<br>
-                            BIC/SWIFT CODE: MIZBILIT<br>
-                            IBAN: IL760204170000000116600
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <label class="form-label">תאריך העברה</label>
-                        <input type="date" class="form-control" name="bankTransferDate">
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">מספר אסמכתא</label>
-                        <input type="text" class="form-control" name="bankTransferRef" placeholder="מספר אסמכתא מהבנק">
-                    </div>
-                    <div class="col-12">
-                        <label class="form-label">סכום שהועבר</label>
-                        <input type="number" class="form-control" name="bankTransferAmount" placeholder="הזן סכום">
-                    </div>
-                    <div class="col-12">
-                        <label class="form-label">העלאת אסמכתא:</label>
-                        <div class="receipt-upload-area" id="receiptDropZone">
-                            <i class="fas fa-file-upload upload-icon"></i>
-                            <h6>גרור קובץ או לחץ לבחירה</h6>
-                            <small class="text-muted">תמונה או PDF של אישור ההעברה</small>
-                            <input type="file" id="receiptFileInput" class="d-none" accept="image/*,.pdf" onchange="handleReceiptFile(this.files)">
-                        </div>
-                        <div id="receiptFileList" class="receipt-file-list"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Credit Card Section -->
-            <div class="payment-section" id="cardPaymentSection">
-                <div class="fw-bold text-primary mb-3"><i class="far fa-credit-card"></i> פרטי כרטיס אשראי:</div>
-                <div class="row g-3">
-                    <div class="col-md-5">
-                        <input type="text" class="form-control" name="cardNumber" placeholder="מספר כרטיס אשראי">
-                    </div>
-                    <div class="col-md-3">
-                        <select class="form-select" name="cardType">
-                            <option value="">סוג כרטיס</option>
-                            <option value="ויזה">ויזה</option>
-                            <option value="מאסטרקארד">מאסטרקארד</option>
-                            <option value="אמריקן אקספרס">אמריקן אקספרס (+1.5%)</option>
-                            <option value="דיינרס">דיינרס (+1.5%)</option>
-                        </select>
-                    </div>
-                    <div class="col-md-2">
-                        <input type="text" class="form-control text-center" name="cardExpiry" placeholder="תוקף (MM/YY)">
-                    </div>
-                    <div class="col-md-2">
-                        <input type="text" class="form-control text-center" name="cardCvv" placeholder="CVV">
-                    </div>
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" name="cardHolderId" placeholder="ת.ז בעל הכרטיס">
-                    </div>
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" name="cardHolderName" placeholder="שם בעל הכרטיס">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Full Terms Text -->
-            <div class="terms-box">
-                <h6>תשלומים:</h6>
-                עם ההרשמה יש להעביר מקדמה ע"ס 500€ לנוסע. (תוספת 1.5% לכרטיס אשראי אמריקן אקספרס ודיינרס) או בהעברה בנקאית לחשבון בבנק מזרחי, סניף גאולה, ירושלים מס' הסניף 417 מס' חשבון 116600 על שם אידיאל טורס בע"מ. במידה ונעשתה העברה בנקאית חשוב מאוד לשלוח לנו העתק של טופס ההעברה לכתובת דוא"ל או לווטסאפ כמופיע בראש עמוד זה. את יתרת התשלום יש לשלם 25 יום לפני היציאה. אי תשלום במועד הנקוב - משמעותו ביטול העסקה מצד הלקוח וכפוף לדמי הביטול כמפורט באתר.
-                
-                <h6>ביטולים:</h6>
-                ביטול כלשהו יתקבל בכתב בלבד במייל או בווטסאפ. בביטול עד 30 יום לפני תאריך היציאה התשלום יוחזר, למעט 150€ דמי טיפול לאדם. במידה והטיסה הינה Lowcost המקדמה לא תוחזר. פחות מ 30 יום לפני מועד היציאה - דמי הביטול כמפורט באתר האינטרנט של אידיאל טורס: https://www.idealtours.co.il . אי תשלום במועד הנקוב - משמעותו ביטול העסקה מצד הלקוח, וכפוף לדמי הביטול.
-
-                <h6>תנאים ואחריות:</h6>
-                תאריכי יציאה קבוצתיים מותנים במינימום 30 נרשמים. זמני הטיסות ותנאיהן עשויים להשתנות, והם באחריותן הבלעדית של חברות התעופה ואינם באחריותה של אידיאל טורס. המחירים כפופים לשערי החליפין בין היורו לדולר וכפופים למחירי חברות התעופה. המחיר כולל: טיסות, העברות, 7 לילות בבית מלון על בסיס חצי פנסיון, סנדוויצ'ים בהכנה עצמית לצהריים, קפה ועוגה אחרי הצהריים, שבת - פנסיון מלא, סקי פס מורחב 57 ק"מ, כניסה חופשית בריכה ולספא, WIFI. המחיר אינו כולל מס מקומי. מס מקומי ישולם בקבלה במלון. טל"ח.
-                
-                <h6>חובה לרכוש ביטוח:</h6>
-                בריאות, סקי, מטען וקורונה. ניתן לבצע דרך המשרד.
-            </div>
-
-            <!-- Confirmation & Signature -->
-            <div class="mt-4">
-                <div class="form-check mb-3">
-                    <input class="form-check-input" type="checkbox" id="termsConfirm" required>
-                    <label class="form-check-label fw-bold" for="termsConfirm">
-                        קראתי את התנאים ואני מאשר אותם בחתימתי.
-                    </label>
-                </div>
-
-                <div class="row align-items-end">
-                    <div class="col-md-7">
-                        <label class="form-label">חתימה:</label>
-                        <div class="signature-pad-container">
-                            <div class="signature-pad-wrapper" id="signaturePadWrapper">
-                                <canvas id="signaturePad" class="signature-pad"></canvas>
-                                <span class="signature-pad-label">חתום כאן</span>
-                                <div class="signature-line"></div>
+                    <div class="row align-items-end">
+                        <div class="col-md-7">
+                            <label class="form-label">חתימה:</label>
+                            <div class="signature-pad-container">
+                                <div class="signature-pad-wrapper" id="signaturePadWrapper">
+                                    <canvas id="signaturePad" class="signature-pad"></canvas>
+                                    <span class="signature-pad-label">חתום כאן</span>
+                                    <div class="signature-line"></div>
+                                </div>
+                                <div class="signature-actions">
+                                    <button type="button" class="btn-clear-signature" onclick="clearSignature()">
+                                        <i class="fas fa-eraser"></i> נקה חתימה
+                                    </button>
+                                </div>
                             </div>
-                            <div class="signature-actions">
-                                <button type="button" class="btn-clear-signature" onclick="clearSignature()">
-                                    <i class="fas fa-eraser"></i> נקה חתימה
-                                </button>
-                            </div>
+                            <!-- Hidden input to store signature data -->
+                            <input type="hidden" id="signatureData" name="signatureData">
                         </div>
-                        <!-- Hidden input to store signature data -->
-                        <input type="hidden" id="signatureData" name="signatureData">
-                    </div>
-                    <div class="col-md-5 text-start">
-                        תאריך: <span id="currentDate" class="fw-bold text-decoration-underline"></span>
+                        <div class="col-md-5 text-start">
+                            תאריך: <span id="currentDate" class="fw-bold text-decoration-underline"></span>
+                        </div>
                     </div>
                 </div>
+
+                <div class="text-center mt-5">
+                    <button type="submit" class="btn btn-submit shadow">
+                        שליחת טופס <i class="fas fa-paper-plane ms-2"></i>
+                    </button>
+                </div>
+
+            </form>
+
+            <div class="text-center mt-4 text-muted small">
+                משרד: מלכי ישראל 53, ירושלים | טל: 02-5000821 | goski@idealtours.co.il
             </div>
-
-            <div class="text-center mt-5">
-                <button type="submit" class="btn btn-submit shadow">
-                    שליחת טופס <i class="fas fa-paper-plane ms-2"></i>
-                </button>
-            </div>
-
-        </form>
-
-        <div class="text-center mt-4 text-muted small">
-            משרד: מלכי ישראל 53, ירושלים | טל: 02-5000821 | goski@idealtours.co.il
         </div>
     </div>
-</div>
 
-<script>
-    // --- Configuration ---
-    const BASE_URL = 'https://script.google.com/macros/s/AKfycbxMxpBKCbtaXD-VAOHFaxsczTCLeMXgHaHwiWei5CLvjkOterT3sXKQ3lbeorRiZeUA/exec';
+    <script>
+        // --- Configuration ---
+        const BASE_URL = 'https://script.google.com/macros/s/AKfycbxMxpBKCbtaXD-VAOHFaxsczTCLeMXgHaHwiWei5CLvjkOterT3sXKQ3lbeorRiZeUA/exec';
 
-    // --- Vacation Dates Logic ---
-    async function loadVacationDates() {
-        const select = document.getElementById('vacationDateSelect');
-        try {
-            const response = await fetch(`${BASE_URL}?action=getVacationDates`);
+        // --- Vacation Dates Logic ---
+        async function loadVacationDates() {
+            const select = document.getElementById('vacationDateSelect');
+            try {
+                const response = await fetch(`${BASE_URL}?action=getVacationDates`);
 
-            if (!response.ok) {
-                throw new Error(`HTTP error: ${response.status}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error: ${response.status}`);
+                }
+
+                const dataRes = await response.json();
+                const data = dataRes.data;
+
+                console.log('Vacation Dates Data:', data);
+                select.innerHTML = '<option value="">בחר תאריך...</option>';
+                select.disabled = false;
+                if (Array.isArray(data.dates) && data.dates.length > 0) {
+                    data.dates.forEach(date => {
+                        const option = document.createElement('option');
+                        option.value = date;
+                        option.textContent = date;
+                        select.appendChild(option);
+                    });
+                } else {
+                    select.innerHTML = '<option value="">אין תאריכים זמינים</option>';
+                }
+
+                // Load euro rate from the same response
+                if (data.eur) {
+                    const euroRateSpan = document.getElementById('euroRate');
+                    euroRateSpan.textContent = parseFloat(data.eur).toFixed(2);
+                }
+            } catch (error) {
+                console.error('Error loading vacation dates:', error);
+                select.innerHTML = '<option value="">שגיאה בטעינת תאריכים</option>';
             }
-            
-            const dataRes = await response.json();
-            const data = dataRes.data;
-            
-            console.log('Vacation Dates Data:', data);
-            select.innerHTML = '<option value="">בחר תאריך...</option>';
-            select.disabled = false;
-            if (Array.isArray(data.dates) && data.dates.length > 0) {
-                data.dates.forEach(date => {
-                    const option = document.createElement('option');
-                    option.value = date;
-                    option.textContent = date;
-                    select.appendChild(option);
-                });
-            } else {
-                select.innerHTML = '<option value="">אין תאריכים זמינים</option>';
-            }
-            
-            // Load euro rate from the same response
-            if (data.eur) {
-                const euroRateSpan = document.getElementById('euroRate');
-                euroRateSpan.textContent = parseFloat(data.eur).toFixed(2);
-            }
-        } catch (error) {
-            console.error('Error loading vacation dates:', error);
-            select.innerHTML = '<option value="">שגיאה בטעינת תאריכים</option>';
         }
-    }
 
-    // --- Euro Exchange Rate Logic ---
-    // Euro rate is now loaded together with vacation dates
-    // This function is kept for backward compatibility but does nothing
-    async function loadEuroRate() {
-        // Euro rate is now loaded by loadVacationDates()
-    }
+        // --- Euro Exchange Rate Logic ---
+        // Euro rate is now loaded together with vacation dates
+        // This function is kept for backward compatibility but does nothing
+        async function loadEuroRate() {
+            // Euro rate is now loaded by loadVacationDates()
+        }
 
-    // --- Passenger Logic ---
-    let passengers = [1]; // Tracks existing row IDs
+        // --- Passenger Logic ---
+        let passengers = [1]; // Tracks existing row IDs
 
-    function initTable() {
-        addPassengerRow(); // Add the first row on load
-        // Set Date
-        const d = new Date();
-        document.getElementById('currentDate').innerText = d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear();
-        // Load euro rate
-        loadEuroRate();
-    }
+        function initTable() {
+            addPassengerRow(); // Add the first row on load
+            // Set Date
+            const d = new Date();
+            document.getElementById('currentDate').innerText = d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
+            // Load euro rate
+            loadEuroRate();
+        }
 
-    function addPassengerRow() {
-        const container = document.getElementById('passengersContainer');
-        const rowId = new Date().getTime(); // Unique ID
-        const index = container.children.length + 1;
+        function addPassengerRow() {
+            const container = document.getElementById('passengersContainer');
+            const rowId = new Date().getTime(); // Unique ID
+            const index = container.children.length + 1;
 
-        const card = document.createElement('div');
-        card.className = 'passenger-card';
-        card.id = 'row-' + rowId;
-        card.innerHTML = `
+            const card = document.createElement('div');
+            card.className = 'passenger-card';
+            card.id = 'row-' + rowId;
+            card.innerHTML = `
             <div class="passenger-card-header">
                 <span class="passenger-number row-index">נוסע ${index}</span>
                 <button type="button" class="btn-remove" onclick="removeRow('${rowId}')">
@@ -1174,923 +1228,924 @@
                 </div>
             </div>
         `;
-        container.appendChild(card);
-        updateRemoveButtons();
-        
-        // Add English-only input validation
-        const englishInputs = card.querySelectorAll('.english-only');
-        englishInputs.forEach(input => {
-            input.addEventListener('input', function(e) {
-                this.value = this.value.replace(/[^A-Za-z\s\-]/g, '');
-                // Update dropdowns when name changes
-                updateAllPassengerDropdowns();
-            });
-        });
-    }
-
-    function removeRow(id) {
-        const row = document.getElementById('row-' + id);
-        if (row) {
-            row.remove();
-            reIndexRows();
+            container.appendChild(card);
             updateRemoveButtons();
-            updateAllPassengerDropdowns();
-        }
-    }
 
-    function reIndexRows() {
-        const cards = document.querySelectorAll('#passengersContainer .passenger-card');
-        cards.forEach((card, index) => {
-            card.querySelector('.row-index').innerText = 'נוסע ' + (index + 1);
-        });
-    }
-
-    function updateRemoveButtons() {
-        const buttons = document.querySelectorAll('.btn-remove');
-        const isSingle = buttons.length === 1;
-        
-        buttons.forEach(btn => {
-            btn.disabled = isSingle;
-        });
-    }
-
-    function toggleFreq(checkbox) {
-        const wrapper = checkbox.closest('.freq-flyer-wrapper');
-        const input = wrapper.querySelector('.freq-flyer-input');
-        input.style.display = checkbox.checked ? 'block' : 'none';
-        if(checkbox.checked) input.focus();
-    }
-
-    function toggleNoFlight(checkbox, rowId) {
-        // Toggle flight opt-out - when checked, user doesn't want flight
-        // This is just for data collection, no special UI changes needed
-    }
-
-    function toggleSkiPass(checkbox, rowId) {
-        const skiLevelField = document.getElementById('skiLevelField_' + rowId);
-        const skiLevelSelect = skiLevelField.querySelector('select');
-        
-        if (checkbox.checked) {
-            skiLevelField.style.opacity = '1';
-            skiLevelSelect.disabled = false;
-        } else {
-            skiLevelField.style.opacity = '0.5';
-            skiLevelSelect.disabled = true;
-            skiLevelSelect.value = '';
-        }
-    }
-
-    // --- Deluxe Room Options ---
-    let deluxePassengers = []; // Array of {rowId, name}
-    
-    function toggleDeluxeOptions() {
-        const deluxeRadio = document.getElementById('roomDeluxe');
-        const deluxeOptions = document.getElementById('deluxeOptions');
-        
-        if (deluxeRadio.checked) {
-            deluxeOptions.classList.add('show');
-            updateDeluxePassengerDropdown();
-        } else {
-            deluxeOptions.classList.remove('show');
-            deluxePassengers = [];
-            renderDeluxePassengers();
-        }
-    }
-
-    function toggleDeluxePassengerSelect() {
-        const deluxeSome = document.getElementById('deluxeSome');
-        const selectDiv = document.getElementById('deluxePassengerSelect');
-        
-        if (deluxeSome.checked) {
-            selectDiv.style.display = 'block';
-            updateDeluxePassengerDropdown();
-        } else {
-            selectDiv.style.display = 'none';
-            deluxePassengers = [];
-            renderDeluxePassengers();
-        }
-    }
-
-    function updateDeluxePassengerDropdown() {
-        const select = document.getElementById('deluxePassengerDropdown');
-        const passengers = getRegisteredPassengers();
-        const selectedRowIds = deluxePassengers.map(p => p.rowId);
-        
-        select.innerHTML = '<option value="">בחר נוסע...</option>';
-        passengers.forEach((p) => {
-            if (!selectedRowIds.includes(p.rowId)) {
-                const option = document.createElement('option');
-                option.value = p.rowId;
-                option.textContent = p.name;
-                select.appendChild(option);
-            }
-        });
-    }
-
-    function addDeluxePassenger() {
-        const select = document.getElementById('deluxePassengerDropdown');
-        const selectedOption = select.options[select.selectedIndex];
-        
-        if (selectedOption.value) {
-            const rowId = selectedOption.value;
-            const name = selectedOption.textContent;
-            const selectedRowIds = deluxePassengers.map(p => p.rowId);
-            
-            if (!selectedRowIds.includes(rowId)) {
-                deluxePassengers.push({ rowId, name });
-                renderDeluxePassengers();
-                updateDeluxePassengerDropdown();
-            }
-            // Reset select to default option
-            select.selectedIndex = 0;
-        }
-    }
-
-    function removeDeluxePassenger(index) {
-        deluxePassengers.splice(index, 1);
-        renderDeluxePassengers();
-        updateDeluxePassengerDropdown();
-    }
-
-    function renderDeluxePassengers() {
-        const list = document.getElementById('deluxePassengerList');
-        list.innerHTML = '';
-        
-        // Update names from current passenger data
-        const passengers = getRegisteredPassengers();
-        deluxePassengers.forEach((selected, index) => {
-            const currentPassenger = passengers.find(p => p.rowId === selected.rowId);
-            const displayName = currentPassenger ? currentPassenger.name : selected.name;
-            // Update stored name
-            selected.name = displayName;
-            
-            const tag = document.createElement('span');
-            tag.className = 'participant-tag';
-            tag.innerHTML = `${displayName} <i class="fas fa-times remove-participant" onclick="removeDeluxePassenger(${index})"></i>`;
-            list.appendChild(tag);
-        });
-    }
-
-    // --- Ski Lesson Participants ---
-    const skiLessonParticipants = {
-        kids: [],    // Array of {rowId, name}
-        adults: [],  // Array of {rowId, name}
-        private: []  // Array of {rowId, name}
-    };
-
-    // Get list of registered passengers
-    function getRegisteredPassengers() {
-        const passengers = [];
-        const cards = document.querySelectorAll('.passenger-card');
-        cards.forEach((card, index) => {
-            const rowId = card.id.replace('row-', '');
-            const firstName = card.querySelector(`input[name="firstName_${rowId}"]`)?.value || '';
-            const lastName = card.querySelector(`input[name="lastName_${rowId}"]`)?.value || '';
-            if (firstName || lastName) {
-                passengers.push({
-                    index: index + 1,
-                    name: `${firstName} ${lastName}`.trim() || `נוסע ${index + 1}`,
-                    rowId: rowId
+            // Add English-only input validation
+            const englishInputs = card.querySelectorAll('.english-only');
+            englishInputs.forEach(input => {
+                input.addEventListener('input', function (e) {
+                    this.value = this.value.replace(/[^A-Za-z\s\-]/g, '');
+                    // Update dropdowns when name changes
+                    updateAllPassengerDropdowns();
                 });
+            });
+        }
+
+        function removeRow(id) {
+            const row = document.getElementById('row-' + id);
+            if (row) {
+                row.remove();
+                reIndexRows();
+                updateRemoveButtons();
+                updateAllPassengerDropdowns();
+            }
+        }
+
+        function reIndexRows() {
+            const cards = document.querySelectorAll('#passengersContainer .passenger-card');
+            cards.forEach((card, index) => {
+                card.querySelector('.row-index').innerText = 'נוסע ' + (index + 1);
+            });
+        }
+
+        function updateRemoveButtons() {
+            const buttons = document.querySelectorAll('.btn-remove');
+            const isSingle = buttons.length === 1;
+
+            buttons.forEach(btn => {
+                btn.disabled = isSingle;
+            });
+        }
+
+        function toggleFreq(checkbox) {
+            const wrapper = checkbox.closest('.freq-flyer-wrapper');
+            const input = wrapper.querySelector('.freq-flyer-input');
+            input.style.display = checkbox.checked ? 'block' : 'none';
+            if (checkbox.checked) input.focus();
+        }
+
+        function toggleNoFlight(checkbox, rowId) {
+            // Toggle flight opt-out - when checked, user doesn't want flight
+            // This is just for data collection, no special UI changes needed
+        }
+
+        function toggleSkiPass(checkbox, rowId) {
+            const skiLevelField = document.getElementById('skiLevelField_' + rowId);
+            const skiLevelSelect = skiLevelField.querySelector('select');
+
+            if (checkbox.checked) {
+                skiLevelField.style.opacity = '1';
+                skiLevelSelect.disabled = false;
             } else {
-                passengers.push({
-                    index: index + 1,
-                    name: `נוסע ${index + 1}`,
-                    rowId: rowId
-                });
+                skiLevelField.style.opacity = '0.5';
+                skiLevelSelect.disabled = true;
+                skiLevelSelect.value = '';
             }
-        });
-        return passengers;
-    }
-
-    // Update all passenger dropdowns
-    function updateAllPassengerDropdowns() {
-        const types = ['kids', 'adults', 'private'];
-        types.forEach(type => {
-            updateParticipantDropdown(type);
-        });
-        updateDeluxePassengerDropdown();
-    }
-
-    function updateParticipantDropdown(type) {
-        const select = document.getElementById(type + 'ParticipantSelect');
-        if (!select) return;
-        
-        const passengers = getRegisteredPassengers();
-        const selectedRowIds = skiLessonParticipants[type].map(p => p.rowId);
-        
-        select.innerHTML = '<option value="">בחר נוסע...</option>';
-        passengers.forEach((p) => {
-            if (!selectedRowIds.includes(p.rowId)) {
-                const option = document.createElement('option');
-                option.value = p.rowId;
-                option.textContent = p.name;
-                select.appendChild(option);
-            }
-        });
-    }
-
-    function toggleSkiLessonParticipants(type) {
-        const checkbox = document.getElementById(type === 'kids' ? 'lessonKids' : type === 'adults' ? 'lessonAdults' : 'lessonPrivate');
-        const participantsDiv = document.getElementById('lesson' + type.charAt(0).toUpperCase() + type.slice(1) + 'Participants');
-        
-        if (checkbox.checked) {
-            participantsDiv.classList.add('show');
-            updateParticipantDropdown(type);
-        } else {
-            participantsDiv.classList.remove('show');
-            // Clear participants when unchecked
-            skiLessonParticipants[type] = [];
-            renderParticipants(type);
         }
-    }
 
-    function addParticipantFromSelect(type) {
-        const select = document.getElementById(type + 'ParticipantSelect');
-        const selectedOption = select.options[select.selectedIndex];
-        
-        if (selectedOption.value) {
-            const rowId = selectedOption.value;
-            const name = selectedOption.textContent;
-            const selectedRowIds = skiLessonParticipants[type].map(p => p.rowId);
-            
-            if (!selectedRowIds.includes(rowId)) {
-                skiLessonParticipants[type].push({ rowId, name });
-                renderParticipants(type);
+        // --- Deluxe Room Options ---
+        let deluxePassengers = []; // Array of {rowId, name}
+
+        function toggleDeluxeOptions() {
+            const deluxeRadio = document.getElementById('roomDeluxe');
+            const deluxeOptions = document.getElementById('deluxeOptions');
+
+            if (deluxeRadio.checked) {
+                deluxeOptions.classList.add('show');
+                updateDeluxePassengerDropdown();
+            } else {
+                deluxeOptions.classList.remove('show');
+                deluxePassengers = [];
+                renderDeluxePassengers();
+            }
+        }
+
+        function toggleDeluxePassengerSelect() {
+            const deluxeSome = document.getElementById('deluxeSome');
+            const selectDiv = document.getElementById('deluxePassengerSelect');
+
+            if (deluxeSome.checked) {
+                selectDiv.style.display = 'block';
+                updateDeluxePassengerDropdown();
+            } else {
+                selectDiv.style.display = 'none';
+                deluxePassengers = [];
+                renderDeluxePassengers();
+            }
+        }
+
+        function updateDeluxePassengerDropdown() {
+            const select = document.getElementById('deluxePassengerDropdown');
+            const passengers = getRegisteredPassengers();
+            const selectedRowIds = deluxePassengers.map(p => p.rowId);
+
+            select.innerHTML = '<option value="">בחר נוסע...</option>';
+            passengers.forEach((p) => {
+                if (!selectedRowIds.includes(p.rowId)) {
+                    const option = document.createElement('option');
+                    option.value = p.rowId;
+                    option.textContent = p.name;
+                    select.appendChild(option);
+                }
+            });
+        }
+
+        function addDeluxePassenger() {
+            const select = document.getElementById('deluxePassengerDropdown');
+            const selectedOption = select.options[select.selectedIndex];
+
+            if (selectedOption.value) {
+                const rowId = selectedOption.value;
+                const name = selectedOption.textContent;
+                const selectedRowIds = deluxePassengers.map(p => p.rowId);
+
+                if (!selectedRowIds.includes(rowId)) {
+                    deluxePassengers.push({ rowId, name });
+                    renderDeluxePassengers();
+                    updateDeluxePassengerDropdown();
+                }
+                // Reset select to default option
+                select.selectedIndex = 0;
+            }
+        }
+
+        function removeDeluxePassenger(index) {
+            deluxePassengers.splice(index, 1);
+            renderDeluxePassengers();
+            updateDeluxePassengerDropdown();
+        }
+
+        function renderDeluxePassengers() {
+            const list = document.getElementById('deluxePassengerList');
+            list.innerHTML = '';
+
+            // Update names from current passenger data
+            const passengers = getRegisteredPassengers();
+            deluxePassengers.forEach((selected, index) => {
+                const currentPassenger = passengers.find(p => p.rowId === selected.rowId);
+                const displayName = currentPassenger ? currentPassenger.name : selected.name;
+                // Update stored name
+                selected.name = displayName;
+
+                const tag = document.createElement('span');
+                tag.className = 'participant-tag';
+                tag.innerHTML = `${displayName} <i class="fas fa-times remove-participant" onclick="removeDeluxePassenger(${index})"></i>`;
+                list.appendChild(tag);
+            });
+        }
+
+        // --- Ski Lesson Participants ---
+        const skiLessonParticipants = {
+            kids: [],    // Array of {rowId, name}
+            adults: [],  // Array of {rowId, name}
+            private: []  // Array of {rowId, name}
+        };
+
+        // Get list of registered passengers
+        function getRegisteredPassengers() {
+            const passengers = [];
+            const cards = document.querySelectorAll('.passenger-card');
+            cards.forEach((card, index) => {
+                const rowId = card.id.replace('row-', '');
+                const firstName = card.querySelector(`input[name="firstName_${rowId}"]`)?.value || '';
+                const lastName = card.querySelector(`input[name="lastName_${rowId}"]`)?.value || '';
+                if (firstName || lastName) {
+                    passengers.push({
+                        index: index + 1,
+                        name: `${firstName} ${lastName}`.trim() || `נוסע ${index + 1}`,
+                        rowId: rowId
+                    });
+                } else {
+                    passengers.push({
+                        index: index + 1,
+                        name: `נוסע ${index + 1}`,
+                        rowId: rowId
+                    });
+                }
+            });
+            return passengers;
+        }
+
+        // Update all passenger dropdowns
+        function updateAllPassengerDropdowns() {
+            const types = ['kids', 'adults', 'private'];
+            types.forEach(type => {
                 updateParticipantDropdown(type);
-                // Hide error
-                document.getElementById(type + 'ParticipantError').classList.remove('show');
+            });
+            updateDeluxePassengerDropdown();
+        }
+
+        function updateParticipantDropdown(type) {
+            const select = document.getElementById(type + 'ParticipantSelect');
+            if (!select) return;
+
+            const passengers = getRegisteredPassengers();
+            const selectedRowIds = skiLessonParticipants[type].map(p => p.rowId);
+
+            select.innerHTML = '<option value="">בחר נוסע...</option>';
+            passengers.forEach((p) => {
+                if (!selectedRowIds.includes(p.rowId)) {
+                    const option = document.createElement('option');
+                    option.value = p.rowId;
+                    option.textContent = p.name;
+                    select.appendChild(option);
+                }
+            });
+        }
+
+        function toggleSkiLessonParticipants(type) {
+            const checkbox = document.getElementById(type === 'kids' ? 'lessonKids' : type === 'adults' ? 'lessonAdults' : 'lessonPrivate');
+            const participantsDiv = document.getElementById('lesson' + type.charAt(0).toUpperCase() + type.slice(1) + 'Participants');
+
+            if (checkbox.checked) {
+                participantsDiv.classList.add('show');
+                updateParticipantDropdown(type);
+            } else {
+                participantsDiv.classList.remove('show');
+                // Clear participants when unchecked
+                skiLessonParticipants[type] = [];
+                renderParticipants(type);
             }
-            // Reset select to default option
-            select.selectedIndex = 0;
         }
-    }
 
-    function removeParticipant(type, index) {
-        skiLessonParticipants[type].splice(index, 1);
-        renderParticipants(type);
-        updateParticipantDropdown(type);
-    }
+        function addParticipantFromSelect(type) {
+            const select = document.getElementById(type + 'ParticipantSelect');
+            const selectedOption = select.options[select.selectedIndex];
 
-    function renderParticipants(type) {
-        const list = document.getElementById(type + 'ParticipantList');
-        list.innerHTML = '';
-        
-        // Update names from current passenger data
-        const passengers = getRegisteredPassengers();
-        skiLessonParticipants[type].forEach((selected, index) => {
-            const currentPassenger = passengers.find(p => p.rowId === selected.rowId);
-            const displayName = currentPassenger ? currentPassenger.name : selected.name;
-            // Update stored name
-            selected.name = displayName;
-            
-            const tag = document.createElement('span');
-            tag.className = 'participant-tag';
-            tag.innerHTML = `${displayName} <i class="fas fa-times remove-participant" onclick="removeParticipant('${type}', ${index})"></i>`;
-            list.appendChild(tag);
-        });
-    }
+            if (selectedOption.value) {
+                const rowId = selectedOption.value;
+                const name = selectedOption.textContent;
+                const selectedRowIds = skiLessonParticipants[type].map(p => p.rowId);
 
-    // --- Payment Section Toggle ---
-    function togglePaymentSection(method) {
-        const bankSection = document.getElementById('bankPaymentSection');
-        const cardSection = document.getElementById('cardPaymentSection');
-        const errorDiv = document.getElementById('paymentMethodError');
-        
-        errorDiv.classList.remove('show');
-        
-        if (method === 'bank') {
-            bankSection.classList.add('show');
-            cardSection.classList.remove('show');
-        } else if (method === 'card') {
-            bankSection.classList.remove('show');
-            cardSection.classList.add('show');
+                if (!selectedRowIds.includes(rowId)) {
+                    skiLessonParticipants[type].push({ rowId, name });
+                    renderParticipants(type);
+                    updateParticipantDropdown(type);
+                    // Hide error
+                    document.getElementById(type + 'ParticipantError').classList.remove('show');
+                }
+                // Reset select to default option
+                select.selectedIndex = 0;
+            }
         }
-    }
 
-    // --- Receipt File Upload ---
-    let receiptFiles = [];
-    
-    const receiptDropZone = document.getElementById('receiptDropZone');
-    const receiptFileInput = document.getElementById('receiptFileInput');
-    
-    if (receiptDropZone) {
-        receiptDropZone.addEventListener('click', () => receiptFileInput.click());
-        
-        receiptDropZone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            receiptDropZone.classList.add('dragover');
-        });
-        
-        receiptDropZone.addEventListener('dragleave', () => {
-            receiptDropZone.classList.remove('dragover');
-        });
-        
-        receiptDropZone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            receiptDropZone.classList.remove('dragover');
-            handleReceiptFile(e.dataTransfer.files);
-        });
-    }
-    
-    function handleReceiptFile(files) {
-        for (let i = 0; i < files.length; i++) {
-            receiptFiles.push(files[i]);
+        function removeParticipant(type, index) {
+            skiLessonParticipants[type].splice(index, 1);
+            renderParticipants(type);
+            updateParticipantDropdown(type);
         }
-        renderReceiptFiles();
-    }
-    
-    function renderReceiptFiles() {
-        const list = document.getElementById('receiptFileList');
-        list.innerHTML = '';
-        receiptFiles.forEach((file, index) => {
-            const div = document.createElement('div');
-            div.className = 'receipt-file-item';
-            div.innerHTML = `
+
+        function renderParticipants(type) {
+            const list = document.getElementById(type + 'ParticipantList');
+            list.innerHTML = '';
+
+            // Update names from current passenger data
+            const passengers = getRegisteredPassengers();
+            skiLessonParticipants[type].forEach((selected, index) => {
+                const currentPassenger = passengers.find(p => p.rowId === selected.rowId);
+                const displayName = currentPassenger ? currentPassenger.name : selected.name;
+                // Update stored name
+                selected.name = displayName;
+
+                const tag = document.createElement('span');
+                tag.className = 'participant-tag';
+                tag.innerHTML = `${displayName} <i class="fas fa-times remove-participant" onclick="removeParticipant('${type}', ${index})"></i>`;
+                list.appendChild(tag);
+            });
+        }
+
+        // --- Payment Section Toggle ---
+        function togglePaymentSection(method) {
+            const bankSection = document.getElementById('bankPaymentSection');
+            const cardSection = document.getElementById('cardPaymentSection');
+            const errorDiv = document.getElementById('paymentMethodError');
+
+            errorDiv.classList.remove('show');
+
+            if (method === 'bank') {
+                bankSection.classList.add('show');
+                cardSection.classList.remove('show');
+            } else if (method === 'card') {
+                bankSection.classList.remove('show');
+                cardSection.classList.add('show');
+            }
+        }
+
+        // --- Receipt File Upload ---
+        let receiptFiles = [];
+
+        const receiptDropZone = document.getElementById('receiptDropZone');
+        const receiptFileInput = document.getElementById('receiptFileInput');
+
+        if (receiptDropZone) {
+            receiptDropZone.addEventListener('click', () => receiptFileInput.click());
+
+            receiptDropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                receiptDropZone.classList.add('dragover');
+            });
+
+            receiptDropZone.addEventListener('dragleave', () => {
+                receiptDropZone.classList.remove('dragover');
+            });
+
+            receiptDropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                receiptDropZone.classList.remove('dragover');
+                handleReceiptFile(e.dataTransfer.files);
+            });
+        }
+
+        function handleReceiptFile(files) {
+            for (let i = 0; i < files.length; i++) {
+                receiptFiles.push(files[i]);
+            }
+            renderReceiptFiles();
+        }
+
+        function renderReceiptFiles() {
+            const list = document.getElementById('receiptFileList');
+            list.innerHTML = '';
+            receiptFiles.forEach((file, index) => {
+                const div = document.createElement('div');
+                div.className = 'receipt-file-item';
+                div.innerHTML = `
                 <span><i class="far fa-file-alt text-primary me-2"></i> ${file.name}</span>
                 <i class="fas fa-times text-danger" style="cursor:pointer" onclick="removeReceiptFile(${index})"></i>
             `;
-            list.appendChild(div);
-        });
-    }
-    
-    function removeReceiptFile(index) {
-        receiptFiles.splice(index, 1);
-        renderReceiptFiles();
-    }
-
-    // --- File Upload Logic ---
-    const dropZone = document.getElementById('dropZone');
-    const fileInput = document.getElementById('fileInput');
-    const fileListDisplay = document.getElementById('fileListDisplay');
-    let uploadedFiles = []; // To store file objects
-
-    // Click to upload
-    dropZone.addEventListener('click', () => fileInput.click());
-
-    // Drag & Drop events
-    dropZone.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        dropZone.classList.add('dragover');
-    });
-
-    dropZone.addEventListener('dragleave', () => {
-        dropZone.classList.remove('dragover');
-    });
-
-    dropZone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dropZone.classList.remove('dragover');
-        const files = e.dataTransfer.files;
-        handleFiles(files);
-    });
-
-    function handleFiles(files) {
-        // Convert FileList to Array and add to our list
-        for (let i = 0; i < files.length; i++) {
-            uploadedFiles.push(files[i]);
+                list.appendChild(div);
+            });
         }
-        renderFileList();
-    }
 
-    function renderFileList() {
-        fileListDisplay.innerHTML = '';
-        uploadedFiles.forEach((file, index) => {
-            const div = document.createElement('div');
-            div.className = 'file-list-item';
-            div.innerHTML = `
+        function removeReceiptFile(index) {
+            receiptFiles.splice(index, 1);
+            renderReceiptFiles();
+        }
+
+        // --- File Upload Logic ---
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const fileListDisplay = document.getElementById('fileListDisplay');
+        let uploadedFiles = []; // To store file objects
+
+        // Click to upload
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        // Drag & Drop events
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            handleFiles(files);
+        });
+
+        function handleFiles(files) {
+            // Convert FileList to Array and add to our list
+            for (let i = 0; i < files.length; i++) {
+                uploadedFiles.push(files[i]);
+            }
+            renderFileList();
+        }
+
+        function renderFileList() {
+            fileListDisplay.innerHTML = '';
+            uploadedFiles.forEach((file, index) => {
+                const div = document.createElement('div');
+                div.className = 'file-list-item';
+                div.innerHTML = `
                 <span><i class="far fa-file-alt text-primary me-2"></i> ${file.name}</span>
                 <i class="fas fa-times text-danger" style="cursor:pointer" onclick="removeFile(${index})"></i>
             `;
-            fileListDisplay.appendChild(div);
-        });
-    }
-
-    function removeFile(index) {
-        // In a real form, you'd need to manipulate the DataTransfer object to sync with input, 
-        // but for UI demo we just update the array
-        uploadedFiles.splice(index, 1);
-        renderFileList();
-    }
-
-    // --- Validation Functions ---
-    function clearAllErrors() {
-        // Clear validation alert
-        const validationAlert = document.getElementById('validationAlert');
-        validationAlert.classList.remove('show');
-        document.getElementById('validationErrors').innerHTML = '';
-        
-        // Clear all inline error messages
-        document.querySelectorAll('.error-message').forEach(el => {
-            el.classList.remove('show');
-        });
-        
-        // Remove invalid class from all inputs
-        document.querySelectorAll('.is-invalid').forEach(el => {
-            el.classList.remove('is-invalid');
-        });
-    }
-
-    function showFieldError(inputElement, message) {
-        inputElement.classList.add('is-invalid');
-        // Try to find error message in parent or sibling elements
-        let errorDiv = inputElement.parentElement.querySelector('.error-message');
-        if (!errorDiv) {
-            // Try grandparent (for input-group structure)
-            errorDiv = inputElement.closest('.col-md-4, .col-md-6, .col-md-8, .passenger-field, [class*="col-"]')?.querySelector('.error-message');
-        }
-        if (errorDiv) {
-            if (message) {
-                errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
-            }
-            errorDiv.classList.add('show');
-        }
-    }
-
-    function showValidationAlert(errors) {
-        const validationAlert = document.getElementById('validationAlert');
-        const errorsList = document.getElementById('validationErrors');
-        
-        errorsList.innerHTML = errors.map(err => `<li>${err}</li>`).join('');
-        validationAlert.classList.add('show');
-        
-        // Scroll to the alert
-        validationAlert.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    function validateForm() {
-        clearAllErrors();
-        const errors = [];
-        let firstInvalidElement = null;
-
-        // 1. Validate vacation date
-        const vacationDateSelect = document.getElementById('vacationDateSelect');
-        if (!vacationDateSelect.value) {
-            showFieldError(vacationDateSelect, 'יש לבחור תאריך יציאה');
-            errors.push('יש לבחור תאריך יציאה');
-            if (!firstInvalidElement) firstInvalidElement = vacationDateSelect;
-        }
-
-        // 2. Validate passengers
-        const passengerCards = document.querySelectorAll('.passenger-card');
-        passengerCards.forEach((card, index) => {
-            const passengerNum = index + 1;
-            const rowId = card.id.replace('row-', '');
-            
-            // Check last name (English only)
-            const lastNameInput = card.querySelector(`input[name="lastName_${rowId}"]`);
-            if (!lastNameInput.value.trim()) {
-                showFieldError(lastNameInput, 'שדה חובה - אותיות באנגלית בלבד');
-                errors.push(`נוסע ${passengerNum}: שם משפחה - שדה חובה`);
-                if (!firstInvalidElement) firstInvalidElement = lastNameInput;
-            } else if (!/^[A-Za-z\s\-]+$/.test(lastNameInput.value)) {
-                showFieldError(lastNameInput, 'אותיות באנגלית בלבד');
-                errors.push(`נוסע ${passengerNum}: שם משפחה - אותיות באנגלית בלבד`);
-                if (!firstInvalidElement) firstInvalidElement = lastNameInput;
-            }
-
-            // Check first name (English only)
-            const firstNameInput = card.querySelector(`input[name="firstName_${rowId}"]`);
-            if (!firstNameInput.value.trim()) {
-                showFieldError(firstNameInput, 'שדה חובה - אותיות באנגלית בלבד');
-                errors.push(`נוסע ${passengerNum}: שם פרטי - שדה חובה`);
-                if (!firstInvalidElement) firstInvalidElement = firstNameInput;
-            } else if (!/^[A-Za-z\s\-]+$/.test(firstNameInput.value)) {
-                showFieldError(firstNameInput, 'אותיות באנגלית בלבד');
-                errors.push(`נוסע ${passengerNum}: שם פרטי - אותיות באנגלית בלבד`);
-                if (!firstInvalidElement) firstInvalidElement = firstNameInput;
-            }
-
-            // Check birth date
-            const birthDateInput = card.querySelector(`input[name="birthDate_${rowId}"]`);
-            if (!birthDateInput.value) {
-                showFieldError(birthDateInput, 'שדה חובה');
-                errors.push(`נוסע ${passengerNum}: תאריך לידה - שדה חובה`);
-                if (!firstInvalidElement) firstInvalidElement = birthDateInput;
-            }
-
-            // Check passport number
-            const passportInput = card.querySelector(`input[name="passportNumber_${rowId}"]`);
-            if (!passportInput.value.trim()) {
-                showFieldError(passportInput, 'שדה חובה');
-                errors.push(`נוסע ${passengerNum}: מס' דרכון - שדה חובה`);
-                if (!firstInvalidElement) firstInvalidElement = passportInput;
-            }
-
-            // Check gender
-            const genderSelect = card.querySelector(`select[name="gender_${rowId}"]`);
-            if (!genderSelect.value) {
-                showFieldError(genderSelect, 'שדה חובה');
-                errors.push(`נוסע ${passengerNum}: מגדר - שדה חובה`);
-                if (!firstInvalidElement) firstInvalidElement = genderSelect;
-            }
-
-            // Check ski level if ski pass is checked
-            const skiPassCheckbox = card.querySelector(`input[name="skiPass_${rowId}"]`);
-            const skiLevelSelect = card.querySelector(`select[name="skiLevel_${rowId}"]`);
-            if (skiPassCheckbox.checked && !skiLevelSelect.value) {
-                showFieldError(skiLevelSelect, 'יש לבחור רמת סקי');
-                errors.push(`נוסע ${passengerNum}: רמת סקי - שדה חובה כאשר סקי פס מסומן`);
-                if (!firstInvalidElement) firstInvalidElement = skiLevelSelect;
-            }
-        });
-
-        // 3. Validate ski lesson participants
-        const lessonKids = document.getElementById('lessonKids');
-        if (lessonKids.checked && skiLessonParticipants.kids.length === 0) {
-            document.getElementById('kidsParticipantError').classList.add('show');
-            errors.push('שיעורי סקי ילדים/נוער - יש להוסיף לפחות משתתף אחד');
-        }
-
-        const lessonAdults = document.getElementById('lessonAdults');
-        if (lessonAdults.checked && skiLessonParticipants.adults.length === 0) {
-            document.getElementById('adultsParticipantError').classList.add('show');
-            errors.push('שיעורי סקי מבוגרים - יש להוסיף לפחות משתתף אחד');
-        }
-
-        const lessonPrivate = document.getElementById('lessonPrivate');
-        if (lessonPrivate.checked && skiLessonParticipants.private.length === 0) {
-            document.getElementById('privateParticipantError').classList.add('show');
-            errors.push('שיעורים פרטיים - יש להוסיף לפחות משתתף אחד');
-        }
-
-        // 4. Validate contact info
-        const addressInput = document.querySelector('input[name="address"]');
-        const phoneInput = document.querySelector('input[name="phone"]');
-        const emailInput = document.querySelector('input[name="email"]');
-
-        if (!addressInput.value.trim()) {
-            showFieldError(addressInput, 'יש למלא כתובת מלאה');
-            errors.push('יש למלא כתובת מלאה');
-            if (!firstInvalidElement) firstInvalidElement = addressInput;
-        }
-
-        if (!phoneInput.value.trim()) {
-            showFieldError(phoneInput, 'יש למלא מספר טלפון');
-            errors.push('יש למלא מספר טלפון');
-            if (!firstInvalidElement) firstInvalidElement = phoneInput;
-        } else if (!isValidPhoneNumber(phoneInput.value)) {
-            showFieldError(phoneInput, 'מספר טלפון לא תקין');
-            errors.push('מספר טלפון לא תקין');
-            if (!firstInvalidElement) firstInvalidElement = phoneInput;
-        }
-
-        if (!emailInput.value.trim()) {
-            showFieldError(emailInput, 'יש למלא כתובת דוא"ל');
-            errors.push('יש למלא כתובת דוא"ל');
-            if (!firstInvalidElement) firstInvalidElement = emailInput;
-        } else if (!isValidEmail(emailInput.value)) {
-            showFieldError(emailInput, 'כתובת דוא"ל לא תקינה');
-            errors.push('כתובת דוא"ל לא תקינה');
-            if (!firstInvalidElement) firstInvalidElement = emailInput;
-        }
-
-        // 5. Validate payment method
-        const paymentBank = document.getElementById('paymentBank');
-        const paymentCard = document.getElementById('paymentCard');
-        if (!paymentBank.checked && !paymentCard.checked) {
-            document.getElementById('paymentMethodError').classList.add('show');
-            errors.push('יש לבחור אמצעי תשלום');
-            if (!firstInvalidElement) firstInvalidElement = paymentBank;
-        }
-
-        // 6. Validate terms acceptance
-        const termsConfirm = document.getElementById('termsConfirm');
-        if (!termsConfirm.checked) {
-            errors.push('יש לאשר את התנאים');
-            if (!firstInvalidElement) firstInvalidElement = termsConfirm;
-        }
-
-        // 7. Validate signature
-        if (isSignatureEmpty()) {
-            errors.push('יש לחתום על הטופס');
-        }
-
-        return { isValid: errors.length === 0, errors, firstInvalidElement };
-    }
-
-    function isValidEmail(email) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-    }
-
-    function isValidPhoneNumber(phone) {
-        // Allow Israeli phone formats: mobile (05X-XXXXXXX), landline (0X-XXXXXXX)
-        const phoneRegex = /^0\d{1,2}[-]?\d{7,8}$/;
-        return phoneRegex.test(phone.replace(/\s/g, ''));
-    }
-
-    // --- Submit ---
-    function submitForm(e) {
-        e.preventDefault();
-        
-        // Validate all fields
-        const validation = validateForm();
-        
-        if (!validation.isValid) {
-            showValidationAlert(validation.errors);
-            
-            // Focus on first invalid element
-            if (validation.firstInvalidElement) {
-                validation.firstInvalidElement.focus();
-            }
-            return;
-        }
-        
-        // Save the signature data before submitting
-        saveSignature();
-        
-        // Collect form data for API submission
-        const formData = collectFormData();
-        
-        // For now, just show success
-        alert('הטופס נשלח בהצלחה למערכת!');
-        console.log('Form data:', formData);
-    }
-
-    // --- Collect Form Data for API ---
-    function collectFormData() {
-        const roomTypeElement = document.querySelector('input[name="roomType"]:checked');
-        const deluxeForElement = document.querySelector('input[name="deluxeFor"]:checked');
-        const paymentMethodElement = document.querySelector('input[name="paymentMethod"]:checked');
-        const currentDateElement = document.getElementById('currentDate');
-        
-        const data = {
-            vacationDate: document.getElementById('vacationDateSelect').value,
-            passengers: [],
-            files: [],
-            roomType: roomTypeElement ? roomTypeElement.value : 'standard',
-            deluxeFor: roomTypeElement?.value === 'deluxe' && deluxeForElement ? deluxeForElement.value : null,
-            deluxePassengers: roomTypeElement?.value === 'deluxe' && deluxeForElement?.value === 'some' ? deluxePassengers : null,
-            skiLessons: {
-                kids: {
-                    selected: document.getElementById('lessonKids').checked,
-                    participants: skiLessonParticipants.kids
-                },
-                adults: {
-                    selected: document.getElementById('lessonAdults').checked,
-                    participants: skiLessonParticipants.adults
-                },
-                private: {
-                    selected: document.getElementById('lessonPrivate').checked,
-                    participants: skiLessonParticipants.private
-                }
-            },
-            contactInfo: {
-                address: document.querySelector('input[name="address"]').value,
-                phone: document.querySelector('input[name="phone"]').value,
-                email: document.querySelector('input[name="email"]').value,
-                notes: document.querySelector('input[name="notes"]').value || null
-            },
-            paymentMethod: paymentMethodElement ? paymentMethodElement.value : null,
-            bankTransfer: paymentMethodElement?.value === 'bank' ? {
-                date: document.querySelector('input[name="bankTransferDate"]')?.value || null,
-                reference: document.querySelector('input[name="bankTransferRef"]')?.value || null,
-                amount: document.querySelector('input[name="bankTransferAmount"]')?.value || null,
-                receiptFiles: receiptFiles.map(f => ({ name: f.name, type: f.type, size: f.size }))
-            } : null,
-            creditCard: paymentMethodElement?.value === 'card' ? {
-                cardNumber: document.querySelector('#cardPaymentSection input[name="cardNumber"]')?.value || null,
-                cardType: document.querySelector('#cardPaymentSection select[name="cardType"]')?.value || null,
-                expiryDate: document.querySelector('#cardPaymentSection input[name="cardExpiry"]')?.value || null,
-                cvv: document.querySelector('#cardPaymentSection input[name="cardCvv"]')?.value || null,
-                cardHolderId: document.querySelector('#cardPaymentSection input[name="cardHolderId"]')?.value || null,
-                cardHolderName: document.querySelector('#cardPaymentSection input[name="cardHolderName"]')?.value || null
-            } : null,
-            termsAccepted: document.getElementById('termsConfirm').checked,
-            signature: document.getElementById('signatureData').value,
-            submissionDate: currentDateElement ? currentDateElement.innerText : new Date().toLocaleDateString('he-IL')
-        };
-
-        // Collect passenger data
-        const passengerCards = document.querySelectorAll('.passenger-card');
-        passengerCards.forEach(card => {
-            const rowId = card.id.replace('row-', '');
-            const passenger = {
-                tempId: rowId,  // Temporary ID for tracking within the form
-                lastName: card.querySelector(`input[name="lastName_${rowId}"]`).value,
-                firstName: card.querySelector(`input[name="firstName_${rowId}"]`).value,
-                birthDate: card.querySelector(`input[name="birthDate_${rowId}"]`).value,
-                passportNumber: card.querySelector(`input[name="passportNumber_${rowId}"]`).value,
-                gender: card.querySelector(`select[name="gender_${rowId}"]`).value,
-                noFlight: card.querySelector(`input[name="noFlight_${rowId}"]`).checked,
-                frequentFlyer: {
-                    hasNumber: card.querySelector(`input[name="hasFreqFlyer_${rowId}"]`).checked,
-                    number: card.querySelector(`input[name="freqFlyerNumber_${rowId}"]`).value || null
-                },
-                skiPass: card.querySelector(`input[name="skiPass_${rowId}"]`).checked,
-                skiLevel: card.querySelector(`select[name="skiLevel_${rowId}"]`).value
-            };
-            data.passengers.push(passenger);
-        });
-
-        // Collect file data (as base64)
-        // Note: In a real implementation, you would read files as base64
-        uploadedFiles.forEach(file => {
-            data.files.push({
-                name: file.name,
-                type: file.type,
-                size: file.size
+                fileListDisplay.appendChild(div);
             });
+        }
+
+        function removeFile(index) {
+            // In a real form, you'd need to manipulate the DataTransfer object to sync with input, 
+            // but for UI demo we just update the array
+            uploadedFiles.splice(index, 1);
+            renderFileList();
+        }
+
+        // --- Validation Functions ---
+        function clearAllErrors() {
+            // Clear validation alert
+            const validationAlert = document.getElementById('validationAlert');
+            validationAlert.classList.remove('show');
+            document.getElementById('validationErrors').innerHTML = '';
+
+            // Clear all inline error messages
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.classList.remove('show');
+            });
+
+            // Remove invalid class from all inputs
+            document.querySelectorAll('.is-invalid').forEach(el => {
+                el.classList.remove('is-invalid');
+            });
+        }
+
+        function showFieldError(inputElement, message) {
+            inputElement.classList.add('is-invalid');
+            // Try to find error message in parent or sibling elements
+            let errorDiv = inputElement.parentElement.querySelector('.error-message');
+            if (!errorDiv) {
+                // Try grandparent (for input-group structure)
+                errorDiv = inputElement.closest('.col-md-4, .col-md-6, .col-md-8, .passenger-field, [class*="col-"]')?.querySelector('.error-message');
+            }
+            if (errorDiv) {
+                if (message) {
+                    errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
+                }
+                errorDiv.classList.add('show');
+            }
+        }
+
+        function showValidationAlert(errors) {
+            const validationAlert = document.getElementById('validationAlert');
+            const errorsList = document.getElementById('validationErrors');
+
+            errorsList.innerHTML = errors.map(err => `<li>${err}</li>`).join('');
+            validationAlert.classList.add('show');
+
+            // Scroll to the alert
+            validationAlert.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function validateForm() {
+            clearAllErrors();
+            const errors = [];
+            let firstInvalidElement = null;
+
+            // 1. Validate vacation date
+            const vacationDateSelect = document.getElementById('vacationDateSelect');
+            if (!vacationDateSelect.value) {
+                showFieldError(vacationDateSelect, 'יש לבחור תאריך יציאה');
+                errors.push('יש לבחור תאריך יציאה');
+                if (!firstInvalidElement) firstInvalidElement = vacationDateSelect;
+            }
+
+            // 2. Validate passengers
+            const passengerCards = document.querySelectorAll('.passenger-card');
+            passengerCards.forEach((card, index) => {
+                const passengerNum = index + 1;
+                const rowId = card.id.replace('row-', '');
+
+                // Check last name (English only)
+                const lastNameInput = card.querySelector(`input[name="lastName_${rowId}"]`);
+                if (!lastNameInput.value.trim()) {
+                    showFieldError(lastNameInput, 'שדה חובה - אותיות באנגלית בלבד');
+                    errors.push(`נוסע ${passengerNum}: שם משפחה - שדה חובה`);
+                    if (!firstInvalidElement) firstInvalidElement = lastNameInput;
+                } else if (!/^[A-Za-z\s\-]+$/.test(lastNameInput.value)) {
+                    showFieldError(lastNameInput, 'אותיות באנגלית בלבד');
+                    errors.push(`נוסע ${passengerNum}: שם משפחה - אותיות באנגלית בלבד`);
+                    if (!firstInvalidElement) firstInvalidElement = lastNameInput;
+                }
+
+                // Check first name (English only)
+                const firstNameInput = card.querySelector(`input[name="firstName_${rowId}"]`);
+                if (!firstNameInput.value.trim()) {
+                    showFieldError(firstNameInput, 'שדה חובה - אותיות באנגלית בלבד');
+                    errors.push(`נוסע ${passengerNum}: שם פרטי - שדה חובה`);
+                    if (!firstInvalidElement) firstInvalidElement = firstNameInput;
+                } else if (!/^[A-Za-z\s\-]+$/.test(firstNameInput.value)) {
+                    showFieldError(firstNameInput, 'אותיות באנגלית בלבד');
+                    errors.push(`נוסע ${passengerNum}: שם פרטי - אותיות באנגלית בלבד`);
+                    if (!firstInvalidElement) firstInvalidElement = firstNameInput;
+                }
+
+                // Check birth date
+                const birthDateInput = card.querySelector(`input[name="birthDate_${rowId}"]`);
+                if (!birthDateInput.value) {
+                    showFieldError(birthDateInput, 'שדה חובה');
+                    errors.push(`נוסע ${passengerNum}: תאריך לידה - שדה חובה`);
+                    if (!firstInvalidElement) firstInvalidElement = birthDateInput;
+                }
+
+                // Check passport number
+                const passportInput = card.querySelector(`input[name="passportNumber_${rowId}"]`);
+                if (!passportInput.value.trim()) {
+                    showFieldError(passportInput, 'שדה חובה');
+                    errors.push(`נוסע ${passengerNum}: מס' דרכון - שדה חובה`);
+                    if (!firstInvalidElement) firstInvalidElement = passportInput;
+                }
+
+                // Check gender
+                const genderSelect = card.querySelector(`select[name="gender_${rowId}"]`);
+                if (!genderSelect.value) {
+                    showFieldError(genderSelect, 'שדה חובה');
+                    errors.push(`נוסע ${passengerNum}: מגדר - שדה חובה`);
+                    if (!firstInvalidElement) firstInvalidElement = genderSelect;
+                }
+
+                // Check ski level if ski pass is checked
+                const skiPassCheckbox = card.querySelector(`input[name="skiPass_${rowId}"]`);
+                const skiLevelSelect = card.querySelector(`select[name="skiLevel_${rowId}"]`);
+                if (skiPassCheckbox.checked && !skiLevelSelect.value) {
+                    showFieldError(skiLevelSelect, 'יש לבחור רמת סקי');
+                    errors.push(`נוסע ${passengerNum}: רמת סקי - שדה חובה כאשר סקי פס מסומן`);
+                    if (!firstInvalidElement) firstInvalidElement = skiLevelSelect;
+                }
+            });
+
+            // 3. Validate ski lesson participants
+            const lessonKids = document.getElementById('lessonKids');
+            if (lessonKids.checked && skiLessonParticipants.kids.length === 0) {
+                document.getElementById('kidsParticipantError').classList.add('show');
+                errors.push('שיעורי סקי ילדים/נוער - יש להוסיף לפחות משתתף אחד');
+            }
+
+            const lessonAdults = document.getElementById('lessonAdults');
+            if (lessonAdults.checked && skiLessonParticipants.adults.length === 0) {
+                document.getElementById('adultsParticipantError').classList.add('show');
+                errors.push('שיעורי סקי מבוגרים - יש להוסיף לפחות משתתף אחד');
+            }
+
+            const lessonPrivate = document.getElementById('lessonPrivate');
+            if (lessonPrivate.checked && skiLessonParticipants.private.length === 0) {
+                document.getElementById('privateParticipantError').classList.add('show');
+                errors.push('שיעורים פרטיים - יש להוסיף לפחות משתתף אחד');
+            }
+
+            // 4. Validate contact info
+            const addressInput = document.querySelector('input[name="address"]');
+            const phoneInput = document.querySelector('input[name="phone"]');
+            const emailInput = document.querySelector('input[name="email"]');
+
+            if (!addressInput.value.trim()) {
+                showFieldError(addressInput, 'יש למלא כתובת מלאה');
+                errors.push('יש למלא כתובת מלאה');
+                if (!firstInvalidElement) firstInvalidElement = addressInput;
+            }
+
+            if (!phoneInput.value.trim()) {
+                showFieldError(phoneInput, 'יש למלא מספר טלפון');
+                errors.push('יש למלא מספר טלפון');
+                if (!firstInvalidElement) firstInvalidElement = phoneInput;
+            } else if (!isValidPhoneNumber(phoneInput.value)) {
+                showFieldError(phoneInput, 'מספר טלפון לא תקין');
+                errors.push('מספר טלפון לא תקין');
+                if (!firstInvalidElement) firstInvalidElement = phoneInput;
+            }
+
+            if (!emailInput.value.trim()) {
+                showFieldError(emailInput, 'יש למלא כתובת דוא"ל');
+                errors.push('יש למלא כתובת דוא"ל');
+                if (!firstInvalidElement) firstInvalidElement = emailInput;
+            } else if (!isValidEmail(emailInput.value)) {
+                showFieldError(emailInput, 'כתובת דוא"ל לא תקינה');
+                errors.push('כתובת דוא"ל לא תקינה');
+                if (!firstInvalidElement) firstInvalidElement = emailInput;
+            }
+
+            // 5. Validate payment method
+            const paymentBank = document.getElementById('paymentBank');
+            const paymentCard = document.getElementById('paymentCard');
+            if (!paymentBank.checked && !paymentCard.checked) {
+                document.getElementById('paymentMethodError').classList.add('show');
+                errors.push('יש לבחור אמצעי תשלום');
+                if (!firstInvalidElement) firstInvalidElement = paymentBank;
+            }
+
+            // 6. Validate terms acceptance
+            const termsConfirm = document.getElementById('termsConfirm');
+            if (!termsConfirm.checked) {
+                errors.push('יש לאשר את התנאים');
+                if (!firstInvalidElement) firstInvalidElement = termsConfirm;
+            }
+
+            // 7. Validate signature
+            if (isSignatureEmpty()) {
+                errors.push('יש לחתום על הטופס');
+            }
+
+            return { isValid: errors.length === 0, errors, firstInvalidElement };
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function isValidPhoneNumber(phone) {
+            // Allow Israeli phone formats: mobile (05X-XXXXXXX), landline (0X-XXXXXXX)
+            const phoneRegex = /^0\d{1,2}[-]?\d{7,8}$/;
+            return phoneRegex.test(phone.replace(/\s/g, ''));
+        }
+
+        // --- Submit ---
+        function submitForm(e) {
+            e.preventDefault();
+
+            // Validate all fields
+            const validation = validateForm();
+
+            if (!validation.isValid) {
+                showValidationAlert(validation.errors);
+
+                // Focus on first invalid element
+                if (validation.firstInvalidElement) {
+                    validation.firstInvalidElement.focus();
+                }
+                return;
+            }
+
+            // Save the signature data before submitting
+            saveSignature();
+
+            // Collect form data for API submission
+            const formData = collectFormData();
+
+            // For now, just show success
+            alert('הטופס נשלח בהצלחה למערכת!');
+            console.log('Form data:', formData);
+        }
+
+        // --- Collect Form Data for API ---
+        function collectFormData() {
+            const roomTypeElement = document.querySelector('input[name="roomType"]:checked');
+            const deluxeForElement = document.querySelector('input[name="deluxeFor"]:checked');
+            const paymentMethodElement = document.querySelector('input[name="paymentMethod"]:checked');
+            const currentDateElement = document.getElementById('currentDate');
+
+            const data = {
+                vacationDate: document.getElementById('vacationDateSelect').value,
+                passengers: [],
+                files: [],
+                roomType: roomTypeElement ? roomTypeElement.value : 'standard',
+                deluxeFor: roomTypeElement?.value === 'deluxe' && deluxeForElement ? deluxeForElement.value : null,
+                deluxePassengers: roomTypeElement?.value === 'deluxe' && deluxeForElement?.value === 'some' ? deluxePassengers : null,
+                skiLessons: {
+                    kids: {
+                        selected: document.getElementById('lessonKids').checked,
+                        participants: skiLessonParticipants.kids
+                    },
+                    adults: {
+                        selected: document.getElementById('lessonAdults').checked,
+                        participants: skiLessonParticipants.adults
+                    },
+                    private: {
+                        selected: document.getElementById('lessonPrivate').checked,
+                        participants: skiLessonParticipants.private
+                    }
+                },
+                contactInfo: {
+                    address: document.querySelector('input[name="address"]').value,
+                    phone: document.querySelector('input[name="phone"]').value,
+                    email: document.querySelector('input[name="email"]').value,
+                    notes: document.querySelector('input[name="notes"]').value || null
+                },
+                paymentMethod: paymentMethodElement ? paymentMethodElement.value : null,
+                bankTransfer: paymentMethodElement?.value === 'bank' ? {
+                    date: document.querySelector('input[name="bankTransferDate"]')?.value || null,
+                    reference: document.querySelector('input[name="bankTransferRef"]')?.value || null,
+                    amount: document.querySelector('input[name="bankTransferAmount"]')?.value || null,
+                    receiptFiles: receiptFiles.map(f => ({ name: f.name, type: f.type, size: f.size }))
+                } : null,
+                creditCard: paymentMethodElement?.value === 'card' ? {
+                    cardNumber: document.querySelector('#cardPaymentSection input[name="cardNumber"]')?.value || null,
+                    cardType: document.querySelector('#cardPaymentSection select[name="cardType"]')?.value || null,
+                    expiryDate: document.querySelector('#cardPaymentSection input[name="cardExpiry"]')?.value || null,
+                    cvv: document.querySelector('#cardPaymentSection input[name="cardCvv"]')?.value || null,
+                    cardHolderId: document.querySelector('#cardPaymentSection input[name="cardHolderId"]')?.value || null,
+                    cardHolderName: document.querySelector('#cardPaymentSection input[name="cardHolderName"]')?.value || null
+                } : null,
+                termsAccepted: document.getElementById('termsConfirm').checked,
+                signature: document.getElementById('signatureData').value,
+                submissionDate: currentDateElement ? currentDateElement.innerText : new Date().toLocaleDateString('he-IL')
+            };
+
+            // Collect passenger data
+            const passengerCards = document.querySelectorAll('.passenger-card');
+            passengerCards.forEach(card => {
+                const rowId = card.id.replace('row-', '');
+                const passenger = {
+                    tempId: rowId,  // Temporary ID for tracking within the form
+                    lastName: card.querySelector(`input[name="lastName_${rowId}"]`).value,
+                    firstName: card.querySelector(`input[name="firstName_${rowId}"]`).value,
+                    birthDate: card.querySelector(`input[name="birthDate_${rowId}"]`).value,
+                    passportNumber: card.querySelector(`input[name="passportNumber_${rowId}"]`).value,
+                    gender: card.querySelector(`select[name="gender_${rowId}"]`).value,
+                    noFlight: card.querySelector(`input[name="noFlight_${rowId}"]`).checked,
+                    frequentFlyer: {
+                        hasNumber: card.querySelector(`input[name="hasFreqFlyer_${rowId}"]`).checked,
+                        number: card.querySelector(`input[name="freqFlyerNumber_${rowId}"]`).value || null
+                    },
+                    skiPass: card.querySelector(`input[name="skiPass_${rowId}"]`).checked,
+                    skiLevel: card.querySelector(`select[name="skiLevel_${rowId}"]`).value
+                };
+                data.passengers.push(passenger);
+            });
+
+            // Collect file data (as base64)
+            // Note: In a real implementation, you would read files as base64
+            uploadedFiles.forEach(file => {
+                data.files.push({
+                    name: file.name,
+                    type: file.type,
+                    size: file.size
+                });
+            });
+
+            return data;
+        }
+
+        // --- Signature Pad Logic ---
+        let signaturePad;
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+
+        function initSignaturePad() {
+            const canvas = document.getElementById('signaturePad');
+            const wrapper = document.getElementById('signaturePadWrapper');
+
+            if (!canvas) return;
+
+            signaturePad = canvas.getContext('2d');
+
+            // Set canvas size to match container
+            resizeCanvas();
+
+            // Set drawing styles
+            signaturePad.strokeStyle = '#000';
+            signaturePad.lineWidth = 2;
+            signaturePad.lineCap = 'round';
+            signaturePad.lineJoin = 'round';
+
+            // Mouse events
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseout', stopDrawing);
+
+            // Touch events
+            canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
+            canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+            canvas.addEventListener('touchend', stopDrawing);
+
+            // Handle window resize
+            window.addEventListener('resize', resizeCanvas);
+        }
+
+        function resizeCanvas() {
+            const canvas = document.getElementById('signaturePad');
+            const wrapper = document.getElementById('signaturePadWrapper');
+
+            if (!canvas || !wrapper) return;
+
+            const hadSignature = wrapper.classList.contains('has-signature');
+
+            // Only save signature data if there's actually a signature
+            let dataUrl = null;
+            if (hadSignature) {
+                dataUrl = canvas.toDataURL();
+            }
+
+            // Resize canvas
+            const rect = wrapper.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = 150;
+
+            // Restore drawing styles after resize (canvas reset clears styles)
+            signaturePad.strokeStyle = '#000';
+            signaturePad.lineWidth = 2;
+            signaturePad.lineCap = 'round';
+            signaturePad.lineJoin = 'round';
+
+            // Restore signature if there was one
+            if (hadSignature && dataUrl) {
+                const img = new Image();
+                img.onload = function () {
+                    signaturePad.drawImage(img, 0, 0);
+                };
+                img.src = dataUrl;
+            }
+        }
+
+        function getPointerPos(e) {
+            const canvas = document.getElementById('signaturePad');
+            const rect = canvas.getBoundingClientRect();
+
+            return {
+                x: e.clientX - rect.left,
+                y: e.clientY - rect.top
+            };
+        }
+
+        function startDrawing(e) {
+            isDrawing = true;
+            const pos = getPointerPos(e);
+            lastX = pos.x;
+            lastY = pos.y;
+
+            // Mark that we have a signature
+            document.getElementById('signaturePadWrapper').classList.add('has-signature');
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+
+            const pos = getPointerPos(e);
+
+            signaturePad.beginPath();
+            signaturePad.moveTo(lastX, lastY);
+            signaturePad.lineTo(pos.x, pos.y);
+            signaturePad.stroke();
+
+            lastX = pos.x;
+            lastY = pos.y;
+        }
+
+        function stopDrawing() {
+            if (isDrawing) {
+                isDrawing = false;
+                // Save signature data when user stops drawing
+                saveSignature();
+            }
+        }
+
+        function getTouchPos(e) {
+            const canvas = document.getElementById('signaturePad');
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0];
+
+            return {
+                x: touch.clientX - rect.left,
+                y: touch.clientY - rect.top
+            };
+        }
+
+        function handleTouchStart(e) {
+            e.preventDefault();
+            isDrawing = true;
+            const pos = getTouchPos(e);
+            lastX = pos.x;
+            lastY = pos.y;
+
+            // Mark that we have a signature
+            document.getElementById('signaturePadWrapper').classList.add('has-signature');
+        }
+
+        function handleTouchMove(e) {
+            if (!isDrawing) return;
+            e.preventDefault();
+
+            const pos = getTouchPos(e);
+
+            signaturePad.beginPath();
+            signaturePad.moveTo(lastX, lastY);
+            signaturePad.lineTo(pos.x, pos.y);
+            signaturePad.stroke();
+
+            lastX = pos.x;
+            lastY = pos.y;
+        }
+
+        function clearSignature() {
+            const canvas = document.getElementById('signaturePad');
+            const wrapper = document.getElementById('signaturePadWrapper');
+
+            if (!canvas || !signaturePad) return;
+
+            signaturePad.clearRect(0, 0, canvas.width, canvas.height);
+            wrapper.classList.remove('has-signature');
+            document.getElementById('signatureData').value = '';
+        }
+
+        function saveSignature() {
+            const canvas = document.getElementById('signaturePad');
+            if (!canvas) return;
+
+            // Get signature as PNG data URL
+            const signatureDataUrl = canvas.toDataURL('image/png');
+            document.getElementById('signatureData').value = signatureDataUrl;
+        }
+
+        function isSignatureEmpty() {
+            const wrapper = document.getElementById('signaturePadWrapper');
+            return !wrapper || !wrapper.classList.contains('has-signature');
+        }
+
+        /**
+         * Public API function to retrieve the signature as a base64 PNG image.
+         * Can be used by external scripts or form handlers to get the signature data.
+         * @returns {string} Base64 encoded PNG data URL of the signature
+         */
+        function getSignatureAsImage() {
+            return document.getElementById('signatureData').value;
+        }
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', () => {
+            initTable();
+            initSignaturePad();
+            loadVacationDates();
         });
 
-        return data;
-    }
-
-    // --- Signature Pad Logic ---
-    let signaturePad;
-    let isDrawing = false;
-    let lastX = 0;
-    let lastY = 0;
-
-    function initSignaturePad() {
-        const canvas = document.getElementById('signaturePad');
-        const wrapper = document.getElementById('signaturePadWrapper');
-        
-        if (!canvas) return;
-        
-        signaturePad = canvas.getContext('2d');
-        
-        // Set canvas size to match container
-        resizeCanvas();
-        
-        // Set drawing styles
-        signaturePad.strokeStyle = '#000';
-        signaturePad.lineWidth = 2;
-        signaturePad.lineCap = 'round';
-        signaturePad.lineJoin = 'round';
-        
-        // Mouse events
-        canvas.addEventListener('mousedown', startDrawing);
-        canvas.addEventListener('mousemove', draw);
-        canvas.addEventListener('mouseup', stopDrawing);
-        canvas.addEventListener('mouseout', stopDrawing);
-        
-        // Touch events
-        canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
-        canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
-        canvas.addEventListener('touchend', stopDrawing);
-        
-        // Handle window resize
-        window.addEventListener('resize', resizeCanvas);
-    }
-    
-    function resizeCanvas() {
-        const canvas = document.getElementById('signaturePad');
-        const wrapper = document.getElementById('signaturePadWrapper');
-        
-        if (!canvas || !wrapper) return;
-        
-        const hadSignature = wrapper.classList.contains('has-signature');
-        
-        // Only save signature data if there's actually a signature
-        let dataUrl = null;
-        if (hadSignature) {
-            dataUrl = canvas.toDataURL();
-        }
-        
-        // Resize canvas
-        const rect = wrapper.getBoundingClientRect();
-        canvas.width = rect.width;
-        canvas.height = 150;
-        
-        // Restore drawing styles after resize (canvas reset clears styles)
-        signaturePad.strokeStyle = '#000';
-        signaturePad.lineWidth = 2;
-        signaturePad.lineCap = 'round';
-        signaturePad.lineJoin = 'round';
-        
-        // Restore signature if there was one
-        if (hadSignature && dataUrl) {
-            const img = new Image();
-            img.onload = function() {
-                signaturePad.drawImage(img, 0, 0);
-            };
-            img.src = dataUrl;
-        }
-    }
-    
-    function getPointerPos(e) {
-        const canvas = document.getElementById('signaturePad');
-        const rect = canvas.getBoundingClientRect();
-        
-        return {
-            x: e.clientX - rect.left,
-            y: e.clientY - rect.top
-        };
-    }
-    
-    function startDrawing(e) {
-        isDrawing = true;
-        const pos = getPointerPos(e);
-        lastX = pos.x;
-        lastY = pos.y;
-        
-        // Mark that we have a signature
-        document.getElementById('signaturePadWrapper').classList.add('has-signature');
-    }
-    
-    function draw(e) {
-        if (!isDrawing) return;
-        
-        const pos = getPointerPos(e);
-        
-        signaturePad.beginPath();
-        signaturePad.moveTo(lastX, lastY);
-        signaturePad.lineTo(pos.x, pos.y);
-        signaturePad.stroke();
-        
-        lastX = pos.x;
-        lastY = pos.y;
-    }
-    
-    function stopDrawing() {
-        if (isDrawing) {
-            isDrawing = false;
-            // Save signature data when user stops drawing
-            saveSignature();
-        }
-    }
-    
-    function getTouchPos(e) {
-        const canvas = document.getElementById('signaturePad');
-        const rect = canvas.getBoundingClientRect();
-        const touch = e.touches[0];
-        
-        return {
-            x: touch.clientX - rect.left,
-            y: touch.clientY - rect.top
-        };
-    }
-    
-    function handleTouchStart(e) {
-        e.preventDefault();
-        isDrawing = true;
-        const pos = getTouchPos(e);
-        lastX = pos.x;
-        lastY = pos.y;
-        
-        // Mark that we have a signature
-        document.getElementById('signaturePadWrapper').classList.add('has-signature');
-    }
-    
-    function handleTouchMove(e) {
-        if (!isDrawing) return;
-        e.preventDefault();
-        
-        const pos = getTouchPos(e);
-        
-        signaturePad.beginPath();
-        signaturePad.moveTo(lastX, lastY);
-        signaturePad.lineTo(pos.x, pos.y);
-        signaturePad.stroke();
-        
-        lastX = pos.x;
-        lastY = pos.y;
-    }
-    
-    function clearSignature() {
-        const canvas = document.getElementById('signaturePad');
-        const wrapper = document.getElementById('signaturePadWrapper');
-        
-        if (!canvas || !signaturePad) return;
-        
-        signaturePad.clearRect(0, 0, canvas.width, canvas.height);
-        wrapper.classList.remove('has-signature');
-        document.getElementById('signatureData').value = '';
-    }
-    
-    function saveSignature() {
-        const canvas = document.getElementById('signaturePad');
-        if (!canvas) return;
-        
-        // Get signature as PNG data URL
-        const signatureDataUrl = canvas.toDataURL('image/png');
-        document.getElementById('signatureData').value = signatureDataUrl;
-    }
-    
-    function isSignatureEmpty() {
-        const wrapper = document.getElementById('signaturePadWrapper');
-        return !wrapper || !wrapper.classList.contains('has-signature');
-    }
-    
-    /**
-     * Public API function to retrieve the signature as a base64 PNG image.
-     * Can be used by external scripts or form handlers to get the signature data.
-     * @returns {string} Base64 encoded PNG data URL of the signature
-     */
-    function getSignatureAsImage() {
-        return document.getElementById('signatureData').value;
-    }
-
-    // Initialize
-    window.addEventListener('DOMContentLoaded', () => {
-        initTable();
-        initSignaturePad();
-        loadVacationDates();
-    });
-
-</script>
+    </script>
 
 </body>
+
 </html>
