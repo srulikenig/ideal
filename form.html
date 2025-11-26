@@ -163,6 +163,40 @@
             border-radius: 4px;
         }
 
+        /* Fix RTL for checkboxes and radio buttons - put them on the right side */
+        .form-check {
+            display: flex !important;
+            flex-direction: row !important;
+            justify-content: flex-start !important;
+            align-items: center !important;
+            gap: 8px !important;
+            padding-right: 0 !important;
+            padding-left: 0 !important;
+        }
+
+        .form-check-input {
+            margin: 0 !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            flex-shrink: 0 !important;
+            position: static !important;
+            float: none !important;
+            order: -1 !important;
+        }
+
+        .form-check-label {
+            cursor: pointer !important;
+            margin: 0 !important;
+            margin-bottom: 0 !important;
+        }
+
+        /* Fix select dropdown arrow for RTL */
+        .form-select {
+            background-position: left 0.75rem center !important;
+            padding-left: 2.25rem !important;
+            padding-right: 0.75rem !important;
+        }
+
         /* RTL fix for input-group rounded corners */
         .input-group {
             direction: rtl;
@@ -629,21 +663,31 @@
         <!-- Header -->
         <div class="text-center">
             <img src="sitelogo.png" alt="אידיאל טורס" class="img-fluid mb-3" style="max-height: 100px;">
-            <br/>
+            <p style="color: var(--accent-color); font-size: 1.1rem; font-weight: 600; margin: 5px 0;">
+                בכשרות גלאט מהדרין
+            </p>
             <div class="contact-highlight mb-3">
                 <div class="contact-info-wrapper">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>טלפון: 02-5000821</span>
+                    </div>
                     <div class="contact-item whatsapp">
                         <i class="fab fa-whatsapp"></i>
-                        <span>058-5396011</span>
+                        <span>ווטסאפ: 058-5396011</span>
                     </div>
                     <div class="contact-item email">
                         <i class="fas fa-envelope"></i>
-                        <span>goski@idealtours.co.il</span>
+                        <span>דוא"ל: GOSKI@IDEAL-TOURS.CO.IL</span>
                     </div>
                 </div>
             </div>
             <h3>טופס הרשמה לחופשת סקי</h3>
             <h4 class="text-primary mt-2">מלון MY KOSHER HOTEL 4⭐⭐⭐⭐</h4>
+            <div class="mt-3" style="background-color: #fff3cd; border: 2px solid #ffc107; padding: 10px 20px; border-radius: 8px; display: inline-block;">
+                <i class="fas fa-euro-sign" style="color: #856404;"></i>
+                <span style="font-weight: 600; color: #856404; font-size: 1.1rem;">שער היורו: <span id="euroRate">טוען...</span> ₪</span>
+            </div>
         </div>
 
         <div class="row justify-content-center mt-4">
@@ -668,7 +712,7 @@
             </div>
             
             <!-- Passengers -->
-            <div class="section-title"><i class="fas fa-users"></i> פרטי הנוסעים והלן (באנגלית לפי הדרכון)</div>
+            <div class="section-title"><i class="fas fa-users"></i> פרטי הנוסעים (באנגלית לפי הדרכון)</div>
             
             <div id="passengersContainer">
                 <!-- JS creates passenger cards here -->
@@ -792,6 +836,16 @@
             <!-- Contact & Payment Details (From Bottom of PDF) -->
             <div class="section-title"><i class="fas fa-address-card"></i> פרטי המזמין ואמצעי תשלום</div>
             
+            <!-- Not Interested in Flight -->
+            <div class="mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="noFlightGeneral" name="noFlightGeneral">
+                    <label class="form-check-label" for="noFlightGeneral">
+                        לא מעוניין בטיסה (זיכוי 350 יורו)
+                    </label>
+                </div>
+            </div>
+            
             <div class="row g-3">
                 <div class="col-md-8">
                     <label class="form-label">כתובת מלאה (רחוב, עיר, מיקוד)</label>
@@ -837,12 +891,37 @@
             <!-- Bank Transfer Section -->
             <div class="payment-section" id="bankPaymentSection">
                 <div class="fw-bold text-primary mb-3"><i class="fas fa-university"></i> פרטי העברה בנקאית:</div>
-                <div class="alert alert-info">
-                    <strong>פרטי החשבון:</strong><br>
-                    בנק מזרחי, סניף גאולה ירושלים<br>
-                    מס' סניף: 417 | מס' חשבון: 116600<br>
-                    על שם: אידיאל טורס בע"מ
+                
+                <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px;">
+                    <!-- Hebrew Bank Details -->
+                    <div style="flex: 1; min-width: 300px; background: #f8f9fa; padding: 15px; border-radius: 8px; border: 2px solid #dee2e6;">
+                        <h6 style="color: var(--primary-color); font-weight: 600; margin-bottom: 10px;">פרטי בנק בעברית</h6>
+                        <div style="font-size: 0.9rem;">
+                            <strong>על שם: אידיאל טורס בע"מ</strong><br>
+                            בנק מזרחי טפחות<br>
+                            סניף: 417 - מלכי ישראל 16 ירושלים<br>
+                            מספר חשבון: 116600<br>
+                            BIC/SWIFT: MIZBILIT<br>
+                            IBAN: IL760204170000000116600
+                        </div>
+                    </div>
+
+                    <!-- English Bank Details -->
+                    <div style="flex: 1; min-width: 300px; background: #e3f2fd; padding: 15px; border-radius: 8px; border: 2px solid #90caf9;">
+                        <h6 style="color: var(--primary-color); font-weight: 600; margin-bottom: 10px;">Bank Details in English</h6>
+                        <div style="font-size: 0.9rem;">
+                            <strong>Beneficiary Name: IDEAL TOURS (1982) (ISRAEL) LTD</strong><br>
+                            Beneficiary Address: Malchei Israel 53, Jerusalem 94395<br>
+                            Bank Name: BANK MIZRACHI TEFAHOT<br>
+                            Bank Address: Malchei Israel 16 Jerusalem<br>
+                            Branch: 417<br>
+                            Account Number: 116600<br>
+                            BIC/SWIFT CODE: MIZBILIT<br>
+                            IBAN: IL760204170000000116600
+                        </div>
+                    </div>
                 </div>
+                
                 <div class="row g-3">
                     <div class="col-md-6">
                         <label class="form-label">תאריך העברה</label>
@@ -853,8 +932,8 @@
                         <input type="text" class="form-control" name="bankTransferRef" placeholder="מספר אסמכתא מהבנק">
                     </div>
                     <div class="col-12">
-                        <label class="form-label">סכום שהועבר (€)</label>
-                        <input type="number" class="form-control" name="bankTransferAmount" placeholder="סכום ביורו">
+                        <label class="form-label">סכום שהועבר</label>
+                        <input type="number" class="form-control" name="bankTransferAmount" placeholder="הזן סכום">
                     </div>
                     <div class="col-12">
                         <label class="form-label">העלאת אסמכתא:</label>
@@ -996,6 +1075,30 @@
         }
     }
 
+    // --- Euro Exchange Rate Logic ---
+    async function loadEuroRate() {
+        const euroRateSpan = document.getElementById('euroRate');
+        try {
+            // Direct fetch from Bank of Israel API
+            const response = await fetch('https://boi.org.il/PublicApi/GetExchangeRate?key=EUR');
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            if (data.currentExchangeRate) {
+                euroRateSpan.textContent = parseFloat(data.currentExchangeRate).toFixed(2);
+            } else {
+                euroRateSpan.textContent = 'לא זמין';
+            }
+        } catch (error) {
+            console.error('Error loading euro rate:', error);
+            euroRateSpan.textContent = 'לא זמין';
+        }
+    }
+
     // --- Passenger Logic ---
     let passengers = [1]; // Tracks existing row IDs
 
@@ -1004,6 +1107,8 @@
         // Set Date
         const d = new Date();
         document.getElementById('currentDate').innerText = d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear();
+        // Load euro rate
+        loadEuroRate();
     }
 
     function addPassengerRow() {
@@ -1060,10 +1165,6 @@
                         </div>
                         <input type="text" class="form-control freq-flyer-input" name="freqFlyerNumber_${rowId}" placeholder="מס' נוסע מתמיד" style="display: none;">
                     </div>
-                </div>
-                <div class="passenger-field checkbox-field">
-                    <input type="checkbox" class="form-check-input" name="noFlight_${rowId}" onchange="toggleNoFlight(this, '${rowId}')">
-                    <label>לא מעוניין בטיסה <span class="price-tag">(זיכוי 350€)</span></label>
                 </div>
                 <div class="passenger-field checkbox-field">
                     <input type="checkbox" class="form-check-input ski-pass-checkbox" name="skiPass_${rowId}" checked onchange="toggleSkiPass(this, '${rowId}')">
