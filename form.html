@@ -1186,7 +1186,7 @@
                 // Load euro rate from the same response
                 if (data.eur) {
                     const euroRateSpan = document.getElementById('euroRate');
-                    euroRateSpan.textContent = parseFloat(data.eur).toFixed(2);
+                    euroRateSpan.textContent = parseFloat(data.eur).toFixed(4);
                 }
             } catch (error) {
                 console.error('Error loading vacation dates:', error);
