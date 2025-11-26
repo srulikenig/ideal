@@ -909,19 +909,24 @@
                                 <div class="error-message" id="privateParticipantError"><i
                                         class="fas fa-exclamation-circle"></i> יש להוסיף לפחות משתתף אחד</div>
                                 <!-- Same teacher question for multiple private lesson participants -->
-                                <div class="same-teacher-question" id="sameTeacherQuestion" style="display: none; margin-top: 10px; padding: 10px; background-color: #fff3cd; border-radius: 6px; border: 1px solid #ffc107;">
-                                    <label class="small fw-bold">האם כל המשתתפים רוצים את אותו מורה או כל אחד בנפרד?</label>
+                                <div class="same-teacher-question" id="sameTeacherQuestion"
+                                    style="display: none; margin-top: 10px; padding: 10px; background-color: #fff3cd; border-radius: 6px; border: 1px solid #ffc107;">
+                                    <label class="small fw-bold">האם כל המשתתפים רוצים את אותו מורה או כל אחד
+                                        בנפרד?</label>
                                     <div class="d-flex gap-3 mt-2">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="sameTeacher" id="sameTeacherYes" value="yes">
+                                            <input class="form-check-input" type="radio" name="sameTeacher"
+                                                id="sameTeacherYes" value="yes">
                                             <label class="form-check-label" for="sameTeacherYes">אותו מורה לכולם</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="sameTeacher" id="sameTeacherNo" value="no">
+                                            <input class="form-check-input" type="radio" name="sameTeacher"
+                                                id="sameTeacherNo" value="no">
                                             <label class="form-check-label" for="sameTeacherNo">כל אחד בנפרד</label>
                                         </div>
                                     </div>
-                                    <div class="error-message" id="sameTeacherError"><i class="fas fa-exclamation-circle"></i> יש לבחור אפשרות</div>
+                                    <div class="error-message" id="sameTeacherError"><i
+                                            class="fas fa-exclamation-circle"></i> יש לבחור אפשרות</div>
                                 </div>
                             </div>
 
@@ -933,7 +938,8 @@
                                     <strong>לא מעוניין/ת בשיעורי סקי</strong>
                                 </label>
                             </div>
-                            <div class="error-message" id="skiLessonsError"><i class="fas fa-exclamation-circle"></i> יש לבחור לפחות אופציה אחת</div>
+                            <div class="error-message" id="skiLessonsError"><i class="fas fa-exclamation-circle"></i> יש
+                                לבחור לפחות אופציה אחת</div>
                         </div>
                     </div>
                 </div>
@@ -950,17 +956,19 @@
                                 id="euroRate">טוען...</span> ₪</strong>
                     </div>
                     <!-- Currency Converter -->
-                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding-top: 10px; border-top: 1px dashed #ffc107;">
+                    <div
+                        style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding-top: 10px; border-top: 1px dashed #ffc107;">
                         <label style="color: #856404; font-weight: 500;">ממיר מטבע:</label>
                         <div style="display: flex; align-items: center; gap: 5px;">
-                            <input type="number" id="euroAmountInput" placeholder="הזן סכום ביורו" 
+                            <input type="number" id="euroAmountInput" placeholder="הזן סכום ביורו"
                                 style="width: 150px; padding: 6px 10px; border: 1px solid #ffc107; border-radius: 4px; text-align: center;"
                                 oninput="convertEuroToShekel()">
                             <span style="color: #856404;">€</span>
                         </div>
                         <span style="color: #856404;">=</span>
                         <div style="display: flex; align-items: center; gap: 5px;">
-                            <span id="shekelResult" style="font-weight: bold; color: #155724; background: #d4edda; padding: 6px 12px; border-radius: 4px; min-width: 100px; text-align: center;">0</span>
+                            <span id="shekelResult"
+                                style="font-weight: bold; color: #155724; background: #d4edda; padding: 6px 12px; border-radius: 4px; min-width: 100px; text-align: center;">0</span>
                             <span style="color: #856404;">₪</span>
                         </div>
                     </div>
@@ -974,8 +982,10 @@
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">טלפון נייד</label>
-                        <input type="tel" class="form-control" name="phone" placeholder="05x-xxxxxxx" required maxlength="11" oninput="validatePhoneInput(this)">
-                        <div class="error-message"><i class="fas fa-exclamation-circle"></i> מספר טלפון חייב להכיל 9-10 ספרות</div>
+                        <input type="tel" class="form-control" name="phone" placeholder="05x-xxxxxxx" required
+                            maxlength="11" oninput="validatePhoneInput(this)">
+                        <div class="error-message"><i class="fas fa-exclamation-circle"></i> מספר טלפון חייב להכיל 9-10
+                            ספרות</div>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">כתובת דוא"ל</label>
@@ -1009,6 +1019,11 @@
                     </div>
                     <div class="error-message" id="paymentMethodError"><i class="fas fa-exclamation-circle"></i> יש
                         לבחור אמצעי תשלום</div>
+                    <div
+                        style="background-color: #d4edda; border: 2px solid #28a745; padding: 12px 20px; border-radius: 8px; margin-bottom: 15px;">
+                        <i class="fas fa-info-circle" style="color: #155724; margin-left: 8px;"></i>
+                        <strong style="color: #155724;">חובה להעביר מקדמה של 500€ לנוסע</strong>
+                    </div>
                 </div>
 
                 <!-- Bank Transfer Section -->
@@ -1016,16 +1031,14 @@
                     <div class="fw-bold text-primary mb-3"><i class="fas fa-university"></i> פרטי העברה בנקאית:</div>
 
                     <!-- Minimum deposit notice -->
-                    <div style="background-color: #d4edda; border: 2px solid #28a745; padding: 12px 20px; border-radius: 8px; margin-bottom: 15px;">
-                        <i class="fas fa-info-circle" style="color: #155724; margin-left: 8px;"></i>
-                        <strong style="color: #155724;">חובה להעביר מקדמה מינימלית של 500€ לנוסע</strong>
-                    </div>
+
 
                     <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px;">
                         <!-- Hebrew Bank Details -->
                         <div
                             style="flex: 1; min-width: 300px; background: #f8f9fa; padding: 15px; border-radius: 8px; border: 2px solid #dee2e6;">
-                            <h6 style="color: var(--primary-color); font-weight: 600; margin-bottom: 10px;">פרטי בנק</h6>
+                            <h6 style="color: var(--primary-color); font-weight: 600; margin-bottom: 10px;">פרטי בנק
+                            </h6>
                             <div style="font-size: 0.9rem;">
                                 <strong>אידיאל טורס בע"מ</strong><br>
                                 בנק מזרחי טפחות<br>
@@ -1037,7 +1050,9 @@
                         <!-- English Bank Details -->
                         <div
                             style="flex: 1; min-width: 300px; background: #e3f2fd; padding: 15px; border-radius: 8px; border: 2px solid #90caf9;">
-                            <h6 style="color: var(--primary-color); font-weight: 600; margin-bottom: 10px; text-align: left;">Bank Details</h6>
+                            <h6
+                                style="color: var(--primary-color); font-weight: 600; margin-bottom: 10px; text-align: left;">
+                                Bank Details</h6>
                             <div style="font-size: 0.9rem;text-align: left;">
                                 <strong>Beneficiary Name: IDEAL TOURS (1982) (ISRAEL) LTD</strong><br>
                                 Beneficiary Address: Malchei Israel 53, Jerusalem 94395<br>
@@ -1052,12 +1067,15 @@
                     </div>
 
                     <!-- Bank transfer confirmation note -->
-                    <div style="background-color: #fff3cd; border: 2px solid #ffc107; padding: 12px 15px; border-radius: 8px; margin-bottom: 15px;">
+                    <div
+                        style="background-color: #fff3cd; border: 2px solid #ffc107; padding: 12px 15px; border-radius: 8px; margin-bottom: 15px;">
                         <i class="fas fa-exclamation-triangle" style="color: #856404; margin-left: 8px;"></i>
                         <strong style="color: #856404;">חשוב!</strong>
-                        <span style="color: #856404;">לאחר ביצוע ההעברה יש לשלוח אישור העברה למייל: <strong>GOSKI@IDEALTOURS.CO.IL</strong> או לווטסאפ: <strong>058-5396011</strong></span>
+                        <span style="color: #856404;">לאחר ביצוע ההעברה יש לשלוח אישור העברה למייל:
+                            <strong>GOSKI@IDEALTOURS.CO.IL</strong> או לווטסאפ: <strong>058-5396011</strong></span>
                         <br>
-                        <span style="color: #856404; font-size: 0.9rem;">יש לציין: שם מלא + כתובת דוא"ל של המזמין.</span>
+                        <span style="color: #856404; font-size: 0.9rem;">יש לציין: שם מלא + כתובת דוא"ל של
+                            המזמין.</span>
                     </div>
 
                     <div class="row g-3">
@@ -1074,16 +1092,19 @@
                             <label class="form-label">סכום שהועבר</label>
                             <div class="row g-2 align-items-center">
                                 <div class="col-md-6">
-                                    <input type="number" class="form-control" name="bankTransferAmount" placeholder="הזן סכום">
+                                    <input type="number" class="form-control" name="bankTransferAmount"
+                                        placeholder="הזן סכום">
                                 </div>
                                 <div class="col-md-6">
                                     <div class="d-flex gap-3">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="transferCurrency" id="currencyILS" value="ILS" checked>
+                                            <input class="form-check-input" type="radio" name="transferCurrency"
+                                                id="currencyILS" value="ILS" checked>
                                             <label class="form-check-label" for="currencyILS">₪ ש"ח</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="transferCurrency" id="currencyEUR" value="EUR">
+                                            <input class="form-check-input" type="radio" name="transferCurrency"
+                                                id="currencyEUR" value="EUR">
                                             <label class="form-check-label" for="currencyEUR">€ יורו</label>
                                         </div>
                                     </div>
@@ -2139,9 +2160,9 @@
                     private: {
                         selected: document.getElementById('lessonPrivate').checked,
                         participants: skiLessonParticipants.private,
-                        sameTeacher: skiLessonParticipants.private.length > 1 ? 
-                            (document.getElementById('sameTeacherYes').checked ? 'yes' : 
-                             document.getElementById('sameTeacherNo').checked ? 'no' : null) : null
+                        sameTeacher: skiLessonParticipants.private.length > 1 ?
+                            (document.getElementById('sameTeacherYes').checked ? 'yes' :
+                                document.getElementById('sameTeacherNo').checked ? 'no' : null) : null
                     }
                 },
                 contactInfo: {
