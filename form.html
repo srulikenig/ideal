@@ -691,7 +691,7 @@
 
         <div class="row justify-content-center mt-4">
             <div class="col-md-4 text-center">
-                <label class="form-label fw-bold">תאריך יציאה מבוקש:</label>
+                <label class="form-label fw-bold">תאריך מבוקש:</label>
                 <div class="input-group">
                     <select class="form-select" id="vacationDateSelect" required disabled>
                         <option value="">טוען תאריכים...</option>
@@ -839,16 +839,6 @@
             <div class="mb-3" style="background-color: #fff3cd; border: 2px solid #ffc107; padding: 12px 20px; border-radius: 8px;">
                 <i class="fas fa-euro-sign" style="color: #856404; margin-left: 8px;"></i>
                 <strong style="font-size: 1.05rem; color: #856404;">שער היורו עדכני: <span id="euroRate">טוען...</span> ₪</strong>
-            </div>
-            
-            <!-- Not Interested in Flight -->
-            <div class="mb-3">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="noFlightGeneral" name="noFlightGeneral">
-                    <label class="form-check-label" for="noFlightGeneral">
-                        לא מעוניין בטיסה (זיכוי 350 יורו)
-                    </label>
-                </div>
             </div>
             
             <div class="row g-3">
@@ -1177,6 +1167,10 @@
                         <option value="SB">סנובורד</option>
                     </select>
                     <div class="error-message"><i class="fas fa-exclamation-circle"></i> יש לבחור רמת סקי</div>
+                </div>
+                <div class="passenger-field checkbox-field">
+                    <input type="checkbox" class="form-check-input" name="noFlight_${rowId}" onchange="toggleNoFlight(this, '${rowId}')">
+                    <label>לא מעוניין בטיסה (זיכוי 350€)</label>
                 </div>
             </div>
         `;
