@@ -977,24 +977,20 @@
                         <!-- Hebrew Bank Details -->
                         <div
                             style="flex: 1; min-width: 300px; background: #f8f9fa; padding: 15px; border-radius: 8px; border: 2px solid #dee2e6;">
-                            <h6 style="color: var(--primary-color); font-weight: 600; margin-bottom: 10px;">פרטי בנק
-                                בעברית</h6>
+                            <h6 style="color: var(--primary-color); font-weight: 600; margin-bottom: 10px;">פרטי בנק</h6>
                             <div style="font-size: 0.9rem;">
-                                <strong>על שם: אידיאל טורס בע"מ</strong><br>
+                                <strong>אידיאל טורס בע"מ</strong><br>
                                 בנק מזרחי טפחות<br>
                                 סניף: 417 - מלכי ישראל 16 ירושלים<br>
                                 מספר חשבון: 116600<br>
-                                BIC/SWIFT: MIZBILIT<br>
-                                IBAN: IL760204170000000116600
                             </div>
                         </div>
 
                         <!-- English Bank Details -->
                         <div
                             style="flex: 1; min-width: 300px; background: #e3f2fd; padding: 15px; border-radius: 8px; border: 2px solid #90caf9;">
-                            <h6 style="color: var(--primary-color); font-weight: 600; margin-bottom: 10px;">Bank Details
-                                in English</h6>
-                            <div style="font-size: 0.9rem;">
+                            <h6 style="color: var(--primary-color); font-weight: 600; margin-bottom: 10px;">Bank Details</h6>
+                            <div style="font-size: 0.9rem;text-align: left;">
                                 <strong>Beneficiary Name: IDEAL TOURS (1982) (ISRAEL) LTD</strong><br>
                                 Beneficiary Address: Malchei Israel 53, Jerusalem 94395<br>
                                 Bank Name: BANK MIZRACHI TEFAHOT<br>
@@ -1019,7 +1015,23 @@
                         </div>
                         <div class="col-12">
                             <label class="form-label">סכום שהועבר</label>
-                            <input type="number" class="form-control" name="bankTransferAmount" placeholder="הזן סכום">
+                            <div class="row g-2 align-items-center">
+                                <div class="col-md-6">
+                                    <input type="number" class="form-control" name="bankTransferAmount" placeholder="הזן סכום">
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="d-flex gap-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="transferCurrency" id="currencyILS" value="ILS" checked>
+                                            <label class="form-check-label" for="currencyILS">₪ ש"ח</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="transferCurrency" id="currencyEUR" value="EUR">
+                                            <label class="form-check-label" for="currencyEUR">€ יורו</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-12">
                             <label class="form-label">העלאת אסמכתא:</label>
