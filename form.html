@@ -275,16 +275,18 @@
             flex-direction: row;
             align-items: center;
             gap: 8px;
-            padding-top: 25px;
+            padding-top: 32px;
         }
 
         .passenger-field.checkbox-field label {
             margin-bottom: 0;
+            line-height: 20px;
         }
 
         .passenger-field.checkbox-field .form-check-input {
             width: 20px;
             height: 20px;
+            flex-shrink: 0;
         }
 
         .freq-flyer-wrapper {
@@ -1055,12 +1057,14 @@
                 throw new Error(`HTTP error: ${response.status}`);
             }
             
-            const dates = await response.json();
+            const dataRes = await response.json();
+            const data = dataRes.data;
             
+            console.log('Vacation Dates Data:', data);
             select.innerHTML = '<option value="">בחר תאריך...</option>';
             select.disabled = false;
-            if (Array.isArray(dates.data) && dates.data.length > 0) {
-                dates.data.forEach(date => {
+            if (Array.isArray(data.dates) && data.dates.length > 0) {
+                data.dates.forEach(date => {
                     const option = document.createElement('option');
                     option.value = date;
                     option.textContent = date;
@@ -1069,6 +1073,12 @@
             } else {
                 select.innerHTML = '<option value="">אין תאריכים זמינים</option>';
             }
+            
+            // Load euro rate from the same response
+            if (data.eur) {
+                const euroRateSpan = document.getElementById('euroRate');
+                euroRateSpan.textContent = parseFloat(data.eur).toFixed(2);
+            }
         } catch (error) {
             console.error('Error loading vacation dates:', error);
             select.innerHTML = '<option value="">שגיאה בטעינת תאריכים</option>';
@@ -1076,27 +1086,10 @@
     }
 
     // --- Euro Exchange Rate Logic ---
+    // Euro rate is now loaded together with vacation dates
+    // This function is kept for backward compatibility but does nothing
     async function loadEuroRate() {
-        const euroRateSpan = document.getElementById('euroRate');
-        try {
-            // Direct fetch from Bank of Israel API
-            const response = await fetch('https://boi.org.il/PublicApi/GetExchangeRate?key=EUR');
-            
-            if (!response.ok) {
-                throw new Error(`HTTP error: ${response.status}`);
-            }
-            
-            const data = await response.json();
-            
-            if (data.currentExchangeRate) {
-                euroRateSpan.textContent = parseFloat(data.currentExchangeRate).toFixed(2);
-            } else {
-                euroRateSpan.textContent = 'לא זמין';
-            }
-        } catch (error) {
-            console.error('Error loading euro rate:', error);
-            euroRateSpan.textContent = 'לא זמין';
-        }
+        // Euro rate is now loaded by loadVacationDates()
     }
 
     // --- Passenger Logic ---
