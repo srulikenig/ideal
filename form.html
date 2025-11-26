@@ -908,7 +908,32 @@
                                 </div>
                                 <div class="error-message" id="privateParticipantError"><i
                                         class="fas fa-exclamation-circle"></i> יש להוסיף לפחות משתתף אחד</div>
+                                <!-- Same teacher question for multiple private lesson participants -->
+                                <div class="same-teacher-question" id="sameTeacherQuestion" style="display: none; margin-top: 10px; padding: 10px; background-color: #fff3cd; border-radius: 6px; border: 1px solid #ffc107;">
+                                    <label class="small fw-bold">האם כל המשתתפים רוצים את אותו מורה או כל אחד בנפרד?</label>
+                                    <div class="d-flex gap-3 mt-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="sameTeacher" id="sameTeacherYes" value="yes">
+                                            <label class="form-check-label" for="sameTeacherYes">אותו מורה לכולם</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="sameTeacher" id="sameTeacherNo" value="no">
+                                            <label class="form-check-label" for="sameTeacherNo">כל אחד בנפרד</label>
+                                        </div>
+                                    </div>
+                                    <div class="error-message" id="sameTeacherError"><i class="fas fa-exclamation-circle"></i> יש לבחור אפשרות</div>
+                                </div>
                             </div>
+
+                            <!-- Not interested in ski lessons option -->
+                            <div class="form-check mt-3">
+                                <input class="form-check-input" type="checkbox" id="noSkiLessons"
+                                    onchange="toggleNoSkiLessons()">
+                                <label class="form-check-label" for="noSkiLessons">
+                                    <strong>לא מעוניין/ת בשיעורי סקי</strong>
+                                </label>
+                            </div>
+                            <div class="error-message" id="skiLessonsError"><i class="fas fa-exclamation-circle"></i> יש לבחור לפחות אופציה אחת</div>
                         </div>
                     </div>
                 </div>
@@ -916,12 +941,29 @@
                 <!-- Contact & Payment Details (From Bottom of PDF) -->
                 <div class="section-title"><i class="fas fa-address-card"></i> פרטי המזמין ואמצעי תשלום</div>
 
-                <!-- Euro Rate Display -->
+                <!-- Euro Rate Display with Converter -->
                 <div class="mb-3"
                     style="background-color: #fff3cd; border: 2px solid #ffc107; padding: 12px 20px; border-radius: 8px;">
-                    <i class="fas fa-euro-sign" style="color: #856404; margin-left: 8px;"></i>
-                    <strong style="font-size: 1.05rem; color: #856404;">שער היורו עדכני: <span
-                            id="euroRate">טוען...</span> ₪</strong>
+                    <div style="margin-bottom: 10px;">
+                        <i class="fas fa-euro-sign" style="color: #856404; margin-left: 8px;"></i>
+                        <strong style="font-size: 1.05rem; color: #856404;">שער היורו עדכני: <span
+                                id="euroRate">טוען...</span> ₪</strong>
+                    </div>
+                    <!-- Currency Converter -->
+                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding-top: 10px; border-top: 1px dashed #ffc107;">
+                        <label style="color: #856404; font-weight: 500;">ממיר מטבע:</label>
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <input type="number" id="euroAmountInput" placeholder="הזן סכום ביורו" 
+                                style="width: 150px; padding: 6px 10px; border: 1px solid #ffc107; border-radius: 4px; text-align: center;"
+                                oninput="convertEuroToShekel()">
+                            <span style="color: #856404;">€</span>
+                        </div>
+                        <span style="color: #856404;">=</span>
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <span id="shekelResult" style="font-weight: bold; color: #155724; background: #d4edda; padding: 6px 12px; border-radius: 4px; min-width: 100px; text-align: center;">0</span>
+                            <span style="color: #856404;">₪</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row g-3">
@@ -932,8 +974,8 @@
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">טלפון נייד</label>
-                        <input type="tel" class="form-control" name="phone" placeholder="05x-xxxxxxx" required>
-                        <div class="error-message"><i class="fas fa-exclamation-circle"></i> שדה חובה</div>
+                        <input type="tel" class="form-control" name="phone" placeholder="05x-xxxxxxx" required maxlength="11" oninput="validatePhoneInput(this)">
+                        <div class="error-message"><i class="fas fa-exclamation-circle"></i> מספר טלפון חייב להכיל 9-10 ספרות</div>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">כתובת דוא"ל</label>
@@ -973,6 +1015,12 @@
                 <div class="payment-section" id="bankPaymentSection">
                     <div class="fw-bold text-primary mb-3"><i class="fas fa-university"></i> פרטי העברה בנקאית:</div>
 
+                    <!-- Minimum deposit notice -->
+                    <div style="background-color: #d4edda; border: 2px solid #28a745; padding: 12px 20px; border-radius: 8px; margin-bottom: 15px;">
+                        <i class="fas fa-info-circle" style="color: #155724; margin-left: 8px;"></i>
+                        <strong style="color: #155724;">חובה להעביר מקדמה מינימלית של 500€ לנוסע</strong>
+                    </div>
+
                     <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px;">
                         <!-- Hebrew Bank Details -->
                         <div
@@ -1001,6 +1049,15 @@
                                 IBAN: IL760204170000000116600
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Bank transfer confirmation note -->
+                    <div style="background-color: #fff3cd; border: 2px solid #ffc107; padding: 12px 15px; border-radius: 8px; margin-bottom: 15px;">
+                        <i class="fas fa-exclamation-triangle" style="color: #856404; margin-left: 8px;"></i>
+                        <strong style="color: #856404;">חשוב!</strong>
+                        <span style="color: #856404;">לאחר ביצוע ההעברה יש לשלוח אישור העברה למייל: <strong>GOSKI@IDEALTOURS.CO.IL</strong> או לווטסאפ: <strong>058-5396011</strong></span>
+                        <br>
+                        <span style="color: #856404; font-size: 0.9rem;">יש לציין: שם מלא + כתובת דוא"ל של המזמין.</span>
                     </div>
 
                     <div class="row g-3">
@@ -1201,6 +1258,28 @@
             // Euro rate is now loaded by loadVacationDates()
         }
 
+        // Cache DOM references for currency converter
+        let euroInputElement = null;
+        let shekelResultElement = null;
+        let euroRateElement = null;
+
+        function convertEuroToShekel() {
+            // Lazy initialization of cached elements
+            if (!euroInputElement) euroInputElement = document.getElementById('euroAmountInput');
+            if (!shekelResultElement) shekelResultElement = document.getElementById('shekelResult');
+            if (!euroRateElement) euroRateElement = document.getElementById('euroRate');
+
+            const euroAmount = parseFloat(euroInputElement.value) || 0;
+            const euroRate = parseFloat(euroRateElement.textContent) || 0;
+
+            if (euroAmount > 0 && euroRate > 0) {
+                const shekelAmount = (euroAmount * euroRate).toFixed(2);
+                shekelResultElement.textContent = shekelAmount;
+            } else {
+                shekelResultElement.textContent = '0';
+            }
+        }
+
         // --- Passenger Logic ---
         let passengers = [1]; // Tracks existing row IDs
 
@@ -1241,7 +1320,7 @@
                 </div>
                 <div class="passenger-field">
                     <label>תאריך לידה</label>
-                    <input type="date" class="form-control" name="birthDate_${rowId}" required>
+                    <input type="date" class="form-control" name="birthDate_${rowId}" required min="1900-01-01" oninput="validateBirthDateInput(this)">
                     <div class="error-message"><i class="fas fa-exclamation-circle"></i> שדה חובה</div>
                 </div>
                 <div class="passenger-field">
@@ -1266,6 +1345,7 @@
                             <span>כן, יש לי מספר</span>
                         </div>
                         <input type="text" class="form-control freq-flyer-input" name="freqFlyerNumber_${rowId}" placeholder="מס' נוסע מתמיד" style="display: none;">
+                        <div class="error-message"><i class="fas fa-exclamation-circle"></i> חובה למלא מספר נוסע מתמיד</div>
                     </div>
                 </div>
                 <div class="passenger-field checkbox-field">
@@ -1292,6 +1372,14 @@
         `;
             container.appendChild(card);
             updateRemoveButtons();
+
+            // Set max date for birth date field (today's date)
+            const birthDateInput = card.querySelector(`input[name="birthDate_${rowId}"]`);
+            if (birthDateInput) {
+                const today = new Date();
+                const maxDate = today.toISOString().split('T')[0];
+                birthDateInput.setAttribute('max', maxDate);
+            }
 
             // Add English-only input validation
             const englishInputs = card.querySelectorAll('.english-only');
@@ -1565,6 +1653,55 @@
                 tag.innerHTML = `${displayName} <i class="fas fa-times remove-participant" onclick="removeParticipant('${type}', ${index})"></i>`;
                 list.appendChild(tag);
             });
+
+            // For private lessons, show/hide same teacher question based on participant count
+            if (type === 'private') {
+                updateSameTeacherQuestion();
+            }
+        }
+
+        function toggleNoSkiLessons() {
+            const noSkiLessonsCheckbox = document.getElementById('noSkiLessons');
+            const lessonKids = document.getElementById('lessonKids');
+            const lessonAdults = document.getElementById('lessonAdults');
+            const lessonPrivate = document.getElementById('lessonPrivate');
+
+            if (noSkiLessonsCheckbox.checked) {
+                // Uncheck and disable other ski lesson options
+                lessonKids.checked = false;
+                lessonAdults.checked = false;
+                lessonPrivate.checked = false;
+                lessonKids.disabled = true;
+                lessonAdults.disabled = true;
+                lessonPrivate.disabled = true;
+
+                // Hide participant sections
+                toggleSkiLessonParticipants('kids');
+                toggleSkiLessonParticipants('adults');
+                toggleSkiLessonParticipants('private');
+
+                // Hide error
+                document.getElementById('skiLessonsError').classList.remove('show');
+            } else {
+                // Enable ski lesson options
+                lessonKids.disabled = false;
+                lessonAdults.disabled = false;
+                lessonPrivate.disabled = false;
+            }
+        }
+
+        function updateSameTeacherQuestion() {
+            const sameTeacherQuestion = document.getElementById('sameTeacherQuestion');
+            const privateParticipants = skiLessonParticipants.private;
+
+            if (privateParticipants.length > 1) {
+                sameTeacherQuestion.style.display = 'block';
+            } else {
+                sameTeacherQuestion.style.display = 'none';
+                // Reset radio selection when hiding
+                document.getElementById('sameTeacherYes').checked = false;
+                document.getElementById('sameTeacherNo').checked = false;
+            }
         }
 
         // --- Payment Section Toggle ---
@@ -1801,6 +1938,15 @@
                     if (!firstInvalidElement) firstInvalidElement = genderSelect;
                 }
 
+                // Check frequent flyer number if checkbox is checked
+                const hasFreqFlyerCheckbox = card.querySelector(`input[name="hasFreqFlyer_${rowId}"]`);
+                const freqFlyerNumberInput = card.querySelector(`input[name="freqFlyerNumber_${rowId}"]`);
+                if (hasFreqFlyerCheckbox.checked && !freqFlyerNumberInput.value.trim()) {
+                    showFieldError(freqFlyerNumberInput, 'חובה למלא מספר נוסע מתמיד');
+                    errors.push(`נוסע ${passengerNum}: מספר נוסע מתמיד - שדה חובה`);
+                    if (!firstInvalidElement) firstInvalidElement = freqFlyerNumberInput;
+                }
+
                 // Check ski level if ski pass is checked
                 const skiPassCheckbox = card.querySelector(`input[name="skiPass_${rowId}"]`);
                 const skiLevelSelect = card.querySelector(`select[name="skiLevel_${rowId}"]`);
@@ -1811,23 +1957,44 @@
                 }
             });
 
-            // 3. Validate ski lesson participants
+            // 3. Validate ski lesson selection - must select at least one option
             const lessonKids = document.getElementById('lessonKids');
+            const lessonAdults = document.getElementById('lessonAdults');
+            const lessonPrivate = document.getElementById('lessonPrivate');
+            const noSkiLessons = document.getElementById('noSkiLessons');
+
+            const anySkiLessonSelected = lessonKids.checked || lessonAdults.checked || lessonPrivate.checked || noSkiLessons.checked;
+            if (!anySkiLessonSelected) {
+                document.getElementById('skiLessonsError').classList.add('show');
+                errors.push('הדרכת סקי - יש לבחור לפחות אופציה אחת');
+                if (!firstInvalidElement) firstInvalidElement = lessonKids;
+            }
+
+            // Validate ski lesson participants if lesson is selected
             if (lessonKids.checked && skiLessonParticipants.kids.length === 0) {
                 document.getElementById('kidsParticipantError').classList.add('show');
                 errors.push('שיעורי סקי ילדים/נוער - יש להוסיף לפחות משתתף אחד');
             }
 
-            const lessonAdults = document.getElementById('lessonAdults');
             if (lessonAdults.checked && skiLessonParticipants.adults.length === 0) {
                 document.getElementById('adultsParticipantError').classList.add('show');
                 errors.push('שיעורי סקי מבוגרים - יש להוסיף לפחות משתתף אחד');
             }
 
-            const lessonPrivate = document.getElementById('lessonPrivate');
             if (lessonPrivate.checked && skiLessonParticipants.private.length === 0) {
                 document.getElementById('privateParticipantError').classList.add('show');
                 errors.push('שיעורים פרטיים - יש להוסיף לפחות משתתף אחד');
+            }
+
+            // Validate same teacher question for private lessons with multiple participants
+            if (lessonPrivate.checked && skiLessonParticipants.private.length > 1) {
+                const sameTeacherYes = document.getElementById('sameTeacherYes');
+                const sameTeacherNo = document.getElementById('sameTeacherNo');
+                if (!sameTeacherYes.checked && !sameTeacherNo.checked) {
+                    document.getElementById('sameTeacherError').classList.add('show');
+                    errors.push('שיעורים פרטיים - יש לבחור האם כולם רוצים את אותו מורה');
+                    if (!firstInvalidElement) firstInvalidElement = sameTeacherYes;
+                }
             }
 
             // 4. Validate contact info
@@ -1846,8 +2013,8 @@
                 errors.push('יש למלא מספר טלפון');
                 if (!firstInvalidElement) firstInvalidElement = phoneInput;
             } else if (!isValidPhoneNumber(phoneInput.value)) {
-                showFieldError(phoneInput, 'מספר טלפון לא תקין');
-                errors.push('מספר טלפון לא תקין');
+                showFieldError(phoneInput, 'מספר טלפון חייב להכיל 9-10 ספרות');
+                errors.push('מספר טלפון חייב להכיל 9-10 ספרות');
                 if (!firstInvalidElement) firstInvalidElement = phoneInput;
             }
 
@@ -1892,8 +2059,29 @@
 
         function isValidPhoneNumber(phone) {
             // Allow Israeli phone formats: mobile (05X-XXXXXXX), landline (0X-XXXXXXX)
-            const phoneRegex = /^0\d{1,2}[-]?\d{7,8}$/;
-            return phoneRegex.test(phone.replace(/\s/g, ''));
+            // Total 9-10 digits starting with 0 (so 8-9 additional digits after the leading 0)
+            const cleanPhone = phone.replace(/[-\s]/g, '');
+            const phoneRegex = /^0\d{8,9}$/;
+            return phoneRegex.test(cleanPhone);
+        }
+
+        function validatePhoneInput(input) {
+            // Remove any non-digit characters except dash
+            input.value = input.value.replace(/[^\d-]/g, '');
+        }
+
+        function validateBirthDateInput(input) {
+            // Ensure year is maximum 4 digits
+            if (input.value) {
+                const parts = input.value.split('-');
+                if (parts[0] && parts[0].length > 4) {
+                    parts[0] = parts[0].substring(0, 4);
+                    // Only rejoin if all parts exist and are valid
+                    if (parts.length === 3 && parts[1] && parts[2]) {
+                        input.value = parts.join('-');
+                    }
+                }
+            }
         }
 
         // --- Submit ---
@@ -1939,6 +2127,7 @@
                 deluxeFor: roomTypeElement?.value === 'deluxe' && deluxeForElement ? deluxeForElement.value : null,
                 deluxePassengers: roomTypeElement?.value === 'deluxe' && deluxeForElement?.value === 'some' ? deluxePassengers : null,
                 skiLessons: {
+                    notInterested: document.getElementById('noSkiLessons').checked,
                     kids: {
                         selected: document.getElementById('lessonKids').checked,
                         participants: skiLessonParticipants.kids
@@ -1949,7 +2138,10 @@
                     },
                     private: {
                         selected: document.getElementById('lessonPrivate').checked,
-                        participants: skiLessonParticipants.private
+                        participants: skiLessonParticipants.private,
+                        sameTeacher: skiLessonParticipants.private.length > 1 ? 
+                            (document.getElementById('sameTeacherYes').checked ? 'yes' : 
+                             document.getElementById('sameTeacherNo').checked ? 'no' : null) : null
                     }
                 },
                 contactInfo: {
@@ -1963,6 +2155,7 @@
                     date: document.querySelector('input[name="bankTransferDate"]')?.value || null,
                     reference: document.querySelector('input[name="bankTransferRef"]')?.value || null,
                     amount: document.querySelector('input[name="bankTransferAmount"]')?.value || null,
+                    currency: document.querySelector('input[name="transferCurrency"]:checked')?.value || 'ILS',
                     receiptFiles: receiptFiles.map(f => ({ name: f.name, type: f.type, size: f.size }))
                 } : null,
                 creditCard: paymentMethodElement?.value === 'card' ? {
