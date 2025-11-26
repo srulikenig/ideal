@@ -184,12 +184,62 @@
             position: static !important;
             float: none !important;
             order: -1 !important;
+            width: 20px !important;
+            height: 20px !important;
+            border: 2.5px solid #0d47a1 !important;
+            border-radius: 4px !important;
+            background-color: #ffffff !important;
+            cursor: pointer !important;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+            transition: all 0.2s ease !important;
+        }
+
+        .form-check-input:hover {
+            border-color: #1565c0 !important;
+            box-shadow: 0 3px 6px rgba(13, 71, 161, 0.2) !important;
+            transform: scale(1.05) !important;
+        }
+
+        .form-check-input:checked {
+            background-color: #0d47a1 !important;
+            border-color: #0d47a1 !important;
+            box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.2) !important;
+        }
+
+        .form-check-input:focus {
+            border-color: #1565c0 !important;
+            box-shadow: 0 0 0 4px rgba(13, 71, 161, 0.25) !important;
+        }
+
+        /* רדיו בטון עגול */
+        .form-check-input[type="radio"] {
+            border-radius: 50% !important;
         }
 
         .form-check-label {
             cursor: pointer !important;
             margin: 0 !important;
             margin-bottom: 0 !important;
+            user-select: none !important;
+        }
+
+        /* סגנון משופר למארזי הבחירה */
+        .card .form-check {
+            padding: 10px 12px !important;
+            background-color: #f8f9fa !important;
+            border-radius: 6px !important;
+            border: 1px solid #dee2e6 !important;
+            transition: all 0.2s ease !important;
+        }
+
+        .card .form-check:hover {
+            background-color: #e9ecef !important;
+            border-color: #0d47a1 !important;
+        }
+
+        .card .form-check:has(.form-check-input:checked) {
+            background-color: #e3f2fd !important;
+            border-color: #0d47a1 !important;
         }
 
         /* Fix select dropdown arrow for RTL */
@@ -286,8 +336,8 @@
         }
 
         .passenger-field.checkbox-field .form-check-input {
-            width: 18px;
-            height: 18px;
+            width: 22px !important;
+            height: 22px !important;
             flex-shrink: 0;
             margin-top: 0;
         }
