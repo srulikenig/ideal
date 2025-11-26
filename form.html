@@ -1258,19 +1258,25 @@
             // Euro rate is now loaded by loadVacationDates()
         }
 
-        function convertEuroToShekel() {
-            const euroInput = document.getElementById('euroAmountInput');
-            const shekelResult = document.getElementById('shekelResult');
-            const euroRateSpan = document.getElementById('euroRate');
+        // Cache DOM references for currency converter
+        let euroInputElement = null;
+        let shekelResultElement = null;
+        let euroRateElement = null;
 
-            const euroAmount = parseFloat(euroInput.value) || 0;
-            const euroRate = parseFloat(euroRateSpan.textContent) || 0;
+        function convertEuroToShekel() {
+            // Lazy initialization of cached elements
+            if (!euroInputElement) euroInputElement = document.getElementById('euroAmountInput');
+            if (!shekelResultElement) shekelResultElement = document.getElementById('shekelResult');
+            if (!euroRateElement) euroRateElement = document.getElementById('euroRate');
+
+            const euroAmount = parseFloat(euroInputElement.value) || 0;
+            const euroRate = parseFloat(euroRateElement.textContent) || 0;
 
             if (euroAmount > 0 && euroRate > 0) {
                 const shekelAmount = (euroAmount * euroRate).toFixed(2);
-                shekelResult.textContent = shekelAmount;
+                shekelResultElement.textContent = shekelAmount;
             } else {
-                shekelResult.textContent = '0';
+                shekelResultElement.textContent = '0';
             }
         }
 
@@ -1314,7 +1320,7 @@
                 </div>
                 <div class="passenger-field">
                     <label>תאריך לידה</label>
-                    <input type="date" class="form-control" name="birthDate_${rowId}" required max="2099-12-31" min="1900-01-01" oninput="validateBirthDateInput(this)">
+                    <input type="date" class="form-control" name="birthDate_${rowId}" required min="1900-01-01" oninput="validateBirthDateInput(this)">
                     <div class="error-message"><i class="fas fa-exclamation-circle"></i> שדה חובה</div>
                 </div>
                 <div class="passenger-field">
@@ -1366,6 +1372,14 @@
         `;
             container.appendChild(card);
             updateRemoveButtons();
+
+            // Set max date for birth date field (today's date)
+            const birthDateInput = card.querySelector(`input[name="birthDate_${rowId}"]`);
+            if (birthDateInput) {
+                const today = new Date();
+                const maxDate = today.toISOString().split('T')[0];
+                birthDateInput.setAttribute('max', maxDate);
+            }
 
             // Add English-only input validation
             const englishInputs = card.querySelectorAll('.english-only');
@@ -2045,7 +2059,7 @@
 
         function isValidPhoneNumber(phone) {
             // Allow Israeli phone formats: mobile (05X-XXXXXXX), landline (0X-XXXXXXX)
-            // Must be between 9-10 digits (not including dashes)
+            // Total 9-10 digits starting with 0 (so 8-9 additional digits after the leading 0)
             const cleanPhone = phone.replace(/[-\s]/g, '');
             const phoneRegex = /^0\d{8,9}$/;
             return phoneRegex.test(cleanPhone);
@@ -2062,7 +2076,10 @@
                 const parts = input.value.split('-');
                 if (parts[0] && parts[0].length > 4) {
                     parts[0] = parts[0].substring(0, 4);
-                    input.value = parts.join('-');
+                    // Only rejoin if all parts exist and are valid
+                    if (parts.length === 3 && parts[1] && parts[2]) {
+                        input.value = parts.join('-');
+                    }
                 }
             }
         }
