@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הרשמה הושלמה - IDEAL TOURS</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #0d47a1;
+            --secondary-color: #f8f9fa;
+            --accent-color: #ffc107;
+            --success-color: #28a745;
+        }
+
+        body {
+            font-family: 'Rubik', sans-serif;
+            background-color: #e9ecef;
+            padding: 20px;
+            color: #333;
+        }
+
+        .paper-container {
+            background: #fff;
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 40px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            border-top: 6px solid var(--primary-color);
+            border-radius: 8px;
+        }
+
+        .success-container {
+            max-width: 900px;
+            background: white;
+            margin: 30px auto;
+            padding: 0;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            border-top: 6px solid var(--success-color);
+            animation: slideUp 0.6s ease;
+            overflow: hidden;
+        }
+
+        .contact-highlight {
+            background-color: var(--accent-color);
+            padding: 10px 20px;
+            font-weight: 600;
+            display: inline-block;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .contact-info-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-item i {
+            font-size: 1.2rem;
+        }
+
+        .contact-item.whatsapp i {
+            color: #25D366;
+        }
+
+        .contact-item.email i {
+            color: #0d47a1;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-header {
+            background: linear-gradient(135deg, var(--success-color), #20c997);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .success-header .logo-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .success-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            animation: scaleIn 0.5s ease 0.3s both;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .success-header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .success-header p {
+            margin: 0;
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        .success-content {
+            padding: 40px 30px;
+        }
+
+        .transaction-info {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 2px solid #e9ecef;
+        }
+
+        .transaction-info h3 {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-item span {
+            color: #666;
+        }
+
+        .info-item strong {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .transaction-id-box {
+            background: linear-gradient(135deg, var(--primary-color), #1565c0);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .transaction-id-box h4 {
+            margin: 0 0 10px 0;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .transaction-id-box .tid {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .next-steps {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .next-steps h4 {
+            color: #856404;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .next-steps ul {
+            margin: 0;
+            padding-right: 20px;
+            color: #856404;
+        }
+
+        .next-steps li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .contact-info {
+            background: #e3f2fd;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .contact-info h4 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .contact-methods {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-method {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            min-width: 200px;
+            transition: transform 0.3s;
+        }
+
+        .contact-method:hover {
+            transform: translateY(-3px);
+        }
+
+        .contact-method i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+
+        .contact-method a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .btn-home {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: block;
+            margin: 0 auto;
+            text-decoration: none;
+        }
+
+        .btn-home:hover {
+            background: #08337a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+
+        .payment-status {
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .payment-status.success {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            border-radius: 12px;
+        }
+
+        .payment-status.pending {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 12px;
+        }
+
+        .payment-status h3 {
+            margin: 0 0 10px 0;
+        }
+
+        .payment-status.success h3 {
+            color: #155724;
+        }
+
+        .payment-status.pending h3 {
+            color: #856404;
+        }
+
+        @media (max-width: 768px) {
+            .success-header {
+                padding: 30px 20px;
+            }
+
+            .success-content {
+                padding: 30px 20px;
+            }
+
+            .contact-methods {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="success-container">
+        <div class="success-header">
+            <div class="logo-title">✈️ IDEAL TOURS</div>
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h1>ההרשמה הושלמה בהצלחה!</h1>
+            <p>תודה שבחרת ב-IDEAL TOURS</p>
+            <div class="contact-info-wrapper" style="margin-top: 20px;">
+                <div class="contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>058-5396011</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>goski@idealtours.co.il</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="success-content">
+            <!-- Transaction ID -->
+            <div class="transaction-id-box">
+                <h4>מספר עסקה שלך:</h4>
+                <div class="tid" id="transactionId">---</div>
+            </div>
+
+            <!-- Payment Status -->
+            <div class="payment-status" id="paymentStatus">
+                <h3><i class="fas fa-hourglass-half"></i> סטטוס תשלום</h3>
+                <p id="paymentStatusText">טוען...</p>
+            </div>
+
+            <!-- Transaction Info -->
+            <div class="transaction-info">
+                <h3><i class="fas fa-info-circle"></i> פרטי ההזמנה שלך</h3>
+                <div class="info-item">
+                    <span>תאריך נסיעה:</span>
+                    <strong id="infoDate">---</strong>
+                </div>
+                <div class="info-item">
+                    <span>מספר נוסעים:</span>
+                    <strong id="infoPassengers">---</strong>
+                </div>
+                <div class="info-item">
+                    <span>סוג חדר:</span>
+                    <strong id="infoRoom">---</strong>
+                </div>
+            </div>
+
+            <!-- Next Steps -->
+            <div class="next-steps">
+                <h4><i class="fas fa-tasks"></i> השלבים הבאים:</h4>
+                <ul id="nextStepsList">
+                    <li>קיבלת אישור במייל עם כל הפרטים</li>
+                    <li>נציג ייצור איתך קשר תוך 24 שעות לאישור ההזמנה</li>
+                    <li>יתרת התשלום תידרש 25 יום לפני מועד היציאה</li>
+                    <li>חשוב לרכוש ביטוח נסיעה, סקי, מטען</li>
+                </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <h4><i class="fas fa-headset"></i> צריך עזרה? אנחנו כאן בשבילך</h4>
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <i class="fab fa-whatsapp"></i>
+                        <div>
+                            <small>WhatsApp</small><br>
+                            <a href="https://wa.me/972585396011">058-5396011</a>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <small>דוא"ל</small><br>
+                            <a href="mailto:goski@idealtours.co.il">goski@idealtours.co.il</a>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <small>טלפון</small><br>
+                            <a href="tel:025000821">02-5000821</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Home Button -->
+            <a href="form.html" class="btn-home">
+                <i class="fas fa-home"></i> חזרה לעמוד הראשי
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const BASE_URL = 'https://script.google.com/macros/s/AKfycbxGm3JFz86g2R2TN1NKlBERLnz-qy2LUqLUIO0RYPgX7DMM-XaRayOi3YC23_8TWkE1jw/exec';
+
+        // קבלת transaction ID מה-URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const transactionId = urlParams.get('tid');
+
+        if (!transactionId) {
+            // אם אין transaction ID, חזרה לדף הבית
+            window.location.href = 'form.html';
+        } else {
+            document.getElementById('transactionId').textContent = transactionId;
+            loadTransactionDetails();
+        }
+
+        async function loadTransactionDetails() {
+            try {
+                const response = await fetch(`${BASE_URL}?action=getTransaction&tid=${transactionId}`);
+                const result = await response.json();
+                
+                console.log('Success page - transaction result:', result);
+
+                if (result.data && result.data.error) {
+                    throw new Error(result.data.error);
+                }
+
+                const data = result.data;
+
+                // עדכון פרטי העסקה
+                document.getElementById('infoDate').textContent = data.vacationDate || '---';
+                document.getElementById('infoPassengers').textContent = data.passengerCount || '---';
+                document.getElementById('infoRoom').textContent = data.roomType || '---';
+
+                // עדכון סטטוס תשלום
+                const statusDiv = document.getElementById('paymentStatus');
+                const statusText = document.getElementById('paymentStatusText');
+
+                if (data.paymentStatus === 'paid') {
+                    statusDiv.className = 'payment-status success';
+                    statusText.innerHTML = '<strong>התשלום אושר בהצלחה!</strong><br>המקדמה של 500€ התקבלה.';
+                } else if (data.paymentStatus === 'bank_transfer_pending') {
+                    statusDiv.className = 'payment-status pending';
+                    statusText.innerHTML = '<strong>ממתין לאישור העברה בנקאית</strong><br>נציג יאשר את קבלת התשלום בהקדם.';
+                } else if (data.paymentStatus === 'pending') {
+                    statusDiv.className = 'payment-status pending';
+                    statusText.innerHTML = '<strong>ממתין לתשלום</strong><br>נא לשלם את המקדמה בהקדם.';
+                } else {
+                    statusDiv.className = 'payment-status pending';
+                    statusText.innerHTML = '<strong>ממתין לתשלום</strong><br>נא לשלם את המקדמה בהקדם.';
+                }
+
+            } catch (error) {
+                console.error('Error loading transaction:', error);
+                // אם יש שגיאה, נותיר את הערכים ברירת המחדל
+            }
+        }
+    </script>
+
+</body>
+
+</html>

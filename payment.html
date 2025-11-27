@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>השלמת תשלום - IDEAL TOURS</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #0d47a1;
+            --secondary-color: #f8f9fa;
+            --accent-color: #ffc107;
+        }
+
+        body {
+            font-family: 'Rubik', sans-serif;
+            background-color: #e9ecef;
+            color: #333;
+        }
+
+        .payment-container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            border-top: 6px solid var(--primary-color);
+            border-radius: 8px;
+        }
+
+        .payment-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .payment-header h1 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .transaction-id {
+            background-color: var(--accent-color);
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        .contact-highlight {
+            background-color: var(--accent-color);
+            padding: 10px 20px;
+            font-weight: 600;
+            display: inline-block;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .contact-info-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-item i {
+            font-size: 1.2rem;
+        }
+
+        .contact-item.whatsapp i {
+            color: #25D366;
+        }
+
+        .contact-item.email i {
+            color: #0d47a1;
+        }
+
+        .payment-content {
+            padding: 40px;
+        }
+
+        .order-summary {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .order-summary h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            padding-top: 15px;
+            margin-top: 10px;
+            border-top: 2px solid var(--primary-color);
+        }
+
+        .payment-method-section {
+            margin-top: 30px;
+        }
+
+        .payment-method-title {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .payment-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .payment-option {
+            border: 3px solid #dee2e6;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .payment-option:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(13, 71, 161, 0.2);
+        }
+
+        .payment-option.selected {
+            border-color: var(--primary-color);
+            background: #e3f2fd;
+        }
+
+        .payment-option input[type="radio"] {
+            display: none;
+        }
+
+        .payment-option i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .payment-option h4 {
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .payment-option p {
+            font-size: 0.85rem;
+            color: #666;
+            margin: 0;
+        }
+
+        .payment-details {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 2px solid var(--primary-color);
+        }
+
+        .payment-details.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .credit-card-frame {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #dee2e6;
+        }
+
+        .credit-card-frame iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+
+        .bank-transfer-info {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .bank-details {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid #ffc107;
+        }
+
+        .bank-details h5 {
+            color: #856404;
+            margin-bottom: 15px;
+        }
+
+        .bank-detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dashed #dee2e6;
+        }
+
+        .bank-detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .bank-detail-item strong {
+            color: #333;
+        }
+
+        .upload-receipt-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: #e3f2fd;
+            border-radius: 8px;
+            border: 2px dashed var(--primary-color);
+        }
+
+        .upload-receipt-section h6 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            flex-direction: column;
+        }
+
+        .loading-overlay.show {
+            display: flex;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .btn-confirm {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px 50px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: block;
+            margin: 30px auto 0;
+        }
+
+        .btn-confirm:hover {
+            background: #08337a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-confirm:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .receipt-upload-area {
+            border: 2px dashed #b0c4de;
+            background-color: #f8fbff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .receipt-upload-area:hover {
+            background-color: #e3f2fd;
+            border-color: var(--primary-color);
+        }
+
+        .receipt-upload-area .upload-icon {
+            font-size: 2rem;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+
+        .receipt-upload-area h6 {
+            margin: 5px 0;
+            font-size: 0.95rem;
+            color: #333;
+        }
+
+        .receipt-file-list {
+            margin-top: 10px;
+        }
+
+        .receipt-file-item {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 10px 15px;
+            margin-top: 8px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(13, 71, 161, 0.25);
+        }
+
+        .row.g-3 {
+            row-gap: 1rem !important;
+        }
+
+        .d-flex.gap-3 {
+            gap: 1rem !important;
+        }
+
+        .d-none {
+            display: none !important;
+        }
+
+        .form-check {
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            padding-right: 0 !important;
+        }
+
+        .form-check-input {
+            margin: 0 !important;
+            width: 20px !important;
+            height: 20px !important;
+            cursor: pointer !important;
+        }
+
+        .form-check-label {
+            cursor: pointer !important;
+            margin: 0 !important;
+        }
+
+        .col-md-6 {
+            flex: 0 0 auto;
+            width: 50%;
+        }
+
+        .col-12 {
+            flex: 0 0 auto;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .payment-options {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-content {
+                padding: 20px;
+            }
+
+            .col-md-6 {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p id="loadingMessage" style="margin-top: 20px; font-size: 1.1rem; color: #333;">טוען נתונים...</p>
+    </div>
+
+    <div class="payment-container">
+        <div class="payment-header">
+            <h1>💳 השלמת תשלום - IDEAL TOURS</h1>
+            <div class="transaction-id">
+                מספר עסקה: <strong id="transactionId">---</strong>
+            </div>
+            <div class="contact-info-wrapper">
+                <div class="contact-item whatsapp">
+                    <i class="fab fa-whatsapp"></i>
+                    <span><strong>WhatsApp:</strong> 050-123-4567</span>
+                </div>
+                <div class="contact-item email">
+                    <i class="fas fa-envelope"></i>
+                    <span><strong>Email:</strong> info@idealtours.co.il</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="payment-content">
+            <!-- סיכום הזמנה -->
+            <div class="order-summary">
+                <h3><i class="fas fa-receipt"></i> סיכום הזמנה</h3>
+                <div class="summary-item">
+                    <span>תאריך נסיעה:</span>
+                    <strong id="summaryDate">---</strong>
+                </div>
+                <div class="summary-item">
+                    <span>מספר נוסעים:</span>
+                    <strong id="summaryPassengers">---</strong>
+                </div>
+                <div class="summary-item">
+                    <span>סוג חדר:</span>
+                    <strong id="summaryRoom">---</strong>
+                </div>
+                <div class="summary-item">
+                    <span>סה"כ לתשלום (מקדמה):</span>
+                    <strong id="summaryTotal" style="color: #28a745;">500€</strong>
+                </div>
+            </div>
+
+            <!-- בחירת אמצעי תשלום -->
+            <div class="payment-method-section">
+                <h3 class="payment-method-title">בחר אמצעי תשלום</h3>
+
+                <div class="payment-options">
+                    <label class="payment-option" for="methodCard">
+                        <input type="radio" name="paymentMethod" id="methodCard" value="card">
+                        <i class="fas fa-credit-card"></i>
+                        <h4>כרטיס אשראי</h4>
+                        <p>תשלום מאובטח מיידי</p>
+                    </label>
+
+                    <label class="payment-option" for="methodTransfer">
+                        <input type="radio" name="paymentMethod" id="methodTransfer" value="transfer">
+                        <i class="fas fa-university"></i>
+                        <h4>העברה בנקאית</h4>
+                        <p>העברה לחשבון הבנק שלנו</p>
+                    </label>
+                </div>
+
+                <!-- פרטי כרטיס אשראי -->
+                <div class="payment-details" id="cardDetails">
+                    <h5 style="text-align: center; color: var(--primary-color); margin-bottom: 20px;">
+                        <i class="fas fa-lock"></i> תשלום מאובטח דרך Credit2000
+                    </h5>
+                    <div class="credit-card-frame">
+                        <iframe id="paymentFrame" src=""></iframe>
+                    </div>
+                </div>
+
+                <!-- פרטי העברה בנקאית -->
+                <div class="payment-details" id="transferDetails">
+                    <div class="bank-transfer-info">
+                        <h5 style="text-align: center; color: var(--primary-color); margin-bottom: 20px;">
+                            <i class="fas fa-university"></i> פרטי העברה בנקאית
+                        </h5>
+
+                        <!-- Bank Details Cards -->
+                        <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px;">
+                            <!-- Hebrew Bank Details -->
+                            <div style="flex: 1; min-width: 300px; background: #f8f9fa; padding: 15px; border-radius: 8px; border: 2px solid #dee2e6;">
+                                <h6 style="color: var(--primary-color); font-weight: 600; margin-bottom: 10px;">פרטי בנק</h6>
+                                <div style="font-size: 0.9rem;">
+                                    <strong>אידיאל טורס בע"מ</strong><br>
+                                    בנק מזרחי טפחות<br>
+                                    סניף: 417 - מלכי ישראל 16 ירושלים<br>
+                                    מספר חשבון: 116600<br>
+                                </div>
+                            </div>
+
+                            <!-- English Bank Details -->
+                            <div style="flex: 1; min-width: 300px; background: #e3f2fd; padding: 15px; border-radius: 8px; border: 2px solid #90caf9;">
+                                <h6 style="color: var(--primary-color); font-weight: 600; margin-bottom: 10px; text-align: left;">
+                                    Bank Details</h6>
+                                <div style="font-size: 0.9rem; text-align: left;">
+                                    <strong>Beneficiary Name: IDEAL TOURS (1982) (ISRAEL) LTD</strong><br>
+                                    Beneficiary Address: Malchei Israel 53, Jerusalem 94395<br>
+                                    Bank Name: BANK MIZRACHI TEFAHOT<br>
+                                    Bank Address: Malchei Israel 16 Jerusalem<br>
+                                    Branch: 417<br>
+                                    Account Number: 116600<br>
+                                    BIC/SWIFT CODE: MIZBILIT<br>
+                                    IBAN: IL760204170000000116600
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Important Notice -->
+                        <div style="background-color: #fff3cd; border: 2px solid #ffc107; padding: 12px 15px; border-radius: 8px; margin-bottom: 20px;">
+                            <i class="fas fa-exclamation-triangle" style="color: #856404; margin-left: 8px;"></i>
+                            <strong style="color: #856404;">חשוב!</strong>
+                            <span style="color: #856404;">לאחר ביצוע ההעברה יש לשלוח אישור העברה למייל:
+                                <strong>GOSKI@IDEALTOURS.CO.IL</strong> או לווטסאפ: <strong>058-5396011</strong></span>
+                            <br>
+                            <span style="color: #856404; font-size: 0.9rem;">יש לציין: שם מלא + כתובת דוא"ל של המזמין + מספר עסקה: <strong id="tidForTransfer">---</strong></span>
+                        </div>
+
+                        <!-- Transfer Details Form -->
+                        <div class="row g-3" style="margin-top: 10px;">
+                            <div class="col-md-6">
+                                <label class="form-label">תאריך העברה</label>
+                                <input type="date" class="form-control" id="bankTransferDate" name="bankTransferDate">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">מספר אסמכתא</label>
+                                <input type="text" class="form-control" id="bankTransferRef" name="bankTransferRef" placeholder="מספר אסמכתא מהבנק">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">סכום שהועבר</label>
+                                <div class="row g-2 align-items-center">
+                                    <div class="col-md-6">
+                                        <input type="number" class="form-control" id="bankTransferAmount" name="bankTransferAmount" placeholder="הזן סכום">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="d-flex gap-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="transferCurrency" id="currencyILS" value="ILS" checked>
+                                                <label class="form-check-label" for="currencyILS">₪ ש"ח</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="transferCurrency" id="currencyUSD" value="USD">
+                                                <label class="form-check-label" for="currencyUSD">$ דולר</label>
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">העלאת אסמכתא:</label>
+                                <div class="receipt-upload-area" id="receiptDropZone" onclick="document.getElementById('transferReceipt').click()" style="cursor: pointer;">
+                                    <i class="fas fa-file-upload upload-icon"></i>
+                                    <h6>גרור קובץ או לחץ לבחירה</h6>
+                                    <small class="text-muted">תמונה או PDF של אישור ההעברה</small>
+                                </div>
+                                <input type="file" id="transferReceipt" class="d-none" accept="image/*,.pdf">
+                                <div id="receiptFileList" class="receipt-file-list" style="margin-top: 10px;"></div>
+                            </div>
+                        </div>
+
+                        <button class="btn-confirm" onclick="confirmBankTransfer()" style="margin-top: 20px;">
+                            <i class="fas fa-check-circle"></i> אישור העברה בנקאית
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const BASE_URL = 'https://script.google.com/macros/s/AKfycbxGm3JFz86g2R2TN1NKlBERLnz-qy2LUqLUIO0RYPgX7DMM-XaRayOi3YC23_8TWkE1jw/exec';
+
+        // קבלת transaction ID מה-URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const transactionId = urlParams.get('tid');
+
+        if (!transactionId) {
+            alert('שגיאה: לא נמצא מזהה עסקה');
+            window.location.href = 'form.html';
+        }
+
+        // טעינת נתוני העסקה
+        async function loadTransactionData() {
+            showLoading('טוען פרטי הזמנה...');
+
+            try {
+                const response = await fetch(`${BASE_URL}?action=getTransaction&tid=${transactionId}`);
+                const result = await response.json();
+                
+                console.log('Transaction result:', result);
+
+                if (result.data && result.data.error) {
+                    throw new Error(result.data.error);
+                }
+
+                const data = result.data;
+
+                // בדיקה אם ההזמנה לא קיימת או כבר שולמה
+                if (!data || data.error === 'Transaction not found') {
+                    alert('❌ ההזמנה לא נמצאה במערכת');
+                    window.location.href = 'form.html';
+                    return;
+                }
+
+                // בדיקה אם כבר שולם
+                if (data.paymentStatus === 'paid' || data.paymentStatus === 'bank_transfer_pending') {
+                    alert('✅ הזמנה זו כבר שולמה או ממתינה לאישור');
+                    window.location.href = 'success.html?tid=' + transactionId;
+                    return;
+                }
+
+                // עדכון תצוגה
+                document.getElementById('transactionId').textContent = transactionId;
+                document.getElementById('summaryDate').textContent = data.vacationDate || '---';
+                document.getElementById('summaryPassengers').textContent = data.passengerCount || '---';
+                document.getElementById('summaryRoom').textContent = data.roomType || '---';
+                document.getElementById('tidForTransfer').textContent = transactionId;
+                
+                // שמירת ה-paymentUrl לשימוש מאוחר יותר
+                window.savedPaymentUrl = data.paymentUrl;
+
+                hideLoading();
+            } catch (error) {
+                hideLoading();
+                alert('שגיאה בטעינת נתונים: ' + error.message);
+                console.error('Error:', error);
+                window.location.href = 'form.html';
+            }
+        }
+
+        // טיפול בבחירת אמצעי תשלום
+        document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
+            radio.addEventListener('change', async function () {
+                // סימון הכרטיס שנבחר
+                document.querySelectorAll('.payment-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                this.closest('.payment-option').classList.add('selected');
+
+                // הסתרת כל הפרטים
+                document.querySelectorAll('.payment-details').forEach(detail => {
+                    detail.classList.remove('show');
+                });
+
+                // הצגת הפרטים הרלוונטיים
+                if (this.value === 'card') {
+                    showLoading('מכין דף תשלום מאובטח...');
+                    await loadPaymentFrame();
+                    document.getElementById('cardDetails').classList.add('show');
+                    hideLoading();
+                } else {
+                    document.getElementById('transferDetails').classList.add('show');
+                }
+            });
+        });
+
+        // טעינת iframe תשלום
+        async function loadPaymentFrame() {
+            try {
+                // בקשה ליצירת קישור תשלום מה-Google Script
+                const response = await fetch(`${BASE_URL}?action=getPaymentUrl&tid=${transactionId}`);
+                const result = await response.json();
+
+                console.log('Payment URL result:', result);
+
+                if (result.data && result.data.error) {
+                    throw new Error(result.data.error);
+                }
+
+                if (result.data && result.data.paymentUrl) {
+                    document.getElementById('paymentFrame').src = result.data.paymentUrl;
+                } else {
+                    throw new Error('לא התקבל קישור תשלום מהשרת');
+                }
+
+            } catch (error) {
+                alert('שגיאה ביצירת דף תשלום: ' + error.message);
+                console.error('Error loading payment frame:', error);
+            }
+        }
+
+        // Handle receipt file display
+        document.getElementById('transferReceipt').addEventListener('change', function(e) {
+            const fileList = document.getElementById('receiptFileList');
+            const files = e.target.files;
+            
+            if (files.length > 0) {
+                fileList.innerHTML = '';
+                Array.from(files).forEach((file, index) => {
+                    const fileItem = document.createElement('div');
+                    fileItem.className = 'receipt-file-item';
+                    fileItem.innerHTML = `
+                        <span><i class="far fa-file-alt text-primary me-2"></i> ${file.name}</span>
+                        <i class="fas fa-times text-danger" style="cursor:pointer" onclick="clearReceiptFile()"></i>
+                    `;
+                    fileList.appendChild(fileItem);
+                });
+            }
+        });
+
+        function clearReceiptFile() {
+            document.getElementById('transferReceipt').value = '';
+            document.getElementById('receiptFileList').innerHTML = '';
+        }
+
+        // אישור העברה בנקאית
+        async function confirmBankTransfer() {
+            // Validation
+            const transferDate = document.getElementById('bankTransferDate').value;
+            const transferRef = document.getElementById('bankTransferRef').value;
+            const transferAmount = document.getElementById('bankTransferAmount').value;
+            const transferCurrency = document.querySelector('input[name="transferCurrency"]:checked').value;
+            const receiptInput = document.getElementById('transferReceipt');
+
+            if (!transferDate) {
+                alert('נא למלא תאריך העברה');
+                document.getElementById('bankTransferDate').focus();
+                return;
+            }
+
+            if (!transferRef || transferRef.trim() === '') {
+                alert('נא למלא מספר אסמכתא');
+                document.getElementById('bankTransferRef').focus();
+                return;
+            }
+
+            if (!transferAmount || transferAmount <= 0) {
+                alert('נא למלא סכום שהועבר');
+                document.getElementById('bankTransferAmount').focus();
+                return;
+            }
+
+            if (!receiptInput.files || receiptInput.files.length === 0) {
+                alert('נא להעלות אישור העברה');
+                return;
+            }
+
+            showLoading('שומר את פרטי ההעברה...');
+
+            try {
+                const file = receiptInput.files[0];
+                const base64 = await fileToBase64(file);
+
+                const response = await fetch(`${BASE_URL}?action=confirmBankTransfer`, {
+                    method: 'POST',
+                    redirect: 'follow',
+                    headers: {
+                        'Content-Type': 'text/plain;charset=utf-8'
+                    },
+                    body: JSON.stringify({
+                        transactionId: transactionId,
+                        transferDate: transferDate,
+                        transferRef: transferRef,
+                        transferAmount: transferAmount,
+                        transferCurrency: transferCurrency,
+                        receiptFile: base64,
+                        receiptFileName: file.name
+                    })
+                });
+
+                console.log('Response status:', response.status);
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('Error response:', errorText);
+                    throw new Error(`Server returned ${response.status}`);
+                }
+
+                const responseText = await response.text();
+                console.log('Response text:', responseText);
+
+                let result;
+                try {
+                    result = JSON.parse(responseText);
+                } catch (parseError) {
+                    console.error('Failed to parse response:', parseError);
+                    throw new Error('שגיאה בפענוח תגובת השרת');
+                }
+
+                if (result.data && result.data.error) {
+                    throw new Error(result.data.error);
+                }
+
+                hideLoading();
+                alert('✅ ההעברה הבנקאית נרשמה בהצלחה!\nנציג ייצור איתך קשר לאישור סופי.');
+                window.location.href = 'success.html?tid=' + transactionId;
+
+            } catch (error) {
+                hideLoading();
+                alert('שגיאה בשמירת ההעברה: ' + error.message);
+                console.error('Full error:', error);
+            }
+        }
+
+        // המרת קובץ ל-base64
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+        }
+
+        // פונקציות עזר
+        function showLoading(message) {
+            document.getElementById('loadingMessage').textContent = message;
+            document.getElementById('loadingOverlay').classList.add('show');
+        }
+
+        function hideLoading() {
+            document.getElementById('loadingOverlay').classList.remove('show');
+        }
+
+        // האזנה להודעות מה-iframe (לתשלום אשראי מוצלח)
+        window.addEventListener('message', function (event) {
+            // כאן תטפל בהודעות מחברת הסליקה
+            if (event.data.status === 'success') {
+                alert('✅ התשלום בוצע בהצלחה!');
+                window.location.href = 'success.html?tid=' + transactionId;
+            } else if (event.data.status === 'error') {
+                alert('❌ התשלום נכשל. נא לנסות שוב.');
+            }
+        });
+
+        // טעינה ראשונית
+        loadTransactionData();
+    </script>
+
+</body>
+
+</html>

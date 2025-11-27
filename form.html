@@ -804,8 +804,8 @@
                             <!-- Number of rooms input -->
                             <div class="mb-3">
                                 <label class="form-label fw-bold">מספר חדרים:</label>
-                                <input type="number" class="form-control" id="totalRooms" name="totalRooms" 
-                                    min="1" max="20" value="1" required onchange="updateDeluxeRoomsMax()">
+                                <input type="number" class="form-control" id="totalRooms" name="totalRooms" min="1"
+                                    max="20" value="1" required onchange="updateDeluxeRoomsMax()">
                                 <div class="error-message"><i class="fas fa-exclamation-circle"></i> שדה חובה</div>
                             </div>
 
@@ -837,10 +837,13 @@
                                 <div class="deluxe-rooms-input" id="deluxeRoomsInput"
                                     style="display: none; margin-top: 10px;">
                                     <label class="small fw-bold">מספר חדרי דלוקס:</label>
-                                    <input type="number" class="form-control form-control-sm" id="deluxeRoomsCount" 
-                                        name="deluxeRoomsCount" min="1" max="1" value="1" oninput="validateDeluxeRoomsInput()">
+                                    <input type="number" class="form-control form-control-sm" id="deluxeRoomsCount"
+                                        name="deluxeRoomsCount" min="1" max="1" value="1"
+                                        oninput="validateDeluxeRoomsInput()">
                                     <small class="text-muted">עד <span id="maxDeluxeRooms">1</span> חדרים</small>
-                                    <div class="error-message" id="deluxeRoomsError"><i class="fas fa-exclamation-circle"></i> מספר החדרים חייב להיות בין 1 ל-<span id="maxDeluxeRoomsError">1</span></div>
+                                    <div class="error-message" id="deluxeRoomsError"><i
+                                            class="fas fa-exclamation-circle"></i> מספר החדרים חייב להיות בין 1 ל-<span
+                                            id="maxDeluxeRoomsError">1</span></div>
                                 </div>
                             </div>
                         </div>
@@ -898,7 +901,7 @@
                                     onchange="toggleSkiLessonParticipants('private')">
                                 <label class="form-check-label" for="lessonPrivate">
                                     שיעורים פרטיים<br>
-                                    <span class="price-tag">65€ לשעה</span>
+                                    <span class="price-tag">החל מ-65€ לשעה</span>
                                     <small class="text-muted">מינימום 3 שעות
                                         <br />
                                         כל אדם נוסף +15€</small>
@@ -942,16 +945,17 @@
                                 <input class="form-check-input" type="checkbox" id="noSkiLessons"
                                     onchange="toggleNoSkiLessons()">
                                 <label class="form-check-label" for="noSkiLessons">
-                                    <strong>לא מעוניין/ת בשיעורי סקי</strong>
+                                    לא מעוניין/ת בשיעורי סקי
                                 </label>
                             </div>
                             <div class="error-message" id="skiLessonsError"><i class="fas fa-exclamation-circle"></i> יש
                                 לבחור לפחות אופציה אחת</div>
-                            
+
                             <!-- Ski lessons notes -->
                             <div class="mt-3">
                                 <label class="form-label small fw-bold">הערות נוספות לגבי שיעורי סקי:</label>
-                                <textarea class="form-control form-control-sm" name="skiLessonsNotes" rows="2" maxlength="300" placeholder="עד 300 תווים"></textarea>
+                                <textarea class="form-control form-control-sm" name="skiLessonsNotes" rows="2"
+                                    maxlength="300" placeholder="עד 300 תווים"></textarea>
                             </div>
                         </div>
                     </div>
@@ -1020,166 +1024,20 @@
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">הערות ובקשות מיוחדות</label>
-                        <textarea class="form-control" name="notes" rows="3" maxlength="300" placeholder="עד 300 תווים"></textarea>
+                        <textarea class="form-control" name="notes" rows="3" maxlength="300"
+                            placeholder="עד 300 תווים"></textarea>
                     </div>
                 </div>
 
-                <!-- Payment Method Selection -->
+                <!-- Payment Info Notice -->
                 <div class="mt-4">
-                    <label class="fw-bold mb-2">אמצעי תשלום:</label>
-                    <div class="payment-method-selector">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="paymentMethod" id="paymentBank"
-                                value="bank" onchange="togglePaymentSection('bank')">
-                            <label class="form-check-label" for="paymentBank">
-                                <i class="fas fa-university"></i> העברה בנקאית
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="paymentMethod" id="paymentCard"
-                                value="card" onchange="togglePaymentSection('card')">
-                            <label class="form-check-label" for="paymentCard">
-                                <i class="far fa-credit-card"></i> כרטיס אשראי
-                            </label>
-                        </div>
-                    </div>
-                    <div class="error-message" id="paymentMethodError"><i class="fas fa-exclamation-circle"></i> יש
-                        לבחור אמצעי תשלום</div>
                     <div
-                        style="background-color: #d4edda; border: 2px solid #28a745; padding: 12px 20px; border-radius: 8px; margin-bottom: 15px;">
+                        style="background-color: #d4edda; border: 2px solid #28a745; padding: 15px 20px; border-radius: 8px;">
                         <i class="fas fa-info-circle" style="color: #155724; margin-left: 8px;"></i>
-                        <strong style="color: #155724;">חובה להעביר מקדמה של 500€ לנוסע</strong>
-                    </div>
-                </div>
-
-                <!-- Bank Transfer Section -->
-                <div class="payment-section" id="bankPaymentSection">
-                    <div class="fw-bold text-primary mb-3"><i class="fas fa-university"></i> פרטי העברה בנקאית:</div>
-
-                    <!-- Minimum deposit notice -->
-
-
-                    <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px;">
-                        <!-- Hebrew Bank Details -->
-                        <div
-                            style="flex: 1; min-width: 300px; background: #f8f9fa; padding: 15px; border-radius: 8px; border: 2px solid #dee2e6;">
-                            <h6 style="color: var(--primary-color); font-weight: 600; margin-bottom: 10px;">פרטי בנק
-                            </h6>
-                            <div style="font-size: 0.9rem;">
-                                <strong>אידיאל טורס בע"מ</strong><br>
-                                בנק מזרחי טפחות<br>
-                                סניף: 417 - מלכי ישראל 16 ירושלים<br>
-                                מספר חשבון: 116600<br>
-                            </div>
-                        </div>
-
-                        <!-- English Bank Details -->
-                        <div
-                            style="flex: 1; min-width: 300px; background: #e3f2fd; padding: 15px; border-radius: 8px; border: 2px solid #90caf9;">
-                            <h6
-                                style="color: var(--primary-color); font-weight: 600; margin-bottom: 10px; text-align: left;">
-                                Bank Details</h6>
-                            <div style="font-size: 0.9rem;text-align: left;">
-                                <strong>Beneficiary Name: IDEAL TOURS (1982) (ISRAEL) LTD</strong><br>
-                                Beneficiary Address: Malchei Israel 53, Jerusalem 94395<br>
-                                Bank Name: BANK MIZRACHI TEFAHOT<br>
-                                Bank Address: Malchei Israel 16 Jerusalem<br>
-                                Branch: 417<br>
-                                Account Number: 116600<br>
-                                BIC/SWIFT CODE: MIZBILIT<br>
-                                IBAN: IL760204170000000116600
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Bank transfer confirmation note -->
-                    <div
-                        style="background-color: #fff3cd; border: 2px solid #ffc107; padding: 12px 15px; border-radius: 8px; margin-bottom: 15px;">
-                        <i class="fas fa-exclamation-triangle" style="color: #856404; margin-left: 8px;"></i>
-                        <strong style="color: #856404;">חשוב!</strong>
-                        <span style="color: #856404;">לאחר ביצוע ההעברה יש לשלוח אישור העברה למייל:
-                            <strong>GOSKI@IDEALTOURS.CO.IL</strong> או לווטסאפ: <strong>058-5396011</strong></span>
-                        <br>
-                        <span style="color: #856404; font-size: 0.9rem;">יש לציין: שם מלא + כתובת דוא"ל של
-                            המזמין.</span>
-                    </div>
-
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label">תאריך העברה</label>
-                            <input type="date" class="form-control" name="bankTransferDate">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">מספר אסמכתא</label>
-                            <input type="text" class="form-control" name="bankTransferRef"
-                                placeholder="מספר אסמכתא מהבנק">
-                        </div>
-                        <div class="col-12">
-                            <label class="form-label">סכום שהועבר</label>
-                            <div class="row g-2 align-items-center">
-                                <div class="col-md-6">
-                                    <input type="number" class="form-control" name="bankTransferAmount"
-                                        placeholder="הזן סכום">
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="d-flex gap-3">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="transferCurrency"
-                                                id="currencyILS" value="ILS" checked>
-                                            <label class="form-check-label" for="currencyILS">₪ ש"ח</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="transferCurrency"
-                                                id="currencyUSD" value="USD">
-                                            <label class="form-check-label" for="currencyUSD">$ דולר</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <label class="form-label">העלאת אסמכתא:</label>
-                            <div class="receipt-upload-area" id="receiptDropZone">
-                                <i class="fas fa-file-upload upload-icon"></i>
-                                <h6>גרור קובץ או לחץ לבחירה</h6>
-                                <small class="text-muted">תמונה או PDF של אישור ההעברה</small>
-                                <input type="file" id="receiptFileInput" class="d-none" accept="image/*,.pdf"
-                                    onchange="handleReceiptFile(this.files)">
-                            </div>
-                            <div id="receiptFileList" class="receipt-file-list"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Credit Card Section -->
-                <div class="payment-section" id="cardPaymentSection">
-                    <div class="fw-bold text-primary mb-3"><i class="far fa-credit-card"></i> פרטי כרטיס אשראי:</div>
-                    <div class="row g-3">
-                        <div class="col-md-5">
-                            <input type="text" class="form-control" name="cardNumber" placeholder="מספר כרטיס אשראי">
-                        </div>
-                        <div class="col-md-3">
-                            <select class="form-select" name="cardType">
-                                <option value="">סוג כרטיס</option>
-                                <option value="ויזה">ויזה</option>
-                                <option value="מאסטרקארד">מאסטרקארד</option>
-                                <option value="אמריקן אקספרס">אמריקן אקספרס (+1.5%)</option>
-                                <option value="דיינרס">דיינרס (+1.5%)</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <input type="text" class="form-control text-center" name="cardExpiry"
-                                placeholder="תוקף (MM/YY)">
-                        </div>
-                        <div class="col-md-2">
-                            <input type="text" class="form-control text-center" name="cardCvv" placeholder="CVV">
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" name="cardHolderId" placeholder="ת.ז בעל הכרטיס">
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" name="cardHolderName" placeholder="שם בעל הכרטיס">
-                        </div>
+                        <strong style="color: #155724; font-size: 1.1rem;">שלב הבא: תשלום מקדמה של 500€ לנוסע</strong>
+                        <p style="color: #155724; margin: 5px 0 0; font-size: 0.9rem;">
+                            לאחר שליחת הטופס תועבר לדף תשלום מאובטח
+                        </p>
                     </div>
                 </div>
 
@@ -1206,7 +1064,7 @@
                     חופשית בריכה ולספא, WIFI. המחיר אינו כולל מס מקומי. מס מקומי ישולם בקבלה במלון. טל"ח.
 
                     <h6>חובה לרכוש ביטוח:</h6>
-                    בריאות, סקי, מטען וקורונה. ניתן לבצע דרך המשרד.
+                    בריאות, סקי, מטען. ניתן לבצע דרך המשרד.
                 </div>
 
                 <!-- Confirmation & Signature -->
@@ -1244,7 +1102,7 @@
 
                 <div class="text-center mt-5">
                     <button type="submit" class="btn btn-submit shadow">
-                        שליחת טופס <i class="fas fa-paper-plane ms-2"></i>
+                        המשך לתשלום <i class="fas fa-arrow-left ms-2"></i>
                     </button>
                 </div>
 
@@ -1258,7 +1116,7 @@
 
     <script>
         // --- Configuration ---
-        const BASE_URL = 'https://script.google.com/macros/s/AKfycbxMxpBKCbtaXD-VAOHFaxsczTCLeMXgHaHwiWei5CLvjkOterT3sXKQ3lbeorRiZeUA/exec';
+        const BASE_URL = 'https://script.google.com/macros/s/AKfycbxGm3JFz86g2R2TN1NKlBERLnz-qy2LUqLUIO0RYPgX7DMM-XaRayOi3YC23_8TWkE1jw/exec';
 
         // --- Vacation Dates Logic ---
         async function loadVacationDates() {
@@ -1332,7 +1190,7 @@
                 // Calculate shekel amount from euro
                 const shekelAmount = (euroAmount * euroRate).toFixed(2);
                 shekelResultElement.textContent = shekelAmount;
-                
+
                 // Calculate USD amount: convert euro to shekel, then shekel to USD
                 const usdAmount = (euroAmount * euroRate / usdRate).toFixed(2);
                 usdResultElement.textContent = usdAmount;
@@ -1512,11 +1370,11 @@
             const deluxeRoomsCount = document.getElementById('deluxeRoomsCount');
             const maxDeluxeRoomsSpan = document.getElementById('maxDeluxeRooms');
             const maxDeluxeRoomsError = document.getElementById('maxDeluxeRoomsError');
-            
+
             deluxeRoomsCount.max = totalRooms;
             maxDeluxeRoomsSpan.textContent = totalRooms;
             maxDeluxeRoomsError.textContent = totalRooms;
-            
+
             // Reset deluxe rooms count if it exceeds new max
             if (parseInt(deluxeRoomsCount.value) > totalRooms) {
                 deluxeRoomsCount.value = totalRooms;
@@ -1607,7 +1465,6 @@
             types.forEach(type => {
                 updateParticipantDropdown(type);
             });
-            updateDeluxePassengerDropdown();
         }
 
         function updateParticipantDropdown(type) {
@@ -1738,24 +1595,7 @@
             }
         }
 
-        // --- Payment Section Toggle ---
-        function togglePaymentSection(method) {
-            const bankSection = document.getElementById('bankPaymentSection');
-            const cardSection = document.getElementById('cardPaymentSection');
-            const errorDiv = document.getElementById('paymentMethodError');
-
-            errorDiv.classList.remove('show');
-
-            if (method === 'bank') {
-                bankSection.classList.add('show');
-                cardSection.classList.remove('show');
-            } else if (method === 'card') {
-                bankSection.classList.remove('show');
-                cardSection.classList.add('show');
-            }
-        }
-
-        // --- Receipt File Upload ---
+        // --- Receipt File Upload (not used anymore but kept for compatibility) ---
         let receiptFiles = [];
 
         const receiptDropZone = document.getElementById('receiptDropZone');
@@ -2034,7 +1874,7 @@
             // 4. Validate room selection
             const totalRoomsInput = document.getElementById('totalRooms');
             const totalRooms = parseInt(totalRoomsInput.value) || 0;
-            
+
             if (totalRooms < 1) {
                 showFieldError(totalRoomsInput, 'יש להזין מספר חדרים');
                 errors.push('יש להזין מספר חדרים תקין');
@@ -2086,16 +1926,7 @@
                 if (!firstInvalidElement) firstInvalidElement = emailInput;
             }
 
-            // 6. Validate payment method
-            const paymentBank = document.getElementById('paymentBank');
-            const paymentCard = document.getElementById('paymentCard');
-            if (!paymentBank.checked && !paymentCard.checked) {
-                document.getElementById('paymentMethodError').classList.add('show');
-                errors.push('יש לבחור אמצעי תשלום');
-                if (!firstInvalidElement) firstInvalidElement = paymentBank;
-            }
-
-            // 7. Validate terms acceptance
+            // 6. Validate terms acceptance
             const termsConfirm = document.getElementById('termsConfirm');
             if (!termsConfirm.checked) {
                 errors.push('יש לאשר את התנאים');
@@ -2143,7 +1974,7 @@
         }
 
         // --- Submit ---
-        function submitForm(e) {
+        async function submitForm(e) {
             e.preventDefault();
 
             // Validate all fields
@@ -2158,23 +1989,121 @@
                 }
                 return;
             }
+            console.log('Form validation passed.');
 
             // Save the signature data before submitting
             saveSignature();
+            console.log('Signature saved.');
 
             // Collect form data for API submission
             const formData = collectFormData();
+            console.log('Collected form data:', formData);
 
-            // For now, just show success
-            alert('הטופס נשלח בהצלחה למערכת!');
-            console.log('Form data:', formData);
+            // הצגת מסך טעינה
+            showLoadingOverlay('מעבד קבצים...');
+
+            try {
+                // המרת קבצים ל-base64
+                const filesBase64 = await convertFilesToBase64(uploadedFiles);
+                console.log(`Converted ${filesBase64.length} files to base64`);
+
+                // הוספת הקבצים לנתונים
+                formData.files = filesBase64;
+
+                showLoadingOverlay('שולח נתונים לשרת...');
+                console.log('Sending request to:', `${BASE_URL}?action=createTransaction`);
+                console.log('Total data size:', JSON.stringify(formData).length, 'bytes');
+
+                const response = await fetch(`${BASE_URL}?action=createTransaction`, {
+                    method: 'POST',
+                    redirect: 'follow',
+                    headers: {
+                        // 'Content-Type': 'application/json'
+                        "Content-Type": "text/plain;charset=utf-8",
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                console.log('Response status:', response.status);
+                console.log('Response headers:', response.headers);
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('Error response:', errorText);
+                    throw new Error(`Server returned ${response.status}: ${errorText}`);
+                }
+
+                const responseText = await response.text();
+                console.log('Response text:', responseText);
+
+                let result;
+                try {
+                    result = JSON.parse(responseText);
+                    console.log('Parsed result:', result);
+                } catch (parseError) {
+                    console.error('Failed to parse response:', parseError);
+                    throw new Error('שגיאה בפענוח תגובת השרת');
+                }
+
+                if (result.data && result.data.error) {
+                    throw new Error(result.data.error);
+                }
+
+                if (!result.data || !result.data.transactionId) {
+                    console.error('Invalid result structure:', result);
+                    throw new Error('לא התקבל מזהה עסקה מהשרת');
+                }
+
+                // מעבר לדף תשלום
+                hideLoadingOverlay();
+                window.location.href = `payment.html?tid=${result.data.transactionId}`;
+
+            } catch (error) {
+                hideLoadingOverlay();
+                console.error('Full error:', error);
+
+                // הצגת שגיאה ידידותית יותר
+                let errorMessage = error.message;
+                if (error.message.includes('CORS') || error.message.includes('Failed to fetch')) {
+                    errorMessage = 'שגיאת חיבור לשרת. אנא וודא שהסקריפט פרוס כראוי עם הרשאות Anyone.';
+                }
+
+                alert('❌ שגיאה בשמירת הנתונים:\n' + errorMessage);
+            }
+        }
+
+        function showLoadingOverlay(message) {
+            const overlay = document.createElement('div');
+            overlay.id = 'loadingOverlay';
+            overlay.style.cssText = `
+                position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+                background: rgba(255,255,255,0.95); z-index: 10000;
+                display: flex; flex-direction: column;
+                align-items: center; justify-content: center;
+            `;
+            overlay.innerHTML = `
+                <div style="border: 4px solid #f3f3f3; border-top: 4px solid var(--primary-color);
+                            border-radius: 50%; width: 50px; height: 50px;
+                            animation: spin 1s linear infinite;"></div>
+                <p style="margin-top: 20px; font-size: 1.1rem; color: #333;">${message}</p>
+                <style>
+                    @keyframes spin {
+                        0% { transform: rotate(0deg); }
+                        100% { transform: rotate(360deg); }
+                    }
+                </style>
+            `;
+            document.body.appendChild(overlay);
+        }
+
+        function hideLoadingOverlay() {
+            document.getElementById('loadingOverlay')?.remove();
         }
 
         // --- Collect Form Data for API ---
         function collectFormData() {
             const roomTypeElement = document.querySelector('input[name="roomType"]:checked');
             const deluxeForElement = document.querySelector('input[name="deluxeFor"]:checked');
-            const paymentMethodElement = document.querySelector('input[name="paymentMethod"]:checked');
             const currentDateElement = document.getElementById('currentDate');
 
             const data = {
@@ -2185,7 +2114,7 @@
                     totalRooms: parseInt(document.getElementById('totalRooms').value) || 1,
                     roomType: roomTypeElement ? roomTypeElement.value : 'standard',
                     deluxeFor: roomTypeElement?.value === 'deluxe' && deluxeForElement ? deluxeForElement.value : null,
-                    deluxeRoomsCount: roomTypeElement?.value === 'deluxe' && deluxeForElement?.value === 'some' ? 
+                    deluxeRoomsCount: roomTypeElement?.value === 'deluxe' && deluxeForElement?.value === 'some' ?
                         parseInt(document.getElementById('deluxeRoomsCount').value) : null
                 },
                 skiLessons: {
@@ -2210,24 +2139,8 @@
                     address: document.querySelector('input[name="address"]').value,
                     phone: document.querySelector('input[name="phone"]').value,
                     email: document.querySelector('input[name="email"]').value,
-                    notes: document.querySelector('input[name="notes"]').value || null
+                    notes: document.querySelector('textarea[name="notes"]')?.value || null
                 },
-                paymentMethod: paymentMethodElement ? paymentMethodElement.value : null,
-                bankTransfer: paymentMethodElement?.value === 'bank' ? {
-                    date: document.querySelector('input[name="bankTransferDate"]')?.value || null,
-                    reference: document.querySelector('input[name="bankTransferRef"]')?.value || null,
-                    amount: document.querySelector('input[name="bankTransferAmount"]')?.value || null,
-                    currency: document.querySelector('input[name="transferCurrency"]:checked')?.value || 'ILS',
-                    receiptFiles: receiptFiles.map(f => ({ name: f.name, type: f.type, size: f.size }))
-                } : null,
-                creditCard: paymentMethodElement?.value === 'card' ? {
-                    cardNumber: document.querySelector('#cardPaymentSection input[name="cardNumber"]')?.value || null,
-                    cardType: document.querySelector('#cardPaymentSection select[name="cardType"]')?.value || null,
-                    expiryDate: document.querySelector('#cardPaymentSection input[name="cardExpiry"]')?.value || null,
-                    cvv: document.querySelector('#cardPaymentSection input[name="cardCvv"]')?.value || null,
-                    cardHolderId: document.querySelector('#cardPaymentSection input[name="cardHolderId"]')?.value || null,
-                    cardHolderName: document.querySelector('#cardPaymentSection input[name="cardHolderName"]')?.value || null
-                } : null,
                 termsAccepted: document.getElementById('termsConfirm').checked,
                 signature: document.getElementById('signatureData').value,
                 submissionDate: currentDateElement ? currentDateElement.innerText : new Date().toLocaleDateString('he-IL')
@@ -2255,17 +2168,28 @@
                 data.passengers.push(passenger);
             });
 
-            // Collect file data (as base64)
-            // Note: In a real implementation, you would read files as base64
-            uploadedFiles.forEach(file => {
-                data.files.push({
-                    name: file.name,
-                    type: file.type,
-                    size: file.size
+            return data;
+        }
+
+        // פונקציה להמרת קבצים ל-base64
+        async function convertFilesToBase64(files) {
+            const filePromises = files.map(file => {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        resolve({
+                            name: file.name,
+                            type: file.type,
+                            size: file.size,
+                            content: reader.result // base64
+                        });
+                    };
+                    reader.onerror = reject;
+                    reader.readAsDataURL(file);
                 });
             });
 
-            return data;
+            return Promise.all(filePromises);
         }
 
         // --- Signature Pad Logic ---
