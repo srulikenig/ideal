@@ -55,6 +55,13 @@
         .checkbox-wrapper input:checked + div svg {
             display: block;
         }
+        @keyframes bounce-slow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        .animate-bounce-slow {
+            animation: bounce-slow 3s infinite ease-in-out;
+        }
     </style>
 </head>
 <body class="text-gray-800 antialiased">
@@ -188,15 +195,33 @@
                                 </div>
                             </div>
 
+                            <div>
+                                <label class="block text-gray-700 font-bold mb-2">גובה שכר ברוטו</label>
+                                <input type="number" name="p_salary" class="w-full px-5 py-4 rounded-xl input-field bg-gray-50 text-lg" placeholder="לדוגמה: 10,000" required>
+                            </div>
+
                             <!-- Checkbox for Masleka -->
                             <div class="mt-6 p-4 bg-gray-50 rounded-xl border border-gray-100">
-                                <label class="flex items-start cursor-pointer checkbox-wrapper group">
+                                <label class="flex items-center cursor-pointer checkbox-wrapper group">
                                     <input type="checkbox" name="p_consent" class="sr-only" required>
-                                    <div class="w-6 h-6 border-2 border-gray-300 rounded bg-white flex items-center justify-center mr-0 ml-3 mt-1 transition-colors">
+                                    <div class="w-6 h-6 border-2 border-gray-300 rounded bg-white flex items-center justify-center mr-0 ml-3 transition-colors">
                                         <svg class="w-4 h-4 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
                                     </div>
                                     <span class="text-sm text-gray-600 flex-1 leading-relaxed select-none group-hover:text-primary transition-colors">
                                         אני מאשר לקניג ביטוחים להפיק מידע מהמסלקה הפנסיונית על שמי לצורך בדיקת התיק ומקסום התנאים.
+                                    </span>
+                                </label>
+                            </div>
+
+                            <!-- Checkbox for Consultation -->
+                            <div class="mt-4 p-4 bg-gray-50 rounded-xl border border-gray-100">
+                                <label class="flex items-center cursor-pointer checkbox-wrapper group">
+                                    <input type="checkbox" name="p_consultation" class="sr-only">
+                                    <div class="w-6 h-6 border-2 border-gray-300 rounded bg-white flex items-center justify-center mr-0 ml-3 transition-colors">
+                                        <svg class="w-4 h-4 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                    </div>
+                                    <span class="text-sm text-gray-600 flex-1 leading-relaxed select-none group-hover:text-primary transition-colors">
+                                        אני מעוניין בפגישת יעוץ ותכנון פיננסי (בעלות 350 ש"ח)
                                     </span>
                                 </label>
                             </div>
@@ -263,6 +288,25 @@
             <p class="opacity-80 mb-2">&copy; 2025 קניג ביטוחים ופיננסים.</p>
         </div>
     </footer>
+
+    <!-- Floating Side Widget -->
+    <div class="fixed bottom-4 left-4 z-50 max-w-[300px] animate-bounce-slow">
+        <a href="#lead-form-section" class="block bg-white border-l-4 border-[#9CCB68] rounded-lg shadow-2xl p-4 hover:-translate-y-1 transition-transform duration-300 group">
+            <div class="flex items-start gap-3">
+                <div class="text-2xl shrink-0">💍</div>
+                <div>
+                    <h4 class="font-bold text-primary text-sm">על חתונות הילדים כבר חשבתם?</h4>
+                    <p class="text-xs text-gray-600 mt-1 leading-relaxed">
+                        לפגישת יעוץ ותכנון פיננסי, להשקעה וחסכון בשוק ההון בעלות 350 ש"ח בלבד.
+                    </p>
+                    <div class="mt-2 text-[#9CCB68] font-bold text-xs flex items-center group-hover:underline">
+                        מעוניינים בפגישה? לחצו כאן
+                        <svg class="w-3 h-3 mr-1 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
 
     <!-- JavaScript Logic -->
     <script>
