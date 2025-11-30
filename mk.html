@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>בדיקת תיק פנסיוני - מקסום תנאים</title>
+    
+    <!-- Meta Description for Search Engines -->
+    <meta name="description" content="בדיקה מקצועית לתיק הפנסיוני, קרנות השתלמות וקופות גמל. אנחנו מורידים דמי ניהול, משפרים מסלולי השקעה ומייצרים לך עתיד שקט.">
+
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="הגיע הזמן שהפנסיה שלך תתחיל להרוויח יותר | קניג ביטוחים">
+    <meta property="og:description" content="בדיקה מקצועית לתיק הפנסיוני, קרנות השתלמות וקופות גמל. אנחנו מורידים דמי ניהול, משפרים מסלולי השקעה ומייצרים לך עתיד שקט.">
+    <meta property="og:image" content="logo.png">
+    
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -221,7 +231,7 @@
                                         <svg class="w-4 h-4 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
                                     </div>
                                     <span class="text-sm text-gray-600 flex-1 leading-relaxed select-none group-hover:text-primary transition-colors">
-                                        אני מעוניין בפגישת יעוץ ותכנון פיננסי (בעלות 350 ש"ח)
+בנוסף, אני מעונין בפגישת תכנון פיננסי לחיסכון לחתונות ילדים בעלות של 350 ש"ח
                                     </span>
                                 </label>
                             </div>
@@ -390,6 +400,7 @@
             formData.forEach((value, key) => data[key] = value);
             // טיפול בצ'קבוקס (אם לא מסומן הוא לא עובר בפורם-דאטה, אבל אם הוא required הוא חייב להיות מסומן)
             data.p_consent = formData.get('p_consent') === 'on';
+            data.p_consultation = formData.get('p_consultation') === 'on';
 
             // שליחה ב-Fetch
             fetch(GOOGLE_SCRIPT_URL, {
