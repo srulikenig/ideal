@@ -1281,12 +1281,12 @@
                     </div>
                 </div>
                 <div class="passenger-field checkbox-field">
-                    <input type="checkbox" class="form-check-input ski-pass-checkbox" name="skiPass_${rowId}" checked onchange="toggleSkiPass(this, '${rowId}')">
+                    <input type="checkbox" class="form-check-input ski-pass-checkbox" name="skiPass_${rowId}" onchange="toggleSkiPass(this, '${rowId}')">
                     <label>סקי פס?</label>
                 </div>
                 <div class="passenger-field ski-level-field" id="skiLevelField_${rowId}">
                     <label>רמת סקי</label>
-                    <select class="form-select" name="skiLevel_${rowId}">
+                    <select class="form-select" disabled name="skiLevel_${rowId}">
                         <option value="">בחר...</option>
                         <option value="4">4-מתקדם</option>
                         <option value="3">3-בינוני</option>
