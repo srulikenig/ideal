@@ -30,7 +30,7 @@
             max-width: 1000px;
             margin: 30px auto;
             background: white;
-            padding: 40px;
+            padding: 20px;
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
             border-top: 6px solid var(--primary-color);
             border-radius: 8px;
@@ -97,7 +97,7 @@
         }
 
         .payment-content {
-            padding: 40px;
+            padding: 20px;
         }
 
         .order-summary {
@@ -192,7 +192,7 @@
         }
 
         .payment-details {
-            display: none;
+            display: none !important;
             margin-top: 30px;
             padding: 25px;
             background: #f8f9fa;
@@ -201,7 +201,7 @@
         }
 
         .payment-details.show {
-            display: block;
+            display: block !important;
             animation: slideDown 0.3s ease;
         }
 
@@ -436,12 +436,26 @@
         }
 
         @media (max-width: 768px) {
+            .payment-container {
+                margin: 15px;
+                padding: 15px;
+            }
+
             .payment-options {
                 grid-template-columns: 1fr;
             }
 
             .payment-content {
-                padding: 20px;
+                padding: 15px;
+            }
+
+            .payment-header {
+                margin-bottom: 20px;
+                padding-bottom: 15px;
+            }
+
+            .payment-header h1 {
+                font-size: 1.5rem;
             }
 
             .col-md-6 {
