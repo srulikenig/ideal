@@ -1076,7 +1076,7 @@
                     חופשית בריכה ולספא, WIFI. המחיר אינו כולל מס מקומי. מס מקומי ישולם בקבלה במלון. טל"ח.
 
                     <h6>חובה לרכוש ביטוח:</h6>
-                    בריאות, סקי, מטען. ניתן לבצע דרך המשרד.
+                    בריאות, סקי, מטען.
                 </div>
 
                 <!-- Confirmation & Signature -->
@@ -1280,9 +1280,12 @@
                         <div class="error-message"><i class="fas fa-exclamation-circle"></i> חובה למלא מספר נוסע מתמיד</div>
                     </div>
                 </div>
-                <div class="passenger-field checkbox-field">
-                    <input type="checkbox" class="form-check-input ski-pass-checkbox" name="skiPass_${rowId}" onchange="toggleSkiPass(this, '${rowId}')">
+                <div class="passenger-field">
                     <label>סקי פס?</label>
+                    <select class="form-select" name="skiPass_${rowId}" onchange="toggleSkiPass(this, '${rowId}')">
+                        <option value="no">לא</option>
+                        <option value="yes">כן</option>
+                    </select>
                 </div>
                 <div class="passenger-field ski-level-field" id="skiLevelField_${rowId}">
                     <label>רמת סקי</label>
@@ -1362,11 +1365,14 @@
             // This is just for data collection, no special UI changes needed
         }
 
-        function toggleSkiPass(checkbox, rowId) {
+        function toggleSkiPass(element, rowId) {
             const skiLevelField = document.getElementById('skiLevelField_' + rowId);
             const skiLevelSelect = skiLevelField.querySelector('select');
 
-            if (checkbox.checked) {
+            // Support both checkbox (legacy) and select
+            const isYes = element.type === 'checkbox' ? element.checked : element.value === 'yes';
+
+            if (isYes) {
                 skiLevelField.style.opacity = '1';
                 skiLevelSelect.disabled = false;
             } else {
@@ -1834,9 +1840,12 @@
                 }
 
                 // Check ski level if ski pass is checked
-                const skiPassCheckbox = card.querySelector(`input[name="skiPass_${rowId}"]`);
+                const skiPassElement = card.querySelector(`[name="skiPass_${rowId}"]`);
                 const skiLevelSelect = card.querySelector(`select[name="skiLevel_${rowId}"]`);
-                if (skiPassCheckbox.checked && !skiLevelSelect.value) {
+                
+                const isSkiPassSelected = skiPassElement.tagName === 'SELECT' ? skiPassElement.value === 'yes' : skiPassElement.checked;
+
+                if (isSkiPassSelected && !skiLevelSelect.value) {
                     showFieldError(skiLevelSelect, 'יש לבחור רמת סקי');
                     errors.push(`נוסע ${passengerNum}: רמת סקי - שדה חובה כאשר סקי פס מסומן`);
                     if (!firstInvalidElement) firstInvalidElement = skiLevelSelect;
@@ -2174,7 +2183,10 @@
                         hasNumber: card.querySelector(`input[name="hasFreqFlyer_${rowId}"]`).checked,
                         number: card.querySelector(`input[name="freqFlyerNumber_${rowId}"]`).value || null
                     },
-                    skiPass: card.querySelector(`input[name="skiPass_${rowId}"]`).checked,
+                    skiPass: (function() {
+                        const el = card.querySelector(`[name="skiPass_${rowId}"]`);
+                        return el.tagName === 'SELECT' ? el.value === 'yes' : el.checked;
+                    })(),
                     skiLevel: card.querySelector(`select[name="skiLevel_${rowId}"]`).value
                 };
                 data.passengers.push(passenger);
