@@ -976,45 +976,7 @@
                 <!-- Contact & Payment Details (From Bottom of PDF) -->
                 <div class="section-title"><i class="fas fa-address-card"></i> פרטי המזמין ואמצעי תשלום</div>
 
-                <!-- Euro Rate Display with Converter -->
-                <div class="mb-3"
-                    style="background-color: #fff3cd; border: 2px solid #ffc107; padding: 12px 20px; border-radius: 8px;">
-                    <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 10px;">
-                        <div>
-                            <i class="fas fa-euro-sign" style="color: #856404; margin-left: 8px;"></i>
-                            <strong style="font-size: 1.05rem; color: #856404;">שער היורו: <span
-                                    id="euroRate">טוען...</span> ₪</strong>
-                        </div>
-                        <div>
-                            <i class="fas fa-dollar-sign" style="color: #856404; margin-left: 8px;"></i>
-                            <strong style="font-size: 1.05rem; color: #856404;">שער הדולר: <span
-                                    id="usdRate">טוען...</span> ₪</strong>
-                        </div>
-                    </div>
-                    <!-- Currency Converter -->
-                    <div
-                        style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding-top: 10px; border-top: 1px dashed #ffc107;">
-                        <label style="color: #856404; font-weight: 500;">ממיר מטבע:</label>
-                        <div style="display: flex; align-items: center; gap: 5px;">
-                            <input type="number" id="euroAmountInput" placeholder="הזן סכום ביורו"
-                                style="width: 150px; padding: 6px 10px; border: 1px solid #ffc107; border-radius: 4px; text-align: center;"
-                                oninput="convertCurrency()">
-                            <span style="color: #856404;">€</span>
-                        </div>
-                        <span style="color: #856404;">=</span>
-                        <div style="display: flex; align-items: center; gap: 5px;">
-                            <span id="usdResult"
-                                style="font-weight: bold; color: #004085; background: #cce5ff; padding: 6px 12px; border-radius: 4px; min-width: 100px; text-align: center;">0</span>
-                            <span style="color: #856404;">$</span>
-                        </div>
-                        <span style="color: #856404;">=</span>
-                        <div style="display: flex; align-items: center; gap: 5px;">
-                            <span id="shekelResult"
-                                style="font-weight: bold; color: #155724; background: #d4edda; padding: 6px 12px; border-radius: 4px; min-width: 100px; text-align: center;">0</span>
-                            <span style="color: #856404;">₪</span>
-                        </div>
-                    </div>
-                </div>
+
 
                 <div class="row g-3">
                     <div class="col-md-8">
@@ -1050,6 +1012,46 @@
                         <p style="color: #155724; margin: 5px 0 0; font-size: 0.9rem;">
                             לאחר שליחת הטופס תועבר לדף תשלום מאובטח
                         </p>
+                    </div>
+                </div>
+
+                <!-- Euro Rate Display with Converter -->
+                <div class="mb-3 mt-4"
+                    style="background-color: #fff3cd; border: 2px solid #ffc107; padding: 12px 20px; border-radius: 8px;">
+                    <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 10px;">
+                        <div>
+                            <i class="fas fa-euro-sign" style="color: #856404; margin-left: 8px;"></i>
+                            <strong style="font-size: 1.05rem; color: #856404;">שער היורו: <span
+                                    id="euroRate">טוען...</span> ₪</strong>
+                        </div>
+                        <div>
+                            <i class="fas fa-dollar-sign" style="color: #856404; margin-left: 8px;"></i>
+                            <strong style="font-size: 1.05rem; color: #856404;">שער הדולר: <span
+                                    id="usdRate">טוען...</span> ₪</strong>
+                        </div>
+                    </div>
+                    <!-- Currency Converter -->
+                    <div
+                        style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding-top: 10px; border-top: 1px dashed #ffc107;">
+                        <label style="color: #856404; font-weight: 500;">ממיר מטבע:</label>
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <input type="number" id="euroAmountInput" placeholder="הזן סכום ביורו"
+                                style="width: 150px; padding: 6px 10px; border: 1px solid #ffc107; border-radius: 4px; text-align: center;"
+                                oninput="convertCurrency()">
+                            <span style="color: #856404;">€</span>
+                        </div>
+                        <span style="color: #856404;">=</span>
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <span id="usdResult"
+                                style="font-weight: bold; color: #004085; background: #cce5ff; padding: 6px 12px; border-radius: 4px; min-width: 100px; text-align: center;">0</span>
+                            <span style="color: #856404;">$</span>
+                        </div>
+                        <span style="color: #856404;">=</span>
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <span id="shekelResult"
+                                style="font-weight: bold; color: #155724; background: #d4edda; padding: 6px 12px; border-radius: 4px; min-width: 100px; text-align: center;">0</span>
+                            <span style="color: #856404;">₪</span>
+                        </div>
                     </div>
                 </div>
 
