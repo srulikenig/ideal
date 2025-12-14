@@ -481,11 +481,11 @@
             <div class="contact-info-wrapper">
                 <div class="contact-item whatsapp">
                     <i class="fab fa-whatsapp"></i>
-                    <span><strong>WhatsApp:</strong> 050-123-4567</span>
+                    <span><strong>WhatsApp:</strong> 058-5396011</span>
                 </div>
                 <div class="contact-item email">
                     <i class="fas fa-envelope"></i>
-                    <span><strong>Email:</strong> info@idealtours.co.il</span>
+                    <span><strong>Email:</strong> goski@idealtours.co.il</span>
                 </div>
             </div>
         </div>
@@ -683,11 +683,16 @@
                     return;
                 }
 
+                // חישוב הסכום הכולל
+                const passengerCount = parseInt(data.passengerCount) || 1;
+                const totalAmount = 500 * passengerCount;
+
                 // עדכון תצוגה
                 document.getElementById('transactionId').textContent = transactionId;
                 document.getElementById('summaryDate').textContent = data.vacationDate || '---';
                 document.getElementById('summaryPassengers').textContent = data.passengerCount || '---';
                 document.getElementById('summaryRoom').textContent = data.roomType || '---';
+                document.getElementById('summaryTotal').textContent = totalAmount + '€';
                 document.getElementById('tidForTransfer').textContent = transactionId;
                 
                 // שמירת ה-paymentUrl לשימוש מאוחר יותר
