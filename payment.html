@@ -142,6 +142,59 @@
             text-align: center;
         }
 
+        .amount-selection-section {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f8f9fa 100%);
+            border: 3px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(13, 71, 161, 0.15);
+        }
+
+        .amount-selection-section h3 {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .amount-input-wrapper {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .amount-input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 5px;
+        }
+
+        .amount-input-group input {
+            flex: 1;
+            border: none;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: center;
+            padding: 10px;
+        }
+
+        .amount-input-group input:focus {
+            outline: none;
+        }
+
+        .amount-input-group .currency-symbol {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            padding: 0 10px;
+        }
+
         .payment-options {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -168,6 +221,12 @@
         .payment-option.selected {
             border-color: var(--primary-color);
             background: #e3f2fd;
+        }
+
+        .payment-option.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
         }
 
         .payment-option input[type="radio"] {
@@ -436,26 +495,82 @@
         }
 
         @media (max-width: 768px) {
+            body {
+                background-color: white;
+            }
+
             .payment-container {
-                margin: 15px;
-                padding: 15px;
+                margin: 0;
+                padding: 10px;
+                box-shadow: none;
             }
 
             .payment-options {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .payment-option {
+                padding: 12px 8px;
+            }
+
+            .payment-option i {
+                font-size: 2rem;
+                margin-bottom: 8px;
+            }
+
+            .payment-option h4 {
+                font-size: 0.9rem;
+                margin: 5px 0;
+            }
+
+            .payment-option p {
+                font-size: 0.75rem;
             }
 
             .payment-content {
-                padding: 15px;
+                padding: 10px;
             }
 
             .payment-header {
-                margin-bottom: 20px;
-                padding-bottom: 15px;
+                margin-bottom: 15px;
+                padding-bottom: 10px;
             }
 
             .payment-header h1 {
-                font-size: 1.5rem;
+                font-size: 1.3rem;
+            }
+
+            .payment-details {
+                padding: 5px;
+                background: white;
+                margin-top: 15px;
+            }
+
+            .credit-card-frame {
+                padding: 0;
+                margin: 0;
+            }
+
+            .order-summary {
+                padding: 12px;
+            }
+
+            .amount-selection-section {
+                padding: 15px;
+            }
+
+            .bank-transfer-info {
+                padding: 10px;
+            }
+
+            .bank-transfer-info > div[style*="display: flex"] {
+                flex-direction: column;
+            }
+
+            .bank-transfer-info > div[style*="display: flex"] > div {
+                min-width: 100% !important;
+                flex: none !important;
             }
 
             .col-md-6 {
@@ -508,7 +623,79 @@
                 </div>
                 <div class="summary-item">
                     <span>מקדמה לתשלום:</span>
-                    <strong id="summaryTotal" style="color: #28a745;">500€</strong>
+                    <strong id="summaryTotal" style="color: #28a745;">₪500</strong>
+                </div>
+            </div>
+
+            <!-- מחשבון המרה -->
+            <div class="mb-3 mt-4" style="position: relative; background-color: #fff3cd; border: 2px solid #ffc107; padding: 20px 20px 12px 20px; border-radius: 8px;">
+                <div style="position: absolute; top: -14px; right: 20px; background-color: #ffc107; padding: 4px 16px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <i class="fas fa-calculator" style="color: #856404; margin-left: 5px;"></i>
+                    <strong style="font-size: 1.05rem; color: #856404;">מחשבון המרה</strong>
+                </div>
+                <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 10px;">
+                    <div>
+                        <i class="fas fa-euro-sign" style="color: #856404; margin-left: 8px;"></i>
+                        <strong style="font-size: 1.05rem; color: #856404;">שער היורו: <span
+                                id="euroRate">טוען...</span> ₪</strong>
+                    </div>
+                    <div>
+                        <i class="fas fa-dollar-sign" style="color: #856404; margin-left: 8px;"></i>
+                        <strong style="font-size: 1.05rem; color: #856404;">שער הדולר: <span
+                                id="usdRate">טוען...</span> ₪</strong>
+                    </div>
+                    <div>
+                        <i class="fas fa-info-circle" style="color: #856404; margin-left: 8px;"></i>
+                        <small style="color: #856404;">* השערים מתעדכנים מדי יום לפי שער העברות מכירה של בנק מזרחי טפחות</small>
+                    </div>
+                </div>
+                <!-- Currency Converter -->
+                <div
+                    style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding-top: 10px; border-top: 1px dashed #ffc107;">
+                    <label style="color: #856404; font-weight: 500;">ממיר מטבע:</label>
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <input type="number" id="euroAmountInput" placeholder="הזן סכום ביורו"
+                            style="width: 150px; padding: 6px 10px; border: 1px solid #ffc107; border-radius: 4px; text-align: center;"
+                            oninput="convertCurrency()">
+                        <span style="color: #856404;">€</span>
+                    </div>
+                    <span style="color: #856404;">=</span>
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <span id="usdResult"
+                            style="font-weight: bold; color: #004085; background: #cce5ff; padding: 6px 12px; border-radius: 4px; min-width: 100px; text-align: center;">0</span>
+                        <span style="color: #856404;">$</span>
+                    </div>
+                    <span style="color: #856404;">=</span>
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <span id="shekelResult"
+                            style="font-weight: bold; color: #155724; background: #d4edda; padding: 6px 12px; border-radius: 4px; min-width: 100px; text-align: center;">0</span>
+                        <span style="color: #856404;">₪</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- בחירת סכום לתשלום -->
+            <div class="amount-selection-section">
+                <h3></i> הזן סכום לתשלום</h3>
+                <div class="amount-input-wrapper">
+                    <div class="amount-input-group">
+                        <span class="currency-symbol">₪</span>
+                        <input type="number" id="paymentAmount" class="form-control" min="1" step="1" value="" placeholder="הזן סכום">
+                    </div>
+                    <div style="text-align: center; margin-top: 10px; color: #666; font-size: 0.9rem;">
+                        <i class="fas fa-info-circle"></i> ניתן לשנות את הסכום לפי הצורך
+                    </div>
+                    <!-- התראה על שינוי סכום -->
+                    <div id="amountChangedWarning" style="display: none; text-align: center; margin-top: 15px; padding: 12px; background: #fff3cd; border: 2px solid #ffc107; border-radius: 8px;">
+                        <i class="fas fa-exclamation-triangle" style="color: #856404; margin-left: 5px;"></i>
+                        <strong style="color: #856404;">הסכום שונה!</strong>
+                        <div style="color: #856404; font-size: 0.9rem; margin-top: 5px;">
+                            דף התשלום עדיין מכיל סכום ישן. לחץ על "עדכן דף תשלום" כדי לעדכן
+                        </div>
+                        <button id="updateUrlBtn" onclick="updatePaymentUrl()" style="margin-top: 10px; background: var(--primary-color); color: white; border: none; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-weight: 600;">
+                            <i class="fas fa-sync-alt"></i> עדכן דף תשלום
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -567,8 +754,8 @@
                                 <h6 style="color: var(--primary-color); font-weight: 600; margin-bottom: 10px; text-align: left;">
                                     Bank Details</h6>
                                 <div style="font-size: 0.9rem; text-align: left;">
-                                    <strong>Beneficiary Name: IDEAL TOURS (1982) (ISRAEL) LTD</strong><br>
-                                    Beneficiary Address: Malchei Israel 53, Jerusalem 94395<br>
+                                    <strong>IDEAL TOURS (1982) (ISRAEL) LTD</strong><br>
+                                    Address: Malchei Israel 53, Jerusalem 94395<br>
                                     Bank Name: BANK MIZRACHI TEFAHOT<br>
                                     Bank Address: Malchei Israel 16 Jerusalem<br>
                                     Branch: 417<br>
@@ -584,7 +771,7 @@
                             <i class="fas fa-exclamation-triangle" style="color: #856404; margin-left: 8px;"></i>
                             <strong style="color: #856404;">חשוב!</strong>
                             <span style="color: #856404;">לאחר ביצוע ההעברה יש לשלוח אישור העברה למייל:
-                                <strong>GOSKI@IDEALTOURS.CO.IL</strong> או לווטסאפ: <strong>058-5396011</strong></span>
+                                <strong>GOSKI@IDEALTOURS.CO.IL</strong><br/> או לווטסאפ: <strong>058-5396011</strong></span>
                             <br>
                             <span style="color: #856404; font-size: 0.9rem;">יש לציין: שם מלא + כתובת דוא"ל של המזמין + מספר עסקה: <strong id="tidForTransfer">---</strong></span>
                         </div>
@@ -600,23 +787,13 @@
                                 <input type="text" class="form-control" id="bankTransferRef" name="bankTransferRef" placeholder="מספר אסמכתא מהבנק">
                             </div>
                             <div class="col-12">
-                                <label class="form-label">סכום שהועבר</label>
-                                <div class="row g-2 align-items-center">
-                                    <div class="col-md-6">
-                                        <input type="number" class="form-control" id="bankTransferAmount" name="bankTransferAmount" placeholder="הזן סכום">
+                                <label class="form-label">אישור סכום</label>
+                                <div style="background: white; padding: 15px; border-radius: 8px; border: 2px solid var(--primary-color); text-align: center;">
+                                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary-color);">
+                                        ₪<span id="transferAmountDisplay">500</span>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="d-flex gap-3">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="transferCurrency" id="currencyILS" value="ILS" checked>
-                                                <label class="form-check-label" for="currencyILS">₪ ש"ח</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="transferCurrency" id="currencyUSD" value="USD">
-                                                <label class="form-check-label" for="currencyUSD">$ דולר</label>
-                                            </div>
-                                           
-                                        </div>
+                                    <div style="font-size: 0.85rem; color: #666; margin-top: 5px;">
+                                        הסכום שיועבר (כפי שהוזן למעלה)
                                     </div>
                                 </div>
                             </div>
@@ -644,6 +821,67 @@
     <script>
         const BASE_URL = 'https://script.google.com/macros/s/AKfycbyOuF9lZxfZFFLOUgSGdJqjCtiTQ6WVr-JQQ9ovn3_RlkHWxrFwUZNj7ugU98s8Euxknw/exec';
 
+        // --- Exchange Rate & Currency Converter ---
+        async function loadExchangeRates() {
+            try {
+                const response = await fetch(`${BASE_URL}?action=getVacationDates`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error: ${response.status}`);
+                }
+                const dataRes = await response.json();
+                const data = dataRes.data;
+
+                // Load euro rate and USD rate
+                if (data.eur) {
+                    const euroRateSpan = document.getElementById('euroRate');
+                    if (euroRateSpan) {
+                        euroRateSpan.textContent = parseFloat(data.eur).toFixed(4);
+                    }
+                }
+                if (data.usd) {
+                    const usdRateSpan = document.getElementById('usdRate');
+                    if (usdRateSpan) {
+                        usdRateSpan.textContent = parseFloat(data.usd).toFixed(4);
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading exchange rates:', error);
+            }
+        }
+
+        // Cache DOM references for currency converter
+        let euroInputElement = null;
+        let shekelResultElement = null;
+        let usdResultElement = null;
+        let euroRateElement = null;
+        let usdRateElement = null;
+
+        function convertCurrency() {
+            // Lazy initialization of cached elements
+            if (!euroInputElement) euroInputElement = document.getElementById('euroAmountInput');
+            if (!shekelResultElement) shekelResultElement = document.getElementById('shekelResult');
+            if (!usdResultElement) usdResultElement = document.getElementById('usdResult');
+            if (!euroRateElement) euroRateElement = document.getElementById('euroRate');
+            if (!usdRateElement) usdRateElement = document.getElementById('usdRate');
+
+            const euroAmount = parseFloat(euroInputElement.value) || 0;
+            const euroRate = parseFloat(euroRateElement.textContent) || 0;
+            const usdRate = parseFloat(usdRateElement.textContent) || 0;
+
+            if (euroAmount > 0 && euroRate > 0 && usdRate > 0) {
+                // Calculate shekel amount from euro
+                const shekelAmount = (euroAmount * euroRate).toFixed(2);
+                shekelResultElement.textContent = shekelAmount;
+
+                // Calculate USD amount: convert euro to shekel, then shekel to USD
+                const usdAmount = (euroAmount * euroRate / usdRate).toFixed(2);
+                usdResultElement.textContent = usdAmount;
+            } else {
+                shekelResultElement.textContent = '0';
+                usdResultElement.textContent = '0';
+            }
+        }
+
         // קבלת transaction ID מה-URL
         const urlParams = new URLSearchParams(window.location.search);
         const transactionId = urlParams.get('tid');
@@ -652,6 +890,9 @@
             alert('שגיאה: לא נמצא מזהה עסקה');
             window.location.href = 'form.html';
         }
+
+        // טעינת שערי מטבע
+        loadExchangeRates();
 
         // טעינת נתוני העסקה
         async function loadTransactionData() {
@@ -710,6 +951,15 @@
         // טיפול בבחירת אמצעי תשלום
         document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
             radio.addEventListener('change', async function () {
+                // בדיקת סכום לפני המשך
+                const amount = document.getElementById('paymentAmount').value;
+                if (!amount || parseFloat(amount) <= 0) {
+                    this.checked = false;
+                    alert('נא להזין סכום לתשלום תחילה');
+                    document.getElementById('paymentAmount').focus();
+                    return;
+                }
+                
                 // סימון הכרטיס שנבחר
                 document.querySelectorAll('.payment-option').forEach(opt => {
                     opt.classList.remove('selected');
@@ -728,16 +978,82 @@
                     document.getElementById('cardDetails').classList.add('show');
                     hideLoading();
                 } else {
+                    // איפוס מצב ה-iframe כשעוברים להעברה בנקאית
+                    isPaymentFrameLoaded = false;
+                    currentLoadedAmount = null;
+                    document.getElementById('amountChangedWarning').style.display = 'none';
+                    
+                    // עדכון תצוגת הסכום בהעברה בנקאית
+                    const amount = document.getElementById('paymentAmount').value;
+                    document.getElementById('transferAmountDisplay').textContent = amount;
                     document.getElementById('transferDetails').classList.add('show');
                 }
             });
         });
 
+        // משתנה גלובלי לשמירת הסכום שנטען ב-URL
+        let currentLoadedAmount = null;
+        let isPaymentFrameLoaded = false;
+
+        // עדכון מצב הלחצנים בהתאם לסכום
+        function updatePaymentOptionsState() {
+            const amount = document.getElementById('paymentAmount').value;
+            const paymentOptions = document.querySelectorAll('.payment-option');
+            
+            if (!amount || parseFloat(amount) <= 0) {
+                paymentOptions.forEach(option => option.classList.add('disabled'));
+            } else {
+                paymentOptions.forEach(option => option.classList.remove('disabled'));
+            }
+        }
+
+        // עדכון דינמי של תצוגת הסכום כשמשנים אותו
+        document.getElementById('paymentAmount').addEventListener('input', function() {
+            const amount = this.value || '0';
+            const transferDisplay = document.getElementById('transferAmountDisplay');
+            if (transferDisplay) {
+                transferDisplay.textContent = amount;
+            }
+            
+            // בדיקה אם הסכום שונה מהסכום שנטען ב-URL
+            checkAmountChange();
+            
+            // עדכון מצב הלחצנים
+            updatePaymentOptionsState();
+        });
+        
+        // בדיקה אם הסכום שונה והצגת התראה
+        function checkAmountChange() {
+            const currentAmount = document.getElementById('paymentAmount').value;
+            const warningDiv = document.getElementById('amountChangedWarning');
+            
+            // הצגת התראה רק אם:
+            // 1. כבר נטען URL תשלום (אשראי נבחר)
+            // 2. הסכום הנוכחי שונה מהסכום שנטען ב-URL
+            if (isPaymentFrameLoaded && currentLoadedAmount && currentAmount !== currentLoadedAmount) {
+                warningDiv.style.display = 'block';
+            } else {
+                warningDiv.style.display = 'none';
+            }
+        }
+
         // טעינת iframe תשלום
         async function loadPaymentFrame() {
             try {
-                // בקשה ליצירת קישור תשלום מה-Google Script
-                const response = await fetch(`${BASE_URL}?action=getPaymentUrl&tid=${transactionId}`);
+                // קבלת הסכום שנבחר
+                const amount = document.getElementById('paymentAmount').value;
+                
+                if (!amount || amount <= 0) {
+                    alert('נא להזין סכום חוקי לתשלום');
+                    document.getElementById('paymentAmount').focus();
+                    return;
+                }
+
+                // שמירת הסכום הנוכחי
+                currentLoadedAmount = amount;
+                
+                // בקשה ליצירת קישור תשלום מה-Google Script עם הסכום
+                const response = await fetch(`${BASE_URL}?action=getPaymentUrl&tid=${transactionId}&amount=${amount}`);
                 const result = await response.json();
 
                 console.log('Payment URL result:', result);
@@ -748,6 +1064,9 @@
 
                 if (result.data && result.data.paymentUrl) {
                     document.getElementById('paymentFrame').src = result.data.paymentUrl;
+                    isPaymentFrameLoaded = true;
+                    // הסתרת ההתראה לאחר טעינה מוצלחת
+                    document.getElementById('amountChangedWarning').style.display = 'none';
                 } else {
                     throw new Error('לא התקבל קישור תשלום מהשרת');
                 }
@@ -756,6 +1075,13 @@
                 alert('שגיאה ביצירת דף תשלום: ' + error.message);
                 console.error('Error loading payment frame:', error);
             }
+        }
+        
+        // פונקציה לעדכון URL התשלום עם סכום חדש
+        async function updatePaymentUrl() {
+            showLoading('מעדכן URL תשלום...');
+            await loadPaymentFrame();
+            hideLoading();
         }
 
         // Handle receipt file display
@@ -787,8 +1113,8 @@
             // Validation
             const transferDate = document.getElementById('bankTransferDate').value;
             const transferRef = document.getElementById('bankTransferRef').value;
-            const transferAmount = document.getElementById('bankTransferAmount').value;
-            const transferCurrency = document.querySelector('input[name="transferCurrency"]:checked').value;
+            const transferAmount = document.getElementById('paymentAmount').value;
+            const transferCurrency = 'ILS'; // תמיד שקלים
             const receiptInput = document.getElementById('transferReceipt');
 
             if (!transferDate) {
@@ -804,8 +1130,8 @@
             }
 
             if (!transferAmount || transferAmount <= 0) {
-                alert('נא למלא סכום שהועבר');
-                document.getElementById('bankTransferAmount').focus();
+                alert('נא להזין סכום חוקי לתשלום');
+                document.getElementById('paymentAmount').focus();
                 return;
             }
 
@@ -904,6 +1230,7 @@
 
         // טעינה ראשונית
         loadTransactionData();
+        updatePaymentOptionsState();
     </script>
 
 </body>

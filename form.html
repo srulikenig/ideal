@@ -5,15 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- Meta Description for Search Engines -->
-    <meta name="description" content="טופס הרשמה לחופשת סקי במלון MY KOSHER HOTEL 4⭐⭐⭐⭐ עם אידיאל טורס. מלאו את הפרטים והצטרפו לחוויה בלתי נשכחת!">
+    <!-- Meta Description for Search Engines -->
+    <meta name="description"
+        content="טופס הרשמה לחופשת סקי במלון MY KOSHER HOTEL 4⭐⭐⭐⭐ עם אידיאל טורס. מלאו את הפרטים והצטרפו לחוויה בלתי נשכחת!">
 
     <!-- Open Graph / Facebook / WhatsApp -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="טופס הרשמה - IDEAL TOURS">
-    <meta property="og:description" content="טופס הרשמה לחופשת סקי במלון MY KOSHER HOTEL 4⭐⭐⭐⭐ עם אידיאל טורס. מלאו את הפרטים והצטרפו לחוויה בלתי נשכחת!">
+    <meta property="og:description"
+        content="טופס הרשמה לחופשת סקי במלון MY KOSHER HOTEL 4⭐⭐⭐⭐ עם אידיאל טורס. מלאו את הפרטים והצטרפו לחוויה בלתי נשכחת!">
     <meta property="og:image" content="sitelogo.png">
-    
+
     <!-- favicon     -->
     <link rel="icon" type="image/png" href="sitelogo.png">
     <title>טופס הרשמה - IDEAL TOURS</title>
@@ -716,11 +718,15 @@
 
         /* Mobile responsive adjustments */
         @media (max-width: 768px) {
+            body {
+                background-color: white;
+            }
 
             /* Make paper container more mobile-friendly */
             .paper-container {
                 padding: 20px 15px;
-                margin: 15px auto;
+                margin: 0;
+                box-shadow: none;
             }
 
             /* Adjust section titles */
@@ -1016,8 +1022,11 @@
                 </div>
 
                 <!-- Euro Rate Display with Converter -->
-                <div class="mb-3 mt-4"
-                    style="background-color: #fff3cd; border: 2px solid #ffc107; padding: 12px 20px; border-radius: 8px;">
+                <div class="mb-3 mt-4" style="position: relative; background-color: #fff3cd; border: 2px solid #ffc107; padding: 20px 20px 12px 20px; border-radius: 8px;">
+                    <div style="position: absolute; top: -14px; right: 20px; background-color: #ffc107; padding: 4px 16px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                        <i class="fas fa-calculator" style="color: #856404; margin-left: 5px;"></i>
+                        <strong style="font-size: 1.05rem; color: #856404;">מחשבון המרה</strong>
+                    </div>
                     <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 10px;">
                         <div>
                             <i class="fas fa-euro-sign" style="color: #856404; margin-left: 8px;"></i>
@@ -1028,6 +1037,10 @@
                             <i class="fas fa-dollar-sign" style="color: #856404; margin-left: 8px;"></i>
                             <strong style="font-size: 1.05rem; color: #856404;">שער הדולר: <span
                                     id="usdRate">טוען...</span> ₪</strong>
+                        </div>
+                        <div>
+                            <i class="fas fa-info-circle" style="color: #856404; margin-left: 8px;"></i>
+                            <small style="color: #856404;">* השערים מתעדכנים מדי יום לפי שער העברות מכירה של בנק מזרחי טפחות</small>
                         </div>
                     </div>
                     <!-- Currency Converter -->
@@ -1844,7 +1857,7 @@
                 // Check ski level if ski pass is checked
                 const skiPassElement = card.querySelector(`[name="skiPass_${rowId}"]`);
                 const skiLevelSelect = card.querySelector(`select[name="skiLevel_${rowId}"]`);
-                
+
                 const isSkiPassSelected = skiPassElement.tagName === 'SELECT' ? skiPassElement.value === 'yes' : skiPassElement.checked;
 
                 if (isSkiPassSelected && !skiLevelSelect.value) {
@@ -2185,7 +2198,7 @@
                         hasNumber: card.querySelector(`input[name="hasFreqFlyer_${rowId}"]`).checked,
                         number: card.querySelector(`input[name="freqFlyerNumber_${rowId}"]`).value || null
                     },
-                    skiPass: (function() {
+                    skiPass: (function () {
                         const el = card.querySelector(`[name="skiPass_${rowId}"]`);
                         return el.tagName === 'SELECT' ? el.value === 'yes' : el.checked;
                     })(),
